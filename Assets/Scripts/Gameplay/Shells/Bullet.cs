@@ -30,7 +30,7 @@ public abstract class Bullet : MonoBehaviour
 
         float distanceTravelled = Vector3.Distance(startPosition, transform.position);
 
-        KineticArmor hitArmor = collision.contacts[0].otherCollider.GetComponent<KineticArmor>();
+        Armor hitArmor = collision.contacts[0].otherCollider.GetComponent<Armor>();
         if (hitArmor == null)
         {
             Debug.Log("Hit non-Armored object");
@@ -38,7 +38,7 @@ public abstract class Bullet : MonoBehaviour
             return;
         };
 
-        Debug.Log("Armor thickness hit: " + hitArmor.Thickness);
+        Debug.Log("Armor thickness hit: " + hitArmor.KineticResistance);
         Debug.Log("At angle: " + Vector3.Angle(transform.forward, -collision.contacts[0].normal));
 
         remainingPen -= CalculatePenetration(collision, distanceTravelled);

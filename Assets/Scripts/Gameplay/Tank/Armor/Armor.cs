@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class KineticArmor : MonoBehaviour
+public class Armor : MonoBehaviour
 {
     Tank tank;
-    public float Thickness = 0;
-    // Start is called before the first frame update
+    public float KineticResistance = 0;
+    public float ExplosiveResistance = 0;
+    // Start is called before the first frame updatep
     void Start()
     {
-        tank = getParentTank();
-
+        tank = GetParentTank();
     }
 
-    Tank getParentTank()
+    Tank GetParentTank()
     {
         Transform t = transform;
         while (t.parent != null)
@@ -25,11 +23,6 @@ public class KineticArmor : MonoBehaviour
             t = t.parent.transform;
         }
         return null; // Could not find a parent with given tag.
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void RegiserDamage(float damage)

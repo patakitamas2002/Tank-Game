@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraPlayerFollow : MonoBehaviour
 {
+    public InputAction inputSystem;
     public Transform target;
     public float sensitivity = .5f;
 
@@ -18,21 +20,21 @@ public class CameraPlayerFollow : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        //Debug.Log($"Camera {this.name} has started");
         fov = GetComponent<Camera>().fieldOfView;
     }
-    void OnDisable(){
+    void OnDisable()
+    {
         GetComponent<AudioListener>().enabled = false;
     }
-    void OnEnable(){
-        //transform.parent.transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+    void OnEnable()
+    {
         GetComponent<AudioListener>().enabled = true;
     }
     void LateUpdate()
     {
         Vector3 velocity = Vector3.zero;
-        Vector3 offsetRot = target.up *  offset.y + target.forward * offset.z;
-        if(lerpSpeed == 0) transform.position = target.position + offsetRot;
+        Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
+        if (lerpSpeed == 0) transform.position = target.position + offsetRot;
         else transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetRot, ref velocity, lerpSpeed);
         turn.x += Input.GetAxis("Mouse X") * sensitivity;
         turn.y += Input.GetAxis("Mouse Y") * sensitivity;
@@ -40,11 +42,9 @@ public class CameraPlayerFollow : MonoBehaviour
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
 
         fov -= Input.GetAxis("Mouse ScrollWheel") * 50;
-        if(fov < minFov) fov = minFov;
-        if(fov > maxFov) fov = maxFov;
+        if (fov < minFov) fov = minFov;
+        if (fov > maxFov) fov = maxFov;
         GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, fov, 0.05f);
-        
-        //GetComponent<Camera>().fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * 50;
     }
-    
+
 }
