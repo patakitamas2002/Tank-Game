@@ -13,7 +13,7 @@ public class Tank : MonoBehaviour
     public float rotationSpeed = 40.0f;
 
     bool isAlive;
-    
+
     public GameObject barrel;
     public GameObject turret;
     public Transform aimPoint;
@@ -23,11 +23,12 @@ public class Tank : MonoBehaviour
 
 
 
-    bool IsGrounded(){
+    bool IsGrounded()
+    {
         Ray ray = new Ray(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down);
         //Debug.DrawRay(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down * 20, Color.red, 0);
         return Physics.Raycast(ray, GetComponent<Collider>().bounds.extents.y + 0.1f);
-        
+
     }
     // Start is called before the first frame update
     void Start()
@@ -39,58 +40,59 @@ public class Tank : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        if(currentHealth <= 0 && isAlive)
-            Die();
+    {
         turret.GetComponent<TurretRotaion>().RotateTowards(aimPoint);
         barrel.GetComponent<BarrelElevation>().Elevate(aimPoint);
-
-
-    }
-    void FixedUpdate(){
-        // if(Input.GetAxis("Vertical") != 0)
-        //     rb.AddForce(Vector3.forward * Input.GetAxis("Vertical")* acceleration, ForceMode.Acceleration);
     }
 
-    public void TakeDamage(float damage){
+    public void TakeDamage(float damage)
+    {
         currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
-    
-    public void Accelerate(float inputX){
+
+    public void Accelerate(float inputX)
+    {
         //Vector3 accel = transform.forward * inputX * acceleration;       
         //Debug.Log(transform.forward * inputX * acceleration);
-        
-        if(IsGrounded() && rb.velocity.magnitude < maxSpeed)
+
+        if (IsGrounded() && rb.velocity.magnitude < maxSpeed)
             rb.AddForce(transform.forward * inputX * acceleration, ForceMode.Acceleration);
     }
 
-    public void Rotate(float inputX){
-        if(IsGrounded())
+    public void Rotate(float inputX)
+    {
+        if (IsGrounded())
             transform.Rotate(0, inputX * Time.deltaTime * rotationSpeed, 0);
         //Debug.Log(rb.velocity.magnitude);
         //rb.AddForce(transform.forward * rb.velocity.magnitude / 10 * Time.deltaTime, ForceMode.VelocityChange);
     }
-    public void Brake(){
+    public void Brake()
+    {
         //Debug.Log(rb.velocity);
-        if(IsGrounded())
+        if (IsGrounded())
             rb.AddForce(-rb.velocity * brakeStrenght, ForceMode.Acceleration);
     }
 
-    public void Fire(){
+    public void Fire()
+    {
         barrel.transform.GetChild(0).GetComponent<FireProjectile>().Fire(shells[currentShell]);
     }
 
-    public void SwitchBullet(){
-        if(currentShell < shells.Length - 1)
-            currentShell++;
-        else
-            currentShell = 0;
+    public void SwitchBullet()
+    {
+        currentShell = (currentShell + 1) % shells.Length;
         Debug.Log("Selected shell: " + shells[currentShell].name);
     }
-    
-    void Die(){
+
+    void Die()
+    {
         Debug.Log($"The tank \"{gameObject.name}\" has been destroyed");
         isAlive = false;
+        gameObject.SetActive(false);
     }
-    
+
 }

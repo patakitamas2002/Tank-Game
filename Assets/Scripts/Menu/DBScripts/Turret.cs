@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Turret
 {
+    public GameObject Model;
     public string Name;
     public float RotationSpeed;
     public int FrontArmor;
