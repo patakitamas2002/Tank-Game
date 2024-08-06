@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a485fe7fce29ec7ffb6cbda138ec7f51, type: 3}
   m_Name: HullDB
   m_EditorClassIdentifier: 
-  hulls: []
+  hulls:
+  - Model: {fileID: 6309078559783982514, guid: 1477e38ac71b923f1a809e5cb4afc4a3, type: 3}
+    Name: Pz. IV
+    Horsepower: 0
+    MaxSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
+  - Model: {fileID: 6309078559783982514, guid: ae856173fe4b8f2bfac3cee1b846aae7, type: 3}
+    Name: Pz. IV. Rear turret
+    Horsepower: 0
+    MaxSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0

@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2e49a346e786e4ca5c3722034bec67, type: 3}
   m_Name: TurretDB
   m_EditorClassIdentifier: 
-  turrets: []
+  turrets:
+  - Model: {fileID: 7773613420589190543, guid: a4e6464ae022a0621912af70eb2632c5, type: 3}
+    Name: Pz. IV. Round
+    RotationSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
+  - Model: {fileID: 7773613420589190543, guid: 1e6dcdb9bb6e97d858905a4daeab0e2b, type: 3}
+    Name: Pz. IV. Square
+    RotationSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
