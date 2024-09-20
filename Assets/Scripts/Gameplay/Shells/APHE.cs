@@ -5,6 +5,7 @@ using UnityEngine;
 public class APHE : AP
 {
     public float ExplosiveMass;
+    public float FuseSensitivity;
 
     protected override float CalculateDMG(Collision collision)
     {

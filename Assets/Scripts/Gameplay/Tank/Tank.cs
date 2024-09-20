@@ -82,6 +82,7 @@ public class Tank : MonoBehaviour
         barrel.transform.GetChild(0).GetComponent<FireProjectile>().Fire(shells[currentShell]);
     }
 
+
     public void SwitchBullet()
     {
         currentShell = (currentShell + 1) % shells.Length;
@@ -94,5 +95,6 @@ public class Tank : MonoBehaviour
         isAlive = false;
         gameObject.SetActive(false);
     }
+
 
 }

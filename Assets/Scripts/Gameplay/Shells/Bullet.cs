@@ -6,6 +6,7 @@ public abstract class Bullet : MonoBehaviour
 {
     public float Caliber;
     public float Penetration;
+    public float Weight;
     public float Veloctiy = 700;
     bool hasCollided = false;
     public float maxTime = 10f;
@@ -44,6 +45,7 @@ public abstract class Bullet : MonoBehaviour
         remainingPen -= CalculatePenetration(collision, distanceTravelled);
         if (remainingPen <= 0)
         {
+            Debug.Log("Hit armor, no Penetration left");
             hasCollided = true;
             return;
         }
