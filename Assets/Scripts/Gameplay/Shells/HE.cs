@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ public class HE : Bullet
 {
     public float ExplosiveMass;
 
+    protected override float GetMaxPenetration()
+    {
+        return (float)Math.Pow(ExplosiveMass, 2 / 3) / 6;
+    }
 
     protected override float CalculateDMG(Collision collision)
     {
@@ -28,14 +33,14 @@ public class HE : Bullet
             {
                 weakest = hitColliders[i].GetComponent<Armor>();
             }
-            else if (hitColliders[i].GetComponent<Armor>().KineticResistance * InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)) < weakest.KineticResistance)
+            else if (hitColliders[i].GetComponent<Armor>().KineticResistance * MyMath.InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)) < weakest.KineticResistance)
             {
                 weakest = hitColliders[i].GetComponent<Armor>();
-                Debug.Log(weakest + ": " + InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)));
+                Debug.Log(weakest + ": " + MyMath.InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)));
             }
         }
         Debug.Log("Weakest armor: " + weakest.KineticResistance);
-        Debug.Log("Weakest InvSQ: " + weakest.KineticResistance / InvSq(Vector3.Distance(collision.transform.position, weakest.transform.position)));
+        Debug.Log("Weakest InvSQ: " + weakest.KineticResistance / MyMath.InvSq(Vector3.Distance(collision.transform.position, weakest.transform.position)));
         return 0;
     }
 }

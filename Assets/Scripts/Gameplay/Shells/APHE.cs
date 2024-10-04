@@ -10,6 +10,17 @@ public class APHE : AP
     protected override float CalculateDMG(Collision collision)
     {
         Debug.Log("APHE DMG");
-        throw new System.NotImplementedException();
+        float damage = 0;
+        Armor hitArmor = collision.contacts[0].otherCollider.GetComponent<Armor>();
+        if (FuseSensitivity < hitArmor.KineticResistance)
+        {
+            damage = Caliber * Veloctiy / 100;
+        }
+        else
+        {
+            damage = ExplosiveMass * 10;
+        }
+
+        return damage;
     }
 }

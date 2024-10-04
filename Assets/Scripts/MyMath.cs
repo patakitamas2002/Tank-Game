@@ -1,5 +1,8 @@
 
-public class MyMath
+using System;
+using System.Numerics;
+
+public static class MyMath
 {
     public static float InvSq(float value)
     {

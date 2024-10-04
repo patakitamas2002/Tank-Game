@@ -3,6 +3,7 @@ using UnityEngine;
 public class Armor : MonoBehaviour
 {
     Tank tank;
+    float DMGMultiplier = 1;
     public float KineticResistance = 0;
     public float ExplosiveResistance = 0;
     // Start is called before the first frame updatep
@@ -27,6 +28,7 @@ public class Armor : MonoBehaviour
 
     public void RegiserDamage(float damage)
     {
-        tank.TakeDamage(damage);
+        tank.TakeDamage(damage * DMGMultiplier);
     }
+
 }
