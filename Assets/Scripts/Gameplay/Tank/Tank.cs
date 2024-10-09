@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
+    public Tank(Hull hull, Turret turret, Barrel barrel)
+    {
+        this.hull = hull;
+        this.turret = turret;
+        this.barrel = barrel;
+    }
     public float maxHealth = 100;
     private float currentHealth;
     public float acceleration = 10.0f;
@@ -14,14 +20,25 @@ public class Tank : MonoBehaviour
 
     bool isAlive;
 
-    public GameObject barrel;
-    public GameObject turret;
+    public Hull hull;
+    public Barrel barrel;
+    public Turret turret;
     public Transform aimPoint;
-    public GameObject[] shells;
-    int currentShell = 0;
+
     Rigidbody rb;
 
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
+        isAlive = true;
+
+
+
+        Debug.Log("The tank \"" + gameObject.name + "\" has been created");
+
+    }
 
     bool IsGrounded()
     {
@@ -31,18 +48,13 @@ public class Tank : MonoBehaviour
 
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        currentHealth = maxHealth;
-        isAlive = true;
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        turret.GetComponent<TurretRotaion>().RotateTowards(aimPoint);
-        barrel.GetComponent<BarrelElevation>().Elevate(aimPoint);
+        turret.GetComponent<Turret>().RotateTowards(aimPoint);
+        barrel.GetComponent<Barrel>().Elevate(aimPoint);
     }
 
     public void TakeDamage(float damage)
@@ -75,18 +87,6 @@ public class Tank : MonoBehaviour
         //Debug.Log(rb.velocity);
         if (IsGrounded())
             rb.AddForce(-rb.velocity * brakeStrenght, ForceMode.Acceleration);
-    }
-
-    public void Fire()
-    {
-        barrel.transform.GetChild(0).GetComponent<FireProjectile>().Fire(shells[currentShell]);
-    }
-
-
-    public void SwitchBullet()
-    {
-        currentShell = (currentShell + 1) % shells.Length;
-        Debug.Log("Selected shell: " + shells[currentShell].name);
     }
 
     void Die()

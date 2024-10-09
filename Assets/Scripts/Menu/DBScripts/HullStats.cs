@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Turret
+public class HullStats
 {
     public GameObject Model;
     public string Name;
-    public float RotationSpeed;
+    public int Horsepower;
+    public int MaxSpeed;
     public int FrontArmor;
     public int SideArmor;
     public int RearArmor;

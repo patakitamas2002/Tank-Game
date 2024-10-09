@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class CannonDatabase : ScriptableObject
 {
-    public Cannon[] cannons;
+    public CannonStats[] cannons;
     public int GetCannonsAmount()
     {
         return cannons.Length;
     }
 
-    public Cannon GetPart(int index)
+    public CannonStats GetPart(int index)
     {
         return cannons[index % GetCannonsAmount()];
     }

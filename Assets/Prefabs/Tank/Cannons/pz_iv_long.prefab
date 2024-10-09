@@ -150,9 +150,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78981b38e1a05a414a1cfcd7ba304255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: {fileID: 6518451163707467323}
+  Name: 
+  Caliber: 0
+  ReloadTime: 0
+  ElevationSpeed: 0
   maxElevation: 25
   maxDepression: 10
   rotationSpeed: 5
+  shells: []
 --- !u!1 &9140132342221483195
 GameObject:
   m_ObjectHideFlags: 0

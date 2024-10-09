@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TurretDatabase : ScriptableObject
 {
-    public Turret[] turrets;
+    public TurretStats[] turrets;
     public int GetTurretsAmount()
     {
         return turrets.Length;
     }
 
-    public Turret GetTurret(int index)
+    public TurretStats GetTurret(int index)
     {
         return turrets[index % GetTurretsAmount()];
     }

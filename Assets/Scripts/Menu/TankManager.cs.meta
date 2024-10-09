@@ -3,7 +3,13 @@ guid: 02ba5ae840237c869b41d3e15aa6b9ce
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hulls: {fileID: 11400000, guid: a312dbea4e1383391810db599144eb4f, type: 2}
+  - hullName: {instanceID: 0}
+  - turrets: {fileID: 11400000, guid: bf136f8886ebfbfc0982db4af1dddfcf, type: 2}
+  - turretName: {instanceID: 0}
+  - barrels: {fileID: 11400000, guid: cacbf7c6eed74172abea724411d04952, type: 2}
+  - cannonName: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
