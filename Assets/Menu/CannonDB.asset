@@ -12,5 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0291d43e5dbfbb049b5a529199c011fa, type: 3}
   m_Name: CannonDB
   m_EditorClassIdentifier: 
-  barrels:
-  - {fileID: 0}
+  cannons:
+  - Model: {fileID: 6518451163707467323, guid: 597c3e5deb307f7e1a8fb1fd97407591, type: 3}
+    Name: 
+    Health: 0
+    Weight: 0
+    Caliber: 0
+    ReloadTime: 0
+    ElevationSpeed: 0
+    maxElevation: 0
+    maxDepression: 0
+  - Model: {fileID: 6518451163707467323, guid: c5c9b71e701d5a631ab88f302632e48c, type: 3}
+    Name: 
+    Health: 0
+    Weight: 0
+    Caliber: 0
+    ReloadTime: 0
+    ElevationSpeed: 0
+    maxElevation: 0
+    maxDepression: 0

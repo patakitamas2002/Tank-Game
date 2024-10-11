@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    public Tank(Hull hull, Turret turret, Barrel barrel)
-    {
-        this.hull = hull;
-        this.turret = turret;
-        this.barrel = barrel;
-    }
-    public float maxHealth = 100;
+    // public Tank(Hull hull, Turret turret, Barrel barrel)
+    // {
+    //     this.hull = hull;
+    //     this.turret = turret;
+    //     this.barrel = barrel;
+    //     // this.maxHealth = hull.Health;
+    //     // this.maxHealth += turret.Health;
+    //     // this.maxHealth += barrel.Health;
+    // }
+    public float maxHealth { get; private set; }
     private float currentHealth;
-    public float acceleration = 10.0f;
-    public float brakeStrenght = 10.0f;
-    public float maxSpeed = 50.0f;
-    public float rotationSpeed = 40.0f;
 
     bool isAlive;
 
@@ -25,19 +24,31 @@ public class Tank : MonoBehaviour
     public Turret turret;
     public Transform aimPoint;
 
+
     Rigidbody rb;
 
 
     void Start()
     {
+        aimPoint = transform.GetChild(0);
         rb = GetComponent<Rigidbody>();
-        currentHealth = maxHealth;
+
         isAlive = true;
 
+        GameObject hullObject = Instantiate(GameOptions.hull.Model, transform);
+        GameObject turretObject = Instantiate(GameOptions.turret.Model, hullObject.transform.GetChild(0).transform);
+        GameObject barrelObject = Instantiate(GameOptions.barrel.Model, turretObject.transform.GetChild(0).transform);
+
+        hull = hullObject.GetComponent<Hull>();
+        barrel = barrelObject.GetComponent<Barrel>();
+        turret = turretObject.GetComponent<Turret>();
 
 
+        maxHealth = this.hull.stats.Health + this.barrel.stats.Health + this.turret.stats.Health;
+        rb.mass = hull.stats.Weight + barrel.stats.Weight + turret.stats.Weight;
+
+        currentHealth = maxHealth;
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
-
     }
 
     bool IsGrounded()
@@ -47,10 +58,7 @@ public class Tank : MonoBehaviour
         return Physics.Raycast(ray, GetComponent<Collider>().bounds.extents.y + 0.1f);
 
     }
-    // Start is called before the first frame update
 
-
-    // Update is called once per frame
     void Update()
     {
         turret.GetComponent<Turret>().RotateTowards(aimPoint);
@@ -71,14 +79,14 @@ public class Tank : MonoBehaviour
         //Vector3 accel = transform.forward * inputX * acceleration;       
         //Debug.Log(transform.forward * inputX * acceleration);
 
-        if (IsGrounded() && rb.velocity.magnitude < maxSpeed)
-            rb.AddForce(transform.forward * inputX * acceleration, ForceMode.Acceleration);
+        if (IsGrounded() && rb.velocity.magnitude < hull.stats.MaxSpeed)
+            rb.AddForce(transform.forward * inputX * hull.stats.Horsepower / hull.stats.Weight, ForceMode.Acceleration);
     }
 
     public void Rotate(float inputX)
     {
         if (IsGrounded())
-            transform.Rotate(0, inputX * Time.deltaTime * rotationSpeed, 0);
+            transform.Rotate(0, inputX * Time.deltaTime * hull.stats.Horsepower / hull.stats.Weight * 2, 0);
         //Debug.Log(rb.velocity.magnitude);
         //rb.AddForce(transform.forward * rb.velocity.magnitude / 10 * Time.deltaTime, ForceMode.VelocityChange);
     }
@@ -86,7 +94,7 @@ public class Tank : MonoBehaviour
     {
         //Debug.Log(rb.velocity);
         if (IsGrounded())
-            rb.AddForce(-rb.velocity * brakeStrenght, ForceMode.Acceleration);
+            rb.AddForce(-rb.velocity, ForceMode.Acceleration);
     }
 
     void Die()
@@ -95,6 +103,4 @@ public class Tank : MonoBehaviour
         isAlive = false;
         gameObject.SetActive(false);
     }
-
-
 }

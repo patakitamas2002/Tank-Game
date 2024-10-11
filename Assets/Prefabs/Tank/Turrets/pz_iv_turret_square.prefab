@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &1072152100586936015
@@ -620,6 +621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1277063603486228483}
+  - component: {fileID: 2499297433993518057}
   m_Layer: 0
   m_Name: pz_iv_turret_square
   m_TagString: Untagged
@@ -645,6 +647,27 @@ Transform:
   - {fileID: 3791048436450921717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2499297433993518057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773613420589190543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfbc3ccc4ec35b01878d0d24f9cf713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    Model: {fileID: 0}
+    Name: 
+    Health: 0
+    Weight: 0
+    RotationSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
 --- !u!1 &8792550980477275915
 GameObject:
   m_ObjectHideFlags: 0

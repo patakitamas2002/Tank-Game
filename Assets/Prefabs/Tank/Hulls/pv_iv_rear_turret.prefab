@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &392714110099430912
@@ -257,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &1777201665185509485
@@ -367,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &3322790497263892195
@@ -444,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &3568862050872267586
@@ -702,6 +706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 777309448059060631}
+  - component: {fileID: 4858654302342934882}
   m_Layer: 0
   m_Name: pv_iv_rear_turret
   m_TagString: Untagged
@@ -728,6 +733,28 @@ Transform:
   - {fileID: 243163585094431912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4858654302342934882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309078559783982514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9781d144a13d12cd79d2c56d6183e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    Model: {fileID: 0}
+    Name: 
+    Health: 0
+    Weight: 0
+    Horsepower: 0
+    MaxSpeed: 0
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
 --- !u!1 &7093278260827326623
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,6 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &7980524898970078341
@@ -880,6 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DMGMultiplier: 1
   KineticResistance: 0
   ExplosiveResistance: 0
 --- !u!1 &8036195315395683629

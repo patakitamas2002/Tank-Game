@@ -63,19 +63,19 @@ public class TankManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        HullStats hull = hulls.GetHull(hullIndex);
-        hullName.text = hull.Name;
-        GameObject hullModel = Instantiate(hull.Model, tank);
+        GameOptions.hull = hulls.GetHull(hullIndex);
+        hullName.text = GameOptions.hull.Name;
+        GameObject hullModel = Instantiate(GameOptions.hull.Model, tank);
         hullModel.transform.SetParent(tank);
 
-        TurretStats turret = turrets.GetTurret(turretIndex);
-        turretName.text = turret.Name;
-        GameObject turretModel = Instantiate(turret.Model, hullModel.transform.GetChild(0));
+        GameOptions.turret = turrets.GetTurret(turretIndex);
+        turretName.text = GameOptions.turret.Name;
+        GameObject turretModel = Instantiate(GameOptions.turret.Model, hullModel.transform.GetChild(0));
         turretModel.transform.SetParent(tank);
 
-        CannonInfo cannon = cannons.GetPart(cannonIndex);
-        cannonName.text = cannon.Name;
-        GameObject cannonModel = Instantiate(cannon.Model, turretModel.transform.GetChild(0));
+        GameOptions.barrel = cannons.GetCannon(cannonIndex);
+        cannonName.text = GameOptions.barrel.Name;
+        GameObject cannonModel = Instantiate(GameOptions.barrel.Model, turretModel.transform.GetChild(0));
         cannonModel.transform.SetParent(tank);
     }
 }

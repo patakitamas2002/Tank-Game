@@ -5,12 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Turret : MonoBehaviour
 {
-    public GameObject Model;
-    public string Name;
-    public int FrontArmor;
-    public int SideArmor;
-    public int RearArmor;
-    public float RotationSpeed = 50.0f;
+
+    public TurretStats stats;
 
     public void RotateTowards(Transform aimPoint)
     {
@@ -18,7 +14,7 @@ public class Turret : MonoBehaviour
         float target = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg - transform.parent.eulerAngles.y;
         Quaternion trav = Quaternion.Euler(0, target, 0);
 
-        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, RotationSpeed);
+        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.RotationSpeed);
     }
 
 }

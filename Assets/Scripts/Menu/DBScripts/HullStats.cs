@@ -7,7 +7,9 @@ public class HullStats
 {
     public GameObject Model;
     public string Name;
-    public int Horsepower;
+    public float Health;
+    public float Weight;
+    public float Horsepower;
     public int MaxSpeed;
     public int FrontArmor;
     public int SideArmor;

@@ -1,17 +1,9 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
 public class Barrel : MonoBehaviour
 {
-    public GameObject Model;
-    public string Name;
-    public float Caliber;
-    public float ReloadTime;
-    public float ElevationSpeed;
-    public float maxElevation = 15f;
-    public float maxDepression = 10f;
-    public float rotationSpeed = 5.0f;
+    public CannonStats stats;
     public Bullet[] shells;
     private int currentShell = 0;
     private float reload = 0;
@@ -30,7 +22,7 @@ public class Barrel : MonoBehaviour
         if (reload <= 0f)
         {
             Instantiate(shells[currentShell], transform.position, transform.rotation);
-            reload = ReloadTime;
+            reload = stats.ReloadTime;
         }
     }
 
@@ -52,9 +44,9 @@ public class Barrel : MonoBehaviour
         Vector3 targetDirection = aimPoint.position - transform.position;
         float range = Mathf.Sqrt(targetDirection.x * targetDirection.x + targetDirection.z * targetDirection.z);
         float target = Mathf.Atan2(-targetDirection.y, range) * Mathf.Rad2Deg - transform.parent.eulerAngles.x;
-        target = Math.Clamp(target, -maxElevation, maxDepression);
+        target = Math.Clamp(target, -stats.maxElevation, stats.maxDepression);
         Quaternion trav = Quaternion.Euler(target, 0, 0);
-        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, rotationSpeed);
+        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.ElevationSpeed);
     }
 
     public void AlignCrosshair(RectTransform crosshair)

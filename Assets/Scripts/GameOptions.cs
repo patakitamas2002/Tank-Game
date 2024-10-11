@@ -6,5 +6,5 @@ public static class GameOptions
 {
     public static HullStats hull;
     public static TurretStats turret;
-    public static Barrel barrel;
+    public static CannonStats barrel;
 }

@@ -1,23 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    public InputAction playerInput;
+    public PlayerControls playerControls;
+    public GameObject tankObject;
+    public Tank tank;
+    private InputAction moveAction;
+    private InputAction turnAction;
+    private InputAction fireAction;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
     private void OnEnable()
     {
-        playerInput.Enable();
+        fireAction = playerControls.Firing.Fire;
+        fireAction.performed += Fire;
+        fireAction.Enable();
     }
 
     private void OnDisable()
     {
-        playerInput.Disable();
+        playerControls.Disable();
     }
     void Start()
     {
+        tankObject = new GameObject("Tank", typeof(Tank), typeof(Rigidbody));
+        tankObject.transform.position = transform.position;
+        tankObject.transform.SetParent(transform);
+        tank = tankObject.GetComponent<Tank>();
+        Instantiate(new GameObject("Aimpoint"), tankObject.transform);
 
     }
 
@@ -25,5 +43,9 @@ public class PlayerInputs : MonoBehaviour
     void Update()
     {
 
+    }
+    private void Fire(InputAction.CallbackContext context)
+    {
+        Debug.Log("Fired");
     }
 }

@@ -11,7 +11,7 @@ public class CannonDatabase : ScriptableObject
         return cannons.Length;
     }
 
-    public CannonStats GetPart(int index)
+    public CannonStats GetCannon(int index)
     {
         return cannons[index % GetCannonsAmount()];
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Armor : MonoBehaviour
 {
     Tank tank;
-    float DMGMultiplier = 1;
+    public float DMGMultiplier = 1;
     public float KineticResistance = 0;
     public float ExplosiveResistance = 0;
     // Start is called before the first frame updatep
@@ -23,6 +23,7 @@ public class Armor : MonoBehaviour
             }
             t = t.parent.transform;
         }
+        Debug.Log("No parent with tag \"Tank\" found");
         return null; // Could not find a parent with given tag.
     }
 

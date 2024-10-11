@@ -8,7 +8,7 @@ public abstract class Bullet : MonoBehaviour
     public float Weight;
     public float Veloctiy = 700;
     bool hasCollided = false;
-    public float maxTime = 10f;
+    public float maxTime = 20f;
     Vector3 startPosition;
     protected float remainingPen;
 
