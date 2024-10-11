@@ -9,9 +9,14 @@ public class PlayerInputs : MonoBehaviour
     public PlayerControls playerControls;
     public GameObject tankObject;
     public Tank tank;
+
+    #region InputActions
     private InputAction moveAction;
     private InputAction turnAction;
     private InputAction fireAction;
+
+
+    #endregion
 
     // Start is called before the first frame update
     private void Awake()
@@ -20,6 +25,10 @@ public class PlayerInputs : MonoBehaviour
     }
     private void OnEnable()
     {
+
+        moveAction = playerControls.Movement.ForwardBackward;
+        moveAction.performed += context => tank.Accelerate(context.ReadValue<float>());
+
         fireAction = playerControls.Firing.Fire;
         fireAction.performed += Fire;
         fireAction.Enable();
@@ -47,5 +56,7 @@ public class PlayerInputs : MonoBehaviour
     private void Fire(InputAction.CallbackContext context)
     {
         Debug.Log("Fired");
+        tank.barrel.Fire();
     }
+
 }

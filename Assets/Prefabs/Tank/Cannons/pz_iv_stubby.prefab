@@ -150,15 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78981b38e1a05a414a1cfcd7ba304255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Model: {fileID: 0}
-  Name: 
-  Caliber: 0
-  ReloadTime: 0
-  ElevationSpeed: 0
-  maxElevation: 15
-  maxDepression: 10
-  rotationSpeed: 5
-  shells: []
+  stats:
+    Model: {fileID: 0}
+    Name: 
+    Health: 0
+    Weight: 0
+    Caliber: 0
+    ReloadTime: 0
+    ElevationSpeed: 0
+    maxElevation: 0
+    maxDepression: 0
+  shells:
+  - {fileID: 2990589971612980465, guid: 02b94eafa871720048d4960a4064d475, type: 3}
+  - {fileID: 2990589971612980465, guid: 97ff9ac6c536010ffa4d9a4afbe50426, type: 3}
 --- !u!1 &9140132342221483195
 GameObject:
   m_ObjectHideFlags: 0

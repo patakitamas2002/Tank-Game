@@ -4,7 +4,7 @@ using UnityEngine;
 public class Barrel : MonoBehaviour
 {
     public CannonStats stats;
-    public Bullet[] shells;
+    public GameObject[] shells;
     private int currentShell = 0;
     private float reload = 0;
 
