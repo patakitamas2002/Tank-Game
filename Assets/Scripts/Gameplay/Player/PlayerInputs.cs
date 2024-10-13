@@ -11,8 +11,9 @@ public class PlayerInputs : MonoBehaviour
     public Tank tank;
 
     #region InputActions
+    float acceleration = 0;
+    float turn = 0;
     private InputAction moveAction;
-    private InputAction turnAction;
     private InputAction fireAction;
 
 
@@ -26,8 +27,7 @@ public class PlayerInputs : MonoBehaviour
     private void OnEnable()
     {
 
-        moveAction = playerControls.Movement.ForwardBackward;
-        moveAction.performed += context => tank.Accelerate(context.ReadValue<float>());
+        moveAction = playerControls.Movement.Move1;
 
         fireAction = playerControls.Firing.Fire;
         fireAction.performed += Fire;
@@ -52,11 +52,16 @@ public class PlayerInputs : MonoBehaviour
     void Update()
     {
 
+        acceleration = moveAction.ReadValue<Vector2>().x;
+        turn = moveAction.ReadValue<Vector2>().y;
+        tank.Accelerate(acceleration);
+        tank.Rotate(turn);
     }
     private void Fire(InputAction.CallbackContext context)
     {
         Debug.Log("Fired");
         tank.barrel.Fire();
     }
+
 
 }
