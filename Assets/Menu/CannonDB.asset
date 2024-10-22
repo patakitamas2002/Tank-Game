@@ -16,7 +16,7 @@ MonoBehaviour:
   - Model: {fileID: 6518451163707467323, guid: 597c3e5deb307f7e1a8fb1fd97407591, type: 3}
     Name: 
     Health: 0
-    Weight: 0
+    Weight: 500
     Caliber: 0
     ReloadTime: 0
     ElevationSpeed: 0
@@ -24,8 +24,8 @@ MonoBehaviour:
     maxDepression: 0
   - Model: {fileID: 6518451163707467323, guid: c5c9b71e701d5a631ab88f302632e48c, type: 3}
     Name: 
-    Health: 0
-    Weight: 0
+    Health: 10
+    Weight: 300
     Caliber: 0
     ReloadTime: 0
     ElevationSpeed: 0

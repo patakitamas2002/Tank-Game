@@ -30,6 +30,7 @@ public class Tank : MonoBehaviour
 
     void Start()
     {
+        gameObject.tag = "CollisionBox";
         aimPoint = transform.GetChild(0);
         rb = GetComponent<Rigidbody>();
 
@@ -48,6 +49,7 @@ public class Tank : MonoBehaviour
         rb.mass = hull.stats.Weight + barrel.stats.Weight + turret.stats.Weight;
 
         currentHealth = maxHealth;
+
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 

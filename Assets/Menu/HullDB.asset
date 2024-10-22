@@ -15,8 +15,8 @@ MonoBehaviour:
   hulls:
   - Model: {fileID: 6309078559783982514, guid: ae856173fe4b8f2bfac3cee1b846aae7, type: 3}
     Name: 
-    Health: 0
-    Weight: 0
+    Health: 100
+    Weight: 20000
     Horsepower: 0
     MaxSpeed: 0
     FrontArmor: 0
@@ -24,8 +24,8 @@ MonoBehaviour:
     RearArmor: 0
   - Model: {fileID: 6309078559783982514, guid: 1477e38ac71b923f1a809e5cb4afc4a3, type: 3}
     Name: 
-    Health: 0
-    Weight: 0
+    Health: 10
+    Weight: 20000
     Horsepower: 0
     MaxSpeed: 0
     FrontArmor: 0
