@@ -43,17 +43,17 @@ public class TankManager : MonoBehaviour
     }
     public void PreviousHull()
     {
-        hullIndex = hullIndex - 1 < 0 ? hulls.hulls.Length : hullIndex - 1;
+        hullIndex = hullIndex - 1 < 0 ? hulls.hulls.Length - 1 : hullIndex - 1;
         UpdateTank();
     }
     public void PreviousTurret()
     {
-        turretIndex = turretIndex - 1 < 0 ? turrets.turrets.Length : turretIndex - 1;
+        turretIndex = turretIndex - 1 < 0 ? turrets.turrets.Length - 1 : turretIndex - 1;
         UpdateTank();
     }
     public void PreviousCannon()
     {
-        cannonIndex = cannonIndex - 1 < 0 ? cannons.cannons.Length : cannonIndex - 1;
+        cannonIndex = cannonIndex - 1 < 0 ? cannons.cannons.Length - 1 : cannonIndex - 1;
         UpdateTank();
     }
     private void UpdateTank()

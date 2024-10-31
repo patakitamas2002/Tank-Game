@@ -104,7 +104,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &782529484634745415
@@ -293,6 +293,7 @@ Transform:
   - {fileID: 134756420372818523}
   - {fileID: 2496293037270871568}
   - {fileID: 2410229011196048951}
+  - {fileID: 3403492999887125178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3660849030298316715
@@ -309,13 +310,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Model: {fileID: 0}
-    Name: 
-    Health: 0
-    Weight: 0
-    RotationSpeed: 0
+    Name: Round
+    Health: 600
+    Weight: 2000
+    RotationSpeed: 20
     FrontArmor: 0
     SideArmor: 0
     RearArmor: 0
+--- !u!1 &8397799412265682040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3403492999887125178}
+  m_Layer: 0
+  m_Name: FPCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3403492999887125178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397799412265682040}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1277063603486228483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8786153281527981979
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
             tank.Accelerate(Input.GetAxis("Vertical"));
         if (Input.GetAxis("Horizontal") != 0)
             tank.Rotate(Input.GetAxis("Horizontal"));
-        if (Input.GetKey(KeyCode.Space))
-            tank.Brake();
+        // if (Input.GetKey(KeyCode.Space))
+        //     // tank.Brake();
     }
     void Aim(Camera cam)
     {

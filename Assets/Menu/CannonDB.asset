@@ -17,17 +17,17 @@ MonoBehaviour:
     Name: 
     Health: 0
     Weight: 500
-    Caliber: 0
-    ReloadTime: 0
-    ElevationSpeed: 0
-    maxElevation: 0
-    maxDepression: 0
+    Caliber: 75
+    ReloadTime: 8
+    ElevationSpeed: 5
+    maxElevation: 20
+    maxDepression: -10
   - Model: {fileID: 6518451163707467323, guid: c5c9b71e701d5a631ab88f302632e48c, type: 3}
     Name: 
     Health: 10
     Weight: 300
-    Caliber: 0
-    ReloadTime: 0
-    ElevationSpeed: 0
-    maxElevation: 0
-    maxDepression: 0
+    Caliber: 75
+    ReloadTime: 5
+    ElevationSpeed: 3
+    maxElevation: 20
+    maxDepression: -8

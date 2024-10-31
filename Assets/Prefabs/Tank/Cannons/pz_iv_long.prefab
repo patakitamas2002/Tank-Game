@@ -152,14 +152,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Model: {fileID: 0}
-    Name: 
-    Health: 0
-    Weight: 0
-    Caliber: 0
-    ReloadTime: 0
-    ElevationSpeed: 0
-    maxElevation: 0
-    maxDepression: 0
+    Name: Long
+    Health: 150
+    Weight: 700
+    Caliber: 75
+    ReloadTime: 8
+    ElevationSpeed: 6
+    maxElevation: 15
+    maxDepression: 10
   shells:
   - {fileID: 2990589971612980465, guid: 636507e3ad074ccc79a912f1147120ed, type: 3}
   - {fileID: 2990589971612980465, guid: 02b94eafa871720048d4960a4064d475, type: 3}

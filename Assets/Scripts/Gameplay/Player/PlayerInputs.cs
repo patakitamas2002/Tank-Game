@@ -2,25 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerInputs : MonoBehaviour
 {
+
     public PlayerControls playerControls;
-    public GameObject tankObject;
-    public Tank tank;
+    public PlayerAssets playerAssets;
 
     #region InputActions
     float acceleration = 0;
     float turn = 0;
+    float brake = 0;
     private InputAction moveAction;
     private InputAction fireAction;
 
-
+    private InputAction cameraZoom;
     private InputAction changeCamera;
-    public Camera[] cameras;
-    private int camIndex = 0;
+    private InputAction cameraMovement;
+    private InputAction nextShell;
+    private InputAction previousShell;
+
+
 
     #endregion
 
@@ -28,6 +33,7 @@ public class PlayerInputs : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+
     }
     private void OnEnable()
     {
@@ -40,9 +46,23 @@ public class PlayerInputs : MonoBehaviour
         fireAction.Enable();
 
 
+        cameraZoom = playerControls.Aiming.CameraZoom;
+        cameraZoom.performed += OnCameraZoom;
+        cameraZoom.Enable();
+
         changeCamera = playerControls.Aiming.ChangeCamera;
         changeCamera.performed += ChangeCamera;
         changeCamera.Enable();
+
+        cameraMovement.Enable();
+
+        nextShell = playerControls.Firing.NextShell;
+        nextShell.performed += NextShell;
+        nextShell.Enable();
+
+        previousShell = playerControls.Firing.PreviousShell;
+        previousShell.performed += PreviousShell;
+        previousShell.Enable();
     }
 
     private void OnDisable()
@@ -53,45 +73,54 @@ public class PlayerInputs : MonoBehaviour
         changeCamera.Disable();
         changeCamera.performed -= ChangeCamera;
         playerControls.Disable();
+        previousShell.Disable();
+        nextShell.Disable();
+        cameraZoom.Disable();
+        cameraMovement.Disable();
 
     }
     void Start()
     {
-        tankObject = new GameObject("Tank", typeof(Tank), typeof(Rigidbody), typeof(BoxCollider));
-        tankObject.GetComponent<BoxCollider>().size = new Vector3(3, 3, 3);
-        tankObject.transform.position = transform.position;
-        tankObject.transform.SetParent(transform);
-        tank = tankObject.GetComponent<Tank>();
-        Instantiate(new GameObject("Aimpoint"), tankObject.transform);
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        playerAssets.tank.Accelerate(moveAction.ReadValue<Vector2>().y);
+        playerAssets.tank.Rotate(moveAction.ReadValue<Vector2>().x);
 
-        acceleration = moveAction.ReadValue<Vector2>().x;
-        turn = moveAction.ReadValue<Vector2>().y;
-        Debug.Log("acceleration: " + acceleration + " turn: " + turn);
-        tank.Accelerate(acceleration);
-        tank.Rotate(turn);
+        // playerAssets.tank.Brake();
     }
     private void Fire(InputAction.CallbackContext context)
     {
         Debug.Log("Fired");
-        tank.barrel.Fire();
+        playerAssets.tank.barrel.Fire();
 
     }
     private void ChangeCamera(InputAction.CallbackContext context)
     {
-        int previousCam = camIndex;
-        cameras[camIndex].enabled = false;
-        camIndex += 1;
-
-        if (camIndex >= cameras.Length)
-            camIndex = 0;
-        cameras[camIndex].transform.forward = cameras[previousCam].transform.forward;
-        cameras[camIndex].enabled = true;
+        playerAssets.SwitchCamera();
     }
 
+    private void OnCameraZoom(InputAction.CallbackContext context)
+    {
+        float zoom = context.ReadValue<float>();
+        Debug.Log(zoom);
+        playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Zoom(zoom);
+    }
+    private void OnCameraMovement(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+        // Debug.Log(input);
+        playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Aim(input);
+    }
+    private void NextShell(InputAction.CallbackContext context)
+    {
+        playerAssets.tank.barrel.NextShell();
+    }
+    private void PreviousShell(InputAction.CallbackContext context)
+    {
+        playerAssets.tank.barrel.PreviousShell();
+    }
 }

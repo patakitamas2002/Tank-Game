@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
@@ -15,15 +16,15 @@ public class Tank : MonoBehaviour
     //     // this.maxHealth += barrel.Health;
     // }
     public float maxHealth { get; private set; }
-    private float currentHealth;
+    public float currentHealth { get; private set; }
 
-    bool isAlive;
 
     public Hull hull;
     public Barrel barrel;
     public Turret turret;
     public Transform aimPoint;
 
+    private const float ton = 1000;
 
     Rigidbody rb;
 
@@ -34,7 +35,6 @@ public class Tank : MonoBehaviour
         aimPoint = transform.GetChild(0);
         rb = GetComponent<Rigidbody>();
 
-        isAlive = true;
 
         GameObject hullObject = Instantiate(GameOptions.hull.Model, transform);
         GameObject turretObject = Instantiate(GameOptions.turret.Model, hullObject.transform.GetChild(0).transform);
@@ -53,10 +53,14 @@ public class Tank : MonoBehaviour
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 
+    // void FixedUpdate()
+    // {
+    //     if (IsGrounded()) Debug.Log("Grounded");
+    // }
     bool IsGrounded()
     {
         Ray ray = new Ray(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down);
-        //Debug.DrawRay(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down * 20, Color.red, 0);
+        Debug.DrawRay(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down * 20, Color.red, 0);
         return Physics.Raycast(ray, GetComponent<Collider>().bounds.extents.y + 0.1f);
 
     }
@@ -82,27 +86,29 @@ public class Tank : MonoBehaviour
         //Debug.Log(transform.forward * inputX * acceleration);
 
         if (IsGrounded() && rb.velocity.magnitude < hull.stats.MaxSpeed)
-            rb.AddForce(transform.forward * inputX * hull.stats.Horsepower / hull.stats.Weight, ForceMode.Acceleration);
+            rb.AddForce(transform.forward * inputX * hull.stats.Horsepower / (hull.stats.Weight / ton), ForceMode.Acceleration);
+        Debug.Log(transform.forward * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton));
+        // rb.AddForce(100 * inputX * transform.forward, ForceMode.Acceleration);
     }
 
     public void Rotate(float inputX)
     {
         if (IsGrounded())
-            transform.Rotate(0, inputX * Time.deltaTime * hull.stats.Horsepower / hull.stats.Weight * 2, 0);
+            transform.Rotate(0, inputX * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton), 0);
+        // rb.AddForce(100 * inputX * transform.right, ForceMode.Acceleration);
         //Debug.Log(rb.velocity.magnitude);
         //rb.AddForce(transform.forward * rb.velocity.magnitude / 10 * Time.deltaTime, ForceMode.VelocityChange);
     }
-    public void Brake()
+    public void Brake(float inputX)
     {
         //Debug.Log(rb.velocity);
         if (IsGrounded())
-            rb.AddForce(-rb.velocity, ForceMode.Acceleration);
+            rb.AddForce(-rb.velocity * inputX, ForceMode.Acceleration);
     }
 
     void Die()
     {
         Debug.Log($"The tank \"{gameObject.name}\" has been destroyed");
-        isAlive = false;
         gameObject.SetActive(false);
     }
 }
