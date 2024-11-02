@@ -9,6 +9,7 @@ public class PlayerAssets : MonoBehaviour
     public int CamIndex { get { return camIndex; } }
     public GameObject tankObject;
     public Tank tank;
+    public CameraPlayerFollow currentCamera { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +20,13 @@ public class PlayerAssets : MonoBehaviour
         tankObject.transform.SetParent(transform);
         tank = tankObject.GetComponent<Tank>();
 
-        Instantiate(new GameObject("Aimpoint"), tankObject.transform);
+        //Instantiate(new GameObject("Aimpoint"), tankObject.transform);
 
         for (int i = 0; i < cameras.Length; i++)
         {
             cameras[i] = Instantiate(cameras[i], transform);
         }
+        currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
     }
     public void SwitchCamera()
     {
@@ -36,7 +38,9 @@ public class PlayerAssets : MonoBehaviour
             camIndex = 0;
         cameras[camIndex].transform.forward = cameras[previousCam].transform.forward;
         cameras[camIndex].gameObject.SetActive(true);
+        currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
     }
+
 
 
 }

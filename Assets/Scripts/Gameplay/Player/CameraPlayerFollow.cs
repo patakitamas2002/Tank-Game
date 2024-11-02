@@ -8,15 +8,14 @@ public class CameraPlayerFollow : MonoBehaviour
     public CameraType cameraType;
     public InputAction inputSystem;
     public Transform target;
-    public float sensitivity = .5f;
+    public float sensitivity = 1f;
 
     public Vector3 offset;
     [SerializeField] float minFov = 20f;
     [SerializeField] float maxFov = 40f;
-    public float lerpSpeed = 0.05f;
     float fov;
     public RectTransform crosshair;
-    public Vector2 turn;
+    public float turnX, turnY;
 
     void Start()
     {
@@ -40,17 +39,17 @@ public class CameraPlayerFollow : MonoBehaviour
         Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
         transform.position = target.position + offsetRot;
 
-        target.rotation = Quaternion.Euler(-turn.y, turn.x, 0);
-        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        target.rotation = Quaternion.Euler(-turnY, turnX, 0);
+        transform.localRotation = Quaternion.Euler(-turnY, turnX, 0);
     }
     public void Aim(Vector2 value)
     {
-        turn.x += value.x * sensitivity;
-        turn.y += value.y * sensitivity;
+        turnX += value.x * sensitivity;
+        turnY += value.y * sensitivity;
     }
     public void Zoom(float value)
     {
-        fov -= Input.GetAxis("Mouse ScrollWheel") * 50;
+        fov -= value * 50;
         if (fov < minFov) fov = minFov;
         if (fov > maxFov) fov = maxFov;
         GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, fov, 0.05f);

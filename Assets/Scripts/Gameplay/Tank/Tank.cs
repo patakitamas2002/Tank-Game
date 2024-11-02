@@ -32,7 +32,7 @@ public class Tank : MonoBehaviour
     void Start()
     {
         gameObject.tag = "CollisionBox";
-        aimPoint = transform.GetChild(0);
+        aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
         rb = GetComponent<Rigidbody>();
 
 
@@ -67,8 +67,8 @@ public class Tank : MonoBehaviour
 
     void Update()
     {
-        turret.GetComponent<Turret>().RotateTowards(aimPoint);
-        barrel.GetComponent<Barrel>().Elevate(aimPoint);
+        turret.RotateTowards(aimPoint);
+        barrel.Elevate(aimPoint);
     }
 
     public void TakeDamage(float damage)
@@ -87,7 +87,7 @@ public class Tank : MonoBehaviour
 
         if (IsGrounded() && rb.velocity.magnitude < hull.stats.MaxSpeed)
             rb.AddForce(transform.forward * inputX * hull.stats.Horsepower / (hull.stats.Weight / ton), ForceMode.Acceleration);
-        Debug.Log(transform.forward * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton));
+        //        Debug.Log(transform.forward * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton));
         // rb.AddForce(100 * inputX * transform.forward, ForceMode.Acceleration);
     }
 

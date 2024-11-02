@@ -1,32 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class PlayerInputs : MonoBehaviour
 {
 
     public PlayerControls playerControls;
+    PlayerControls.FiringActions firingActions;
     public PlayerAssets playerAssets;
 
     #region InputActions
-    float acceleration = 0;
-    float turn = 0;
-    float brake = 0;
     private InputAction moveAction;
     private InputAction fireAction;
 
     private InputAction cameraZoom;
     private InputAction changeCamera;
-    private InputAction cameraMovement;
+    private InputAction cameraMovementX;
+    private InputAction cameraMovementY;
     private InputAction nextShell;
     private InputAction previousShell;
 
 
-
+    Vector2 mouseInput;
     #endregion
 
     // Start is called before the first frame update
@@ -34,9 +29,12 @@ public class PlayerInputs : MonoBehaviour
     {
         playerControls = new PlayerControls();
 
+        playerControls.Aiming.CameraMovementX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
+        playerControls.Aiming.CameraMovementY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
     }
     private void OnEnable()
     {
+        playerControls.Enable();
 
         moveAction = playerControls.Movement.Move;
         moveAction.Enable();
@@ -54,8 +52,6 @@ public class PlayerInputs : MonoBehaviour
         changeCamera.performed += ChangeCamera;
         changeCamera.Enable();
 
-        cameraMovement.Enable();
-
         nextShell = playerControls.Firing.NextShell;
         nextShell.performed += NextShell;
         nextShell.Enable();
@@ -63,6 +59,9 @@ public class PlayerInputs : MonoBehaviour
         previousShell = playerControls.Firing.PreviousShell;
         previousShell.performed += PreviousShell;
         previousShell.Enable();
+
+
+
     }
 
     private void OnDisable()
@@ -76,11 +75,6 @@ public class PlayerInputs : MonoBehaviour
         previousShell.Disable();
         nextShell.Disable();
         cameraZoom.Disable();
-        cameraMovement.Disable();
-
-    }
-    void Start()
-    {
 
     }
 
@@ -89,9 +83,16 @@ public class PlayerInputs : MonoBehaviour
     {
         playerAssets.tank.Accelerate(moveAction.ReadValue<Vector2>().y);
         playerAssets.tank.Rotate(moveAction.ReadValue<Vector2>().x);
-
         // playerAssets.tank.Brake();
     }
+    void Update()
+    {
+        playerAssets.currentCamera.Aim(mouseInput);
+        Debug.Log(mouseInput);
+    }
+
+
+
     private void Fire(InputAction.CallbackContext context)
     {
         Debug.Log("Fired");
@@ -106,7 +107,7 @@ public class PlayerInputs : MonoBehaviour
     private void OnCameraZoom(InputAction.CallbackContext context)
     {
         float zoom = context.ReadValue<float>();
-        Debug.Log(zoom);
+        //Debug.Log(zoom);
         playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Zoom(zoom);
     }
     private void OnCameraMovement(InputAction.CallbackContext context)
