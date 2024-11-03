@@ -88,7 +88,7 @@ public class PlayerInputs : MonoBehaviour
     void Update()
     {
         playerAssets.currentCamera.Aim(mouseInput);
-        Debug.Log(mouseInput);
+        // Debug.Log(mouseInput);
     }
 
 

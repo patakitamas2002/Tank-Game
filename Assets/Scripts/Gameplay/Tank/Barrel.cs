@@ -46,7 +46,7 @@ public class Barrel : MonoBehaviour
         float target = Mathf.Atan2(-targetDirection.y, range) * Mathf.Rad2Deg - transform.parent.eulerAngles.x;
         target = Math.Clamp(target, -stats.maxElevation, stats.maxDepression);
         Quaternion trav = Quaternion.Euler(target, 0, 0);
-        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.ElevationSpeed);
+        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.ElevationSpeed * Time.deltaTime);
     }
 
     public void AlignCrosshair(RectTransform crosshair)

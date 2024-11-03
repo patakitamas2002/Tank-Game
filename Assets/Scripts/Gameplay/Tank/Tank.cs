@@ -32,7 +32,7 @@ public class Tank : MonoBehaviour
     void Start()
     {
         gameObject.tag = "CollisionBox";
-        aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
+        // aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
         rb = GetComponent<Rigidbody>();
 
 
@@ -65,11 +65,6 @@ public class Tank : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        turret.RotateTowards(aimPoint);
-        barrel.Elevate(aimPoint);
-    }
 
     public void TakeDamage(float damage)
     {
