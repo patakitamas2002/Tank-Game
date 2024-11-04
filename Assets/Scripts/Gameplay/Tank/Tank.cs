@@ -15,6 +15,7 @@ public class Tank : MonoBehaviour
     //     // this.maxHealth += turret.Health;
     //     // this.maxHealth += barrel.Health;
     // }
+
     public float maxHealth { get; private set; }
     public float currentHealth { get; private set; }
 
@@ -28,21 +29,37 @@ public class Tank : MonoBehaviour
 
     Rigidbody rb;
 
+    public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, Transform transform)
+    {
+        Tank newTank = new GameObject("Tank", typeof(Tank), typeof(Rigidbody), typeof(BoxCollider)).GetComponent<Tank>();
+        newTank.transform.position = transform.position;
+
+        newTank.hull = Instantiate(hull.GetComponent<Hull>(), newTank.transform);
+        newTank.turret = Instantiate(turret.GetComponent<Turret>(), newTank.hull.transform.GetChild(0).transform);
+        newTank.barrel = Instantiate(barrel.GetComponent<Barrel>(), newTank.turret.transform.GetChild(0).transform);
+
+        return newTank.gameObject;
+    }
 
     void Start()
     {
-        gameObject.tag = "CollisionBox";
+
         // aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
+
+        Debug.Log(hull.GetComponentInChildren<Renderer>().bounds.size);
+
+        GetComponent<BoxCollider>().size = hull.transform.GetChild(3).GetComponent<Renderer>().bounds.size;
+        gameObject.tag = "CollisionBox";
         rb = GetComponent<Rigidbody>();
 
 
-        GameObject hullObject = Instantiate(GameOptions.hull.Model, transform);
-        GameObject turretObject = Instantiate(GameOptions.turret.Model, hullObject.transform.GetChild(0).transform);
-        GameObject barrelObject = Instantiate(GameOptions.barrel.Model, turretObject.transform.GetChild(0).transform);
+        // GameObject hullObject = Instantiate(hull.stats.Model, transform);
+        // GameObject turretObject = Instantiate(turret.stats.Model, hullObject.transform.GetChild(0).transform);
+        // GameObject barrelObject = Instantiate(barrel.stats.Model, turretObject.transform.GetChild(0).transform);
 
-        hull = hullObject.GetComponent<Hull>();
-        barrel = barrelObject.GetComponent<Barrel>();
-        turret = turretObject.GetComponent<Turret>();
+        // hull = hullObject.GetComponent<Hull>();
+        // barrel = barrelObject.GetComponent<Barrel>();
+        // turret = turretObject.GetComponent<Turret>();
 
 
         maxHealth = this.hull.stats.Health + this.barrel.stats.Health + this.turret.stats.Health;

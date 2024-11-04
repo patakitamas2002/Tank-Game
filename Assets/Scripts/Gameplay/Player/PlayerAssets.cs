@@ -16,13 +16,16 @@ public class PlayerAssets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tankObject = new GameObject("Tank", typeof(Tank), typeof(Rigidbody), typeof(BoxCollider));
-        tankObject.GetComponent<BoxCollider>().size = new Vector3(5, 2, 3);
-        tankObject.transform.position = transform.position;
+        tankObject = Tank.CreateTank(GameOptions.hull.Model, GameOptions.turret.Model, GameOptions.barrel.Model, transform);
+        // tankObject = new GameObject("Tank", );
+        // tankObject.GetComponent<BoxCollider>().size = new Vector3(5, 2, 3);
+        // tankObject.transform.position = transform.position;
         tankObject.transform.SetParent(transform);
         tank = tankObject.GetComponent<Tank>();
 
-        aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
+        //aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
+        aimPoint = new GameObject("Aimpoint").transform;
+        aimPoint.SetParent(transform);
 
         for (int i = 0; i < cameras.Length; i++)
         {
