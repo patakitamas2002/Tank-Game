@@ -33,7 +33,7 @@ public class CameraPlayerFollow : MonoBehaviour
         GetComponent<AudioListener>().enabled = true;
 
     }
-    private void Update()
+    void Update()
     {
 
         Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
@@ -41,6 +41,12 @@ public class CameraPlayerFollow : MonoBehaviour
 
         target.rotation = Quaternion.Euler(-turnY, turnX, 0);
         transform.localRotation = Quaternion.Euler(-turnY, turnX, 0);
+    }
+    private void FixedUpdate()
+    {
+
+
+
     }
     public void Aim(Vector2 value)
     {
@@ -59,12 +65,12 @@ public class CameraPlayerFollow : MonoBehaviour
     {
         if (cameraType == CameraType.FirstPerson)
         {
-            target = GameObject.Find("FPCamera").transform;
+            target = ChildFinder.FindAllByName(transform.parent, "FPCamera");
             if (target == null) Debug.Log("FPCamera not found");
         }
         else
         {
-            target = GameObject.Find("TPCamera").transform;
+            target = ChildFinder.FindAllByName(transform.parent, "TPCamera");
             if (target == null) Debug.Log("TPCamera not found");
         }
         Debug.Log(target.name);

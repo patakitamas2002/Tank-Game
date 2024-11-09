@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 public class PlayerAssets : MonoBehaviour
 {
     public GameObject[] cameras;
+
     [SerializeField] private int camIndex = 0;
     public int CamIndex { get { return camIndex; } }
     public GameObject tankObject;
     public Tank tank;
     public CameraPlayerFollow currentCamera { get; private set; }
     Transform aimPoint;
+    [SerializeField] GameObject dynamicCrosshair;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class PlayerAssets : MonoBehaviour
         }
         currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
         currentCamera.transform.tag = "MainCamera";
+
     }
 
     public void SwitchCamera()
