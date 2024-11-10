@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1709903849851316248}
   - component: {fileID: 7946493709945183878}
   - component: {fileID: 1964009271116218969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 6930731110952956066}
   - component: {fileID: 7489357912757619361}
   - component: {fileID: 3917498177085011532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 4341669670135970248}
   - component: {fileID: 8697409726508664004}
   - component: {fileID: 2917250364891220947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8681234519895465699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

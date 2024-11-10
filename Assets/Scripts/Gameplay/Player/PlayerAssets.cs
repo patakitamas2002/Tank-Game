@@ -24,7 +24,7 @@ public class PlayerAssets : MonoBehaviour
         // tankObject.transform.position = transform.position;
         tankObject.transform.SetParent(transform);
         tank = tankObject.GetComponent<Tank>();
-
+        tankObject.layer = LayerMask.NameToLayer("PlayerTank");
         //aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
         aimPoint = new GameObject("Aimpoint").transform;
         aimPoint.SetParent(transform);
