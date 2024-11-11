@@ -7,6 +7,7 @@ public class PlayerAssets : MonoBehaviour
 {
     public GameObject[] cameras;
 
+    public GameObject pauseMenu;
     [SerializeField] private int camIndex = 0;
     public int CamIndex { get { return camIndex; } }
     public GameObject tankObject;
@@ -35,7 +36,6 @@ public class PlayerAssets : MonoBehaviour
         }
         currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
         currentCamera.transform.tag = "MainCamera";
-
     }
 
     public void SwitchCamera()
@@ -68,4 +68,5 @@ public class PlayerAssets : MonoBehaviour
         }
 
     }
+
 }

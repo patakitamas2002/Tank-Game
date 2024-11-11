@@ -45,7 +45,6 @@ public class Barrel : MonoBehaviour
         float range = Mathf.Sqrt(targetDirection.x * targetDirection.x + targetDirection.z * targetDirection.z);
         float target = Mathf.Atan2(-targetDirection.y, range) * Mathf.Rad2Deg - transform.parent.eulerAngles.x;
         if (target < -180) target += 360;
-        //Debug.Log(target);
         target = Math.Clamp(target, -stats.maxElevation, stats.maxDepression);
         Quaternion trav = Quaternion.Euler(target, 0, 0);
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.ElevationSpeed * Time.deltaTime);
@@ -53,11 +52,11 @@ public class Barrel : MonoBehaviour
 
     public void AlignCrosshair(RectTransform crosshair)
     {
-        Ray ray = new Ray(transform.GetChild(0).position, transform.GetChild(0).forward);
+        Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             crosshair.position = Camera.main.WorldToScreenPoint(hit.point);
         }
-        Debug.DrawRay(transform.GetChild(0).position, transform.GetChild(0).forward * 100, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
     }
 }

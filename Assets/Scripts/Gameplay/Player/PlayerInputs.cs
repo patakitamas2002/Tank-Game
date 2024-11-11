@@ -6,7 +6,6 @@ public class PlayerInputs : MonoBehaviour
 {
 
     public PlayerControls playerControls;
-    PlayerControls.FiringActions firingActions;
     public PlayerAssets playerAssets;
 
     #region InputActions
@@ -15,10 +14,10 @@ public class PlayerInputs : MonoBehaviour
 
     private InputAction cameraZoom;
     private InputAction changeCamera;
-    private InputAction cameraMovementX;
-    private InputAction cameraMovementY;
     private InputAction nextShell;
     private InputAction previousShell;
+
+    private InputAction pauseGame;
 
 
     Vector2 mouseInput;
@@ -60,7 +59,9 @@ public class PlayerInputs : MonoBehaviour
         previousShell.performed += PreviousShell;
         previousShell.Enable();
 
-
+        pauseGame = playerControls.UI.PauseGame;
+        pauseGame.performed += PauseGame;
+        pauseGame.Enable();
 
     }
 
@@ -110,12 +111,12 @@ public class PlayerInputs : MonoBehaviour
         //Debug.Log(zoom);
         playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Zoom(zoom);
     }
-    private void OnCameraMovement(InputAction.CallbackContext context)
-    {
-        Vector2 input = context.ReadValue<Vector2>();
-        // Debug.Log(input);
-        playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Aim(input);
-    }
+    // private void OnCameraMovement(InputAction.CallbackContext context)
+    // {
+    //     Vector2 input = context.ReadValue<Vector2>();
+    //     // Debug.Log(input);
+    //     playerAssets.cameras[playerAssets.CamIndex].GetComponent<CameraPlayerFollow>().Aim(input);
+    // }
     private void NextShell(InputAction.CallbackContext context)
     {
         playerAssets.tank.barrel.NextShell();
@@ -123,5 +124,10 @@ public class PlayerInputs : MonoBehaviour
     private void PreviousShell(InputAction.CallbackContext context)
     {
         playerAssets.tank.barrel.PreviousShell();
+    }
+
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        playerAssets.pauseMenu.GetComponent<PauseMenu>().PauseGame(this);
     }
 }

@@ -40,3 +40,12 @@ MonoBehaviour:
     ElevationSpeed: 3
     maxElevation: 20
     maxDepression: -8
+  - Model: {fileID: 6518451163707467323, guid: 3f5c173316a4fe0f4aa9e17ed49001e0, type: 3}
+    Name: 
+    Health: 10
+    Weight: 300
+    Caliber: 75
+    ReloadTime: 5
+    ElevationSpeed: 3
+    maxElevation: 20
+    maxDepression: -8

@@ -25,6 +25,7 @@ public class Tank : MonoBehaviour
     public Turret turret;
     public Transform aimPoint;
 
+    private BoxCollider boxCollider;
     private const float ton = 1000;
 
     Rigidbody rb;
@@ -49,6 +50,7 @@ public class Tank : MonoBehaviour
         Debug.Log(hull.GetComponentInChildren<Renderer>().bounds.size);
 
         GetComponent<BoxCollider>().size = hull.transform.GetChild(3).GetComponent<Renderer>().bounds.size;
+        boxCollider = GetComponent<BoxCollider>();
         gameObject.tag = "CollisionBox";
         rb = GetComponent<Rigidbody>();
 
@@ -76,9 +78,11 @@ public class Tank : MonoBehaviour
     // }
     bool IsGrounded()
     {
-        Ray ray = new Ray(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down);
-        Debug.DrawRay(GetComponent<Collider>().transform.position - GetComponent<Collider>().bounds.extents.y * transform.up / 2, Vector3.down * 20, Color.red, 0);
-        return Physics.Raycast(ray, GetComponent<Collider>().bounds.extents.y + 0.1f);
+        Ray ray = new Ray(boxCollider.transform.position - boxCollider.bounds.extents.y * transform.up / 2, Vector3.down);
+        Debug.DrawRay(boxCollider.transform.position - (boxCollider.bounds.extents.y * transform.up / 2), Vector3.down, Color.red);
+        // Debug.Log(Physics.Raycast(ray, boxCollider.bounds.extents.y + 0.6f));
+        // Debug.Log(Physics.Raycast(ray, GetComponent<BoxCollider>().bounds.extents.y + 0.1f));
+        return Physics.Raycast(ray, boxCollider.bounds.extents.y + 0.6f);
 
     }
 

@@ -9,7 +9,7 @@ public class DynamicCrosshair : MonoBehaviour
 
     void Start()
     {
-        Invoke("SetTarget", 3f);
+        Invoke("SetTarget", 0.5f);
         crosshair = GetComponent<RectTransform>();
 
     }
@@ -20,12 +20,12 @@ public class DynamicCrosshair : MonoBehaviour
     public void AlignCrosshair()
     {
         if (target == null) return;
-        Ray ray = new Ray(target.GetChild(0).position, target.GetChild(0).forward);
+        Ray ray = new Ray(target.position, target.forward);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             crosshair.position = Camera.main.WorldToScreenPoint(hit.point);
         }
-        Debug.DrawRay(target.GetChild(0).position, target.GetChild(0).forward * 100, Color.red);
+        Debug.DrawRay(target.position, target.forward * 100, Color.red);
     }
     public void SetTarget()
     {

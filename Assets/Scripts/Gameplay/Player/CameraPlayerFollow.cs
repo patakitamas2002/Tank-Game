@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,6 +53,7 @@ public class CameraPlayerFollow : MonoBehaviour
     {
         turnX += value.x * sensitivity;
         turnY += value.y * sensitivity;
+        turnY = Math.Clamp(turnY, -90, 90);
     }
     public void Zoom(float value)
     {
