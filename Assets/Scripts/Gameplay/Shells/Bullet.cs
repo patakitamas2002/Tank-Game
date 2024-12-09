@@ -29,8 +29,9 @@ public abstract class Bullet : MonoBehaviour
         }
 
         float distanceTravelled = Vector3.Distance(startPosition, transform.position);
-
+        Debug.Log(collision.contacts[0].otherCollider.name);
         Armor hitArmor = collision.contacts[0].otherCollider.GetComponent<Armor>();
+
         if (hitArmor == null)
         {
             Debug.Log("Hit non-Armored object");
@@ -38,9 +39,13 @@ public abstract class Bullet : MonoBehaviour
             return;
         };
 
+        // Time.timeScale = 0; 
         Debug.Log("Armor thickness hit: " + hitArmor.KineticResistance);
-        Debug.Log("At angle: " + Vector3.Angle(transform.forward, -collision.contacts[0].normal));
+        Debug.Log("(old)At angle: " + Vector3.Angle(transform.forward, -collision.contacts[0].normal));
+        Debug.Log("At angle: " + Vector3.Angle(transform.forward, collision.contacts[0].normal));
+        Debug.Log("At angle 90-: " + (Vector3.Angle(transform.forward, collision.contacts[0].normal) - 90));
 
+        Time.timeScale = 0;
         remainingPen = CalculatePenetration(collision, distanceTravelled);
         if (remainingPen <= 0)
         {

@@ -7,6 +7,12 @@ public class Barrel : MonoBehaviour
     public GameObject[] shells;
     private int currentShell = 0;
     private float reload = 0;
+    private float lengthOffset;
+
+    void Start()
+    {
+        lengthOffset = GetLengthOffset();
+    }
 
     void Update()
     {
@@ -21,8 +27,12 @@ public class Barrel : MonoBehaviour
     {
         if (reload <= 0f)
         {
-            Instantiate(shells[currentShell], transform.position, transform.rotation);
+            // Debug.Log(lengthOffset);
+            Instantiate(shells[currentShell], transform.position + (lengthOffset + 1) * transform.forward, transform.rotation);
+            // Time.timeScale = 0.05f;
             reload = stats.ReloadTime;
+            Debug.Log("Fired");
+
         }
     }
 
@@ -50,13 +60,23 @@ public class Barrel : MonoBehaviour
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, trav, stats.ElevationSpeed * Time.deltaTime);
     }
 
-    public void AlignCrosshair(RectTransform crosshair)
+
+    float GetLengthOffset()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        float length = 0f;
+        foreach (Renderer child in transform.GetComponentsInChildren<Renderer>())
         {
-            crosshair.position = Camera.main.WorldToScreenPoint(hit.point);
+            length += child.bounds.size.z;
         }
-        Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
+        return length;
     }
+    // public void AlignCrosshair(RectTransform crosshair)
+    // {
+    //     Ray ray = new Ray(transform.position, transform.forward);
+    //     if (Physics.Raycast(ray, out RaycastHit hit))
+    //     {
+    //         crosshair.position = Camera.main.WorldToScreenPoint(hit.point);
+    //     }
+    //     Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
+    // }
 }

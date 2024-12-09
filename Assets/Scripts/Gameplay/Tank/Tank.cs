@@ -28,6 +28,10 @@ public class Tank : MonoBehaviour
     private BoxCollider boxCollider;
     private const float ton = 1000;
 
+    public float accelSpeed { get; private set; }
+    public float rotationSpeed { get; private set; }
+
+
     Rigidbody rb;
 
     public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, Transform transform)
@@ -45,43 +49,37 @@ public class Tank : MonoBehaviour
     void Start()
     {
 
-        // aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
-
         Debug.Log(hull.GetComponentInChildren<Renderer>().bounds.size);
-
         GetComponent<BoxCollider>().size = hull.transform.GetChild(3).GetComponent<Renderer>().bounds.size;
-        boxCollider = GetComponent<BoxCollider>();
-        gameObject.tag = "CollisionBox";
-        rb = GetComponent<Rigidbody>();
-
-
-        // GameObject hullObject = Instantiate(hull.stats.Model, transform);
-        // GameObject turretObject = Instantiate(turret.stats.Model, hullObject.transform.GetChild(0).transform);
-        // GameObject barrelObject = Instantiate(barrel.stats.Model, turretObject.transform.GetChild(0).transform);
-
-        // hull = hullObject.GetComponent<Hull>();
-        // barrel = barrelObject.GetComponent<Barrel>();
-        // turret = turretObject.GetComponent<Turret>();
-
-
-        maxHealth = this.hull.stats.Health + this.barrel.stats.Health + this.turret.stats.Health;
-        rb.mass = hull.stats.Weight + barrel.stats.Weight + turret.stats.Weight;
-
-        currentHealth = maxHealth;
-
+        SetStats();
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 
-    // void FixedUpdate()
-    // {
-    //     if (IsGrounded()) Debug.Log("Grounded");
-    // }
+    private void SetStats()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+
+        gameObject.tag = "CollisionBox";
+        gameObject.layer = LayerMask.NameToLayer("CollisionBox");
+
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -2, 0);
+
+        maxHealth = this.hull.stats.Health + this.barrel.stats.Health + this.turret.stats.Health;
+        rb.mass = hull.stats.Weight + barrel.stats.Weight + turret.stats.Weight;
+        currentHealth = maxHealth;
+
+
+        accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton);
+        rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton);
+
+    }
+
     bool IsGrounded()
     {
         Ray ray = new Ray(boxCollider.transform.position - boxCollider.bounds.extents.y * transform.up / 2, Vector3.down);
         Debug.DrawRay(boxCollider.transform.position - (boxCollider.bounds.extents.y * transform.up / 2), Vector3.down, Color.red);
-        // Debug.Log(Physics.Raycast(ray, boxCollider.bounds.extents.y + 0.6f));
-        // Debug.Log(Physics.Raycast(ray, GetComponent<BoxCollider>().bounds.extents.y + 0.1f));
+
         return Physics.Raycast(ray, boxCollider.bounds.extents.y + 0.6f);
 
     }
@@ -102,7 +100,7 @@ public class Tank : MonoBehaviour
         //Debug.Log(transform.forward * inputX * acceleration);
 
         if (IsGrounded() && rb.velocity.magnitude < hull.stats.MaxSpeed)
-            rb.AddForce(transform.forward * inputX * hull.stats.Horsepower / (hull.stats.Weight / ton), ForceMode.Acceleration);
+            rb.AddForce(transform.forward * inputX * accelSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
         //        Debug.Log(transform.forward * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton));
         // rb.AddForce(100 * inputX * transform.forward, ForceMode.Acceleration);
     }
@@ -110,7 +108,7 @@ public class Tank : MonoBehaviour
     public void Rotate(float inputX)
     {
         if (IsGrounded())
-            transform.Rotate(0, inputX * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton), 0);
+            transform.Rotate(0, inputX * Time.fixedDeltaTime * rotationSpeed, 0);
         // rb.AddForce(100 * inputX * transform.right, ForceMode.Acceleration);
         //Debug.Log(rb.velocity.magnitude);
         //rb.AddForce(transform.forward * rb.velocity.magnitude / 10 * Time.deltaTime, ForceMode.VelocityChange);

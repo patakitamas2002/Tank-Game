@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         Aim(cameras[camIndex]);
 
 
-        tank.barrel.GetComponent<Barrel>().AlignCrosshair(crosshair);
+        //tank.barrel.GetComponent<Barrel>().AlignCrosshair(crosshair);
     }
     void FixedUpdate()
     {

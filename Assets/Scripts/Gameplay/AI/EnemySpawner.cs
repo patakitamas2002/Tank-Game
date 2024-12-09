@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] TurretDatabase turretDatabase;
     [SerializeField] CannonDatabase cannonDatabase;
+    [SerializeField] Transform[] checkpoints;
 
     private List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -31,7 +33,12 @@ public class EnemySpawner : MonoBehaviour
         int hullIndex = random.Next(hullDatabase.hulls.Length);
         int turretIndex = random.Next(turretDatabase.turrets.Length);
         int cannonIndex = random.Next(cannonDatabase.cannons.Length);
-        GameObject enemy = Tank.CreateTank(hullDatabase.hulls[hullIndex].Model, turretDatabase.turrets[turretIndex].Model, cannonDatabase.cannons[cannonIndex].Model, position);
+        GameObject enemy = AITank.CreateTank(hullDatabase.hulls[hullIndex].Model, turretDatabase.turrets[turretIndex].Model, cannonDatabase.cannons[cannonIndex].Model, position);
+        enemy.AddComponent<NavMeshAgent>();
+
+        EnemyAI ai = enemy.AddComponent<EnemyAI>();
+        ai.SetCheckPoints(checkpoints);
+
         enemy.transform.SetParent(position);
         enemies.Add(enemy);
     }

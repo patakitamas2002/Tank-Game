@@ -32,7 +32,7 @@ MonoBehaviour:
     SideArmor: 0
     RearArmor: 0
   - Model: {fileID: 3186258190974456655, guid: e362ba079b534120d8dd424db03f4c72, type: 3}
-    Name: Normal
+    Name: M4
     Health: 10
     Weight: 20000
     Horsepower: 300

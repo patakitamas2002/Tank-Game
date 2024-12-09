@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannons:
   - Model: {fileID: 6518451163707467323, guid: 597c3e5deb307f7e1a8fb1fd97407591, type: 3}
-    Name: 
+    Name: Long Barrel Test
     Health: 0
     Weight: 500
     Caliber: 75
@@ -23,7 +23,7 @@ MonoBehaviour:
     maxElevation: 20
     maxDepression: -10
   - Model: {fileID: 6518451163707467323, guid: c5c9b71e701d5a631ab88f302632e48c, type: 3}
-    Name: 
+    Name: Short Barrel Test
     Health: 10
     Weight: 300
     Caliber: 75
@@ -32,7 +32,7 @@ MonoBehaviour:
     maxElevation: 20
     maxDepression: -8
   - Model: {fileID: 2585144533657364273, guid: 025317c2c1a23312ea01f41ed80ad793, type: 3}
-    Name: 
+    Name: American 75mm
     Health: 10
     Weight: 300
     Caliber: 75

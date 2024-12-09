@@ -96,7 +96,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("Fired");
+        // Debug.Log("Fired");
         playerAssets.tank.barrel.Fire();
 
     }
