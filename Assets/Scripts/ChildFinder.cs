@@ -43,7 +43,7 @@ public static class ChildFinder
     {
         foreach (Transform child in parent.GetComponentsInChildren<Transform>())
         {
-            Debug.Log(child.name);
+            // Debug.Log(child.name);
             if (child.tag == tag)
             {
                 return child;

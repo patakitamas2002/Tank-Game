@@ -25,11 +25,11 @@ public class PlayerAssets : MonoBehaviour
         // tankObject.transform.position = transform.position;
         tankObject.transform.SetParent(transform);
         tank = tankObject.GetComponent<Tank>();
-        foreach (Transform gameObject in tankObject.GetComponentInChildren<Transform>())
+        foreach (Renderer gameObject in tankObject.GetComponentsInChildren<Renderer>())
         {
-            
+            gameObject.gameObject.layer = LayerMask.NameToLayer("PlayerTank");
         }
-        tankObject.layer = LayerMask.NameToLayer("PlayerTank");
+
         //aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
         aimPoint = new GameObject("Aimpoint").transform;
         aimPoint.SetParent(transform);

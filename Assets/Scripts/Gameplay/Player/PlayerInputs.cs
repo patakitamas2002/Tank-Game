@@ -82,8 +82,8 @@ public class PlayerInputs : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        playerAssets.tank.Accelerate(moveAction.ReadValue<Vector2>().y);
-        playerAssets.tank.Rotate(moveAction.ReadValue<Vector2>().x);
+        playerAssets.tank.Accelerate(moveAction.ReadValue<Vector2>().y * Time.fixedDeltaTime);
+        playerAssets.tank.Rotate(moveAction.ReadValue<Vector2>().x * Time.fixedDeltaTime);
         // playerAssets.tank.Brake();
     }
     void Update()

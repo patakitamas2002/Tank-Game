@@ -45,7 +45,7 @@ public abstract class Bullet : MonoBehaviour
         Debug.Log("At angle: " + Vector3.Angle(transform.forward, collision.contacts[0].normal));
         Debug.Log("At angle 90-: " + (Vector3.Angle(transform.forward, collision.contacts[0].normal) - 90));
 
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
         remainingPen = CalculatePenetration(collision, distanceTravelled);
         if (remainingPen <= 0)
         {

@@ -31,8 +31,9 @@ public class Tank : MonoBehaviour
     public float accelSpeed { get; private set; }
     public float rotationSpeed { get; private set; }
 
-
-    Rigidbody rb;
+    private float sidewaysFrictionFactor = 0.04f;
+    private bool grounded = false;
+    public Rigidbody rb { get; private set; }
 
     public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, Transform transform)
     {
@@ -55,33 +56,56 @@ public class Tank : MonoBehaviour
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 
+    void FixedUpdate()
+    {
+        grounded = IsGrounded();
+        if (grounded)
+            SidewaysFriction();
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(boxCollider.bounds.center, 1.5f);
+    }
     private void SetStats()
     {
         boxCollider = GetComponent<BoxCollider>();
 
-        gameObject.tag = "CollisionBox";
+        gameObject.tag = "Player";
         gameObject.layer = LayerMask.NameToLayer("CollisionBox");
 
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -2, 0);
+
 
         maxHealth = this.hull.stats.Health + this.barrel.stats.Health + this.turret.stats.Health;
         rb.mass = hull.stats.Weight + barrel.stats.Weight + turret.stats.Weight;
         currentHealth = maxHealth;
 
 
-        accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton);
-        rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton);
+        accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 20;
+        rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 2;
 
     }
+    private void SidewaysFriction()
+    {
+        Vector3 rightDirection = transform.right;
 
+        // Project the Rigidbody velocity onto the right direction
+        float sidewaysSpeed = Vector3.Dot(rb.velocity, rightDirection);
+
+        // Create a velocity vector to counteract the sideways motion
+        Vector3 sidewaysVelocity = rightDirection * sidewaysSpeed;
+
+        // Apply friction to reduce the sideways velocity
+        Vector3 newVelocity = rb.velocity - sidewaysVelocity * sidewaysFrictionFactor;
+
+        // Update the Rigidbody's velocity
+        rb.velocity = newVelocity;
+    }
     bool IsGrounded()
     {
-        Ray ray = new Ray(boxCollider.transform.position - boxCollider.bounds.extents.y * transform.up / 2, Vector3.down);
-        Debug.DrawRay(boxCollider.transform.position - (boxCollider.bounds.extents.y * transform.up / 2), Vector3.down, Color.red);
-
-        return Physics.Raycast(ray, boxCollider.bounds.extents.y + 0.6f);
-
+        return Physics.CheckSphere(boxCollider.bounds.center, 1.5f, LayerMask.GetMask("Terrain"));
     }
 
 
@@ -99,16 +123,24 @@ public class Tank : MonoBehaviour
         //Vector3 accel = transform.forward * inputX * acceleration;       
         //Debug.Log(transform.forward * inputX * acceleration);
 
-        if (IsGrounded() && rb.velocity.magnitude < hull.stats.MaxSpeed)
-            rb.AddForce(transform.forward * inputX * accelSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
+        if (grounded && rb.velocity.magnitude < hull.stats.MaxSpeed)
+            rb.AddForce(transform.forward * inputX * accelSpeed, ForceMode.Acceleration);
+
+        // Debug.Log(transform.forward * inputX * accelSpeed * Time.fixedDeltaTime);
         //        Debug.Log(transform.forward * hull.stats.Horsepower * Time.fixedDeltaTime / (hull.stats.Weight / ton));
         // rb.AddForce(100 * inputX * transform.forward, ForceMode.Acceleration);
     }
 
     public void Rotate(float inputX)
     {
-        if (IsGrounded())
-            transform.Rotate(0, inputX * Time.fixedDeltaTime * rotationSpeed, 0);
+        if (!grounded)
+            return;
+        if (rb.velocity.magnitude < 2)
+        {
+            transform.Rotate(0, inputX * rotationSpeed, 0);
+            return;
+        }
+        transform.Rotate(0, inputX * rotationSpeed * (float)Math.Pow(rb.velocity.magnitude, 0.2), 0);
         // rb.AddForce(100 * inputX * transform.right, ForceMode.Acceleration);
         //Debug.Log(rb.velocity.magnitude);
         //rb.AddForce(transform.forward * rb.velocity.magnitude / 10 * Time.deltaTime, ForceMode.VelocityChange);
@@ -116,13 +148,19 @@ public class Tank : MonoBehaviour
     public void Brake(float inputX)
     {
         //Debug.Log(rb.velocity);
-        if (IsGrounded())
+        if (grounded)
             rb.AddForce(-rb.velocity * inputX, ForceMode.Acceleration);
     }
 
     void Die()
     {
         Debug.Log($"The tank \"{gameObject.name}\" has been destroyed");
-        gameObject.SetActive(false);
+
+
+        turret.gameObject.SetActive(false);
+        GameObject faketurret = Instantiate(turret.gameObject, turret.transform);
+        Instantiate(barrel.GetComponent<Barrel>(), faketurret.transform.GetChild(0).transform);
+        Rigidbody fakeRb = faketurret.AddComponent<Rigidbody>();
+        fakeRb.AddForce(Vector3.up * 10, ForceMode.Impulse);
     }
 }

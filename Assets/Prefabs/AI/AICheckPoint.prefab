@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 191598944134588519}
   - component: {fileID: 6244070590061687884}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AICheckPoint
-  m_TagString: EditorOnly
+  m_TagString: CollisionBox
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,5 +51,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 15, y: 10, z: 15}
   m_Center: {x: 0, y: 0, z: 0}

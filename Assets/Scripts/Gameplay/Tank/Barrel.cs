@@ -6,11 +6,12 @@ public class Barrel : MonoBehaviour
     public CannonStats stats;
     public GameObject[] shells;
     private int currentShell = 0;
-    private float reload = 0;
+    public float reload { get; private set; }
     private float lengthOffset;
 
     void Start()
     {
+        reload = 0f;
         lengthOffset = GetLengthOffset();
     }
 
