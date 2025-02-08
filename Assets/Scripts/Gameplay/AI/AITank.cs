@@ -11,33 +11,50 @@ public class AITank : MonoBehaviour
     [SerializeField] public Transform[] checkpoints { get; private set; }
     public Tank tank { get; private set; }
     public Transform player { get; private set; }
-
     public AIStateMachine stateMachine { get; private set; }
+    public NavMeshAgent agent { get; private set; }
+
+    private GameState gameState;
+
+    private bool isFinished { get { return checkpointNumber >= checkpoints.Length; } }
 
     int frametimer = 0;
     void Start()
     {
-        checkpointNumber = 0;
         tank = GetComponent<Tank>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.baseOffset = 3f;
+        agent.updatePosition = false;
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        // agent.velocity = Vector3.zero;
+        // agent.isStopped = true;
+
+        checkpointNumber = 0;
+
+
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new PatrolState());
         stateMachine.RegisterState(new AttackState());
         stateMachine.ChangeState(AIStateID.Patrol);
-        StartCoroutine(Waiting());
-        Debug.Log("This is the player: " + GameObject.FindWithTag("Player"));
+
+        // StartCoroutine(Waiting());
+
+        // Debug.Log("This is the player: " + GameObject.FindWithTag("Player"));
         player = GameObject.FindWithTag("Player").transform;
         if (player == null) Debug.Log("Player not found");
-        Debug.Log(stateMachine.currentState);
-
+        // Debug.Log(stateMachine.currentState);
+        gameState = GameObject.FindWithTag("GameState").GetComponent<GameState>();
     }
     IEnumerator Waiting()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(10);
     }
     void Update()
     {
+        agent.nextPosition = transform.position;
         stateMachine.Update();
-        // Debug.DrawRay(transform.position + transform.forward * 6, (player.position - transform.position) * 100, Color.red);
+        Debug.DrawRay(transform.position + transform.forward * 6, (player.position - transform.position) * 100, Color.red);
         // Debug.Log(player.position);
         frametimer++;
         if (frametimer > 5)
@@ -45,54 +62,71 @@ public class AITank : MonoBehaviour
             frametimer = 0;
             if (stateMachine.currentState != AIStateID.Attack && CheckPlayerVisible())
                 stateMachine.ChangeState(AIStateID.Attack);
+            if (tank.isDead) Die();
         }
 
     }
     void OnTriggerEnter(Collider other)
     {
+        // Debug.Log("Triggered by: " + other.transform.position + " checkpoint: " + checkpoints[checkpointNumber].position);
         if (other.transform.position == checkpoints[checkpointNumber].position)
         {
             checkpointNumber++;
+            agent.SetDestination(checkpoints[checkpointNumber].position);
+            if (isFinished) gameState.LoseGame();
         }
+    }
+    void Die()
+    {
+        enabled = false;
+        agent.enabled = false;
+        gameState.EnemyDefeated();
+
     }
     public bool CheckPlayerVisible()
     {
-
-        // Debug.Log(hit.transform.name);
         if (Vector3.Distance(transform.position, player.position) > 100)
             return false;
         Vector3 relativeVector = transform.InverseTransformPoint(player.position);
         float angle = Mathf.Atan2(relativeVector.x, relativeVector.z) * Mathf.Rad2Deg;
         if (Mathf.Abs(angle) > 45) return false;
         if (!Physics.Raycast(transform.position + transform.forward * 6, player.position - transform.position, out RaycastHit hit, 100)) return false;
-        if (Vector3.Distance(hit.point, player.transform.position) > 3) return false;
-
-        Debug.Log("Player visible");
-        return true;
+        return Vector3.Distance(hit.point, player.transform.position) > 3;
+        // Debug.Log(hit.transform.name);
+        // Debug.Log("Player visible");
+        // return true;
     }
     public bool IsLookingAtPlayer()
     {
         Physics.Raycast(tank.barrel.transform.position, tank.barrel.transform.forward, out RaycastHit hit, 100);
+        // Debug.Log(hit.transform.name);
         return Vector3.Distance(hit.point, player.transform.position) < 3;
     }
     public void SetCheckPoints(Transform[] points)
     {
         if (checkpoints == null) checkpoints = points;
     }
-    public void Steer(Transform target)
+    public void Steer(Vector3 target)
     {
-        Vector3 relativeVector = transform.InverseTransformPoint(target.position);
-        float angle = Mathf.Atan2(relativeVector.x, relativeVector.z) * Mathf.Rad2Deg;
+        Vector3 direction = transform.InverseTransformPoint(target);
+        float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         if (Mathf.Abs(angle) > 1)
         {
             tank.Rotate(angle / Mathf.Abs(angle) * Time.deltaTime);
         }
+        // Debug.Log(angle);
     }
-    public void Move()
+
+    public void Move(float strength = 1)
     {
         if (tank.rb.velocity.magnitude < tank.hull.stats.MaxSpeed / 3)
-            tank.Accelerate(1 * Time.deltaTime);
+            tank.Accelerate(strength * Time.deltaTime);
+    }
+    public Vector3 GetDirectionFromPosition(Vector3 target)
+    {
+        // return (target - transform.position).normalized;
+        return transform.InverseTransformPoint(target);
     }
 
     private void SwitchToStrongestShell()

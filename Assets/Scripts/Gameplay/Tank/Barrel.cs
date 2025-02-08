@@ -8,6 +8,7 @@ public class Barrel : MonoBehaviour
     private int currentShell = 0;
     public float reload { get; private set; }
     private float lengthOffset;
+    [SerializeField] AudioSource shotSound;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Barrel : MonoBehaviour
             Instantiate(shells[currentShell], transform.position + (lengthOffset + 1) * transform.forward, transform.rotation);
             // Time.timeScale = 0.05f;
             reload = stats.ReloadTime;
+            shotSound.Play();
             Debug.Log("Fired");
 
         }

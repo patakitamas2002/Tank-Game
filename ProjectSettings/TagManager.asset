@@ -8,6 +8,7 @@ TagManager:
   - CollisionBox
   - Barrel
   - Terrain
+  - GameState
   layers:
   - Default
   - TransparentFX

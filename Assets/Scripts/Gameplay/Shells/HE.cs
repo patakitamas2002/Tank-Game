@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class HE : Bullet
 {
+    [Tooltip("The explosive mass of the shell in grams")]
     public float ExplosiveMass;
+
 
     protected override float GetMaxPenetration()
     {
         return (float)Math.Pow(ExplosiveMass, 2 / 3) / 6;
     }
 
-    protected override float CalculateDMG(Collision collision)
+    protected override float CalculateDMG()
     {
-        Debug.Log("HE DMG");
-        throw new System.NotImplementedException();
+        Debug.Log("HE DMG: " + remainingPen / GetMaxPenetration());
+
+        return ExplosiveMass * (remainingPen / GetMaxPenetration());
 
     }
 
@@ -28,19 +31,22 @@ public class HE : Bullet
         {
             if (hitColliders[i].GetComponent<Armor>() == null)
                 continue;
-
+            if (!Physics.Raycast(transform.position, collision.transform.position - transform.position))
+                continue;
+            Debug.Log("In LoS: " + hitColliders[i].name);
             if (weakest == null)
-            {
                 weakest = hitColliders[i].GetComponent<Armor>();
-            }
+
             else if (hitColliders[i].GetComponent<Armor>().KineticResistance * MyMath.InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)) < weakest.KineticResistance)
             {
                 weakest = hitColliders[i].GetComponent<Armor>();
-                Debug.Log(weakest + ": " + MyMath.InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)));
+                // Debug.Log(weakest + ": " + MyMath.InvSq(Vector3.Distance(transform.position, hitColliders[i].transform.position)));
             }
         }
         Debug.Log("Weakest armor: " + weakest.KineticResistance);
-        Debug.Log("Weakest InvSQ: " + weakest.KineticResistance / MyMath.InvSq(Vector3.Distance(collision.transform.position, weakest.transform.position)));
-        return 0;
+        Debug.Log("Weakest InvSQ: " + weakest.KineticResistance * MyMath.InvSq(Vector3.Distance(collision.transform.position, weakest.transform.position)));
+        return remainingPen / MyMath.InvSq(Vector3.Distance(collision.transform.position, weakest.transform.position)) - weakest.KineticResistance;
     }
+
+
 }

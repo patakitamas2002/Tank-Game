@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] CannonDatabase cannonDatabase;
     [SerializeField] Transform checkpointParent;
     [SerializeField] List<Transform> checkpoints;
+    [SerializeField] GameState gameState;
 
     private List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
         }
         foreach (Transform child in transform)
         {
+            gameState.AddEnemy();
             SpawnEnemy(child);
         }
     }
@@ -42,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         AITank ai = enemy.AddComponent<AITank>();
         ai.SetCheckPoints(checkpoints.ToArray());
         // ai.tank = enemy.GetComponent<Tank>();
-        //enemy.AddComponent<NavMeshAgent>();
+        enemy.AddComponent<NavMeshAgent>();
         // EnemyAI2 ai = enemy.AddComponent<EnemyAI2>();
         // ai.SetCheckPoints(checkpoints.ToArray());
         // ai.tank = enemy.GetComponent<Tank>();

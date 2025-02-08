@@ -33,7 +33,10 @@ public class Tank : MonoBehaviour
 
     private float sidewaysFrictionFactor = 0.04f;
     private bool grounded = false;
+    private AudioSource engineSound;
     public Rigidbody rb { get; private set; }
+
+    public bool isDead { get { return currentHealth <= 0; } }
 
     public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, Transform transform)
     {
@@ -56,6 +59,11 @@ public class Tank : MonoBehaviour
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 
+    void Update()
+    {
+        if (engineSound != null)
+            engineSound.pitch = 0.8f + rb.velocity.magnitude / hull.stats.MaxSpeed;
+    }
     void FixedUpdate()
     {
         grounded = IsGrounded();
@@ -86,6 +94,9 @@ public class Tank : MonoBehaviour
         accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 20;
         rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 2;
 
+        engineSound = hull.GetComponent<AudioSource>();
+        if (engineSound != null)
+            engineSound.Play();
     }
     private void SidewaysFriction()
     {
@@ -112,7 +123,7 @@ public class Tank : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (isDead)
         {
             Die();
         }
@@ -154,13 +165,18 @@ public class Tank : MonoBehaviour
 
     void Die()
     {
+        enabled = false;
+        engineSound.Stop();
+        Vector3 force = new Vector3(UnityEngine.Random.Range(0, 10), UnityEngine.Random.Range(0, 10) + 5, UnityEngine.Random.Range(0, 10));
         Debug.Log($"The tank \"{gameObject.name}\" has been destroyed");
 
 
-        turret.gameObject.SetActive(false);
-        GameObject faketurret = Instantiate(turret.gameObject, turret.transform);
-        Instantiate(barrel.GetComponent<Barrel>(), faketurret.transform.GetChild(0).transform);
+        // GameObject faketurret = Instantiate(turret.gameObject, turret.transform.parent);
+        GameObject faketurret = turret.gameObject;
+        Instantiate(barrel.gameObject, faketurret.transform.GetChild(0).transform);
+        // turret.gameObject.SetActive(false);
         Rigidbody fakeRb = faketurret.AddComponent<Rigidbody>();
-        fakeRb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        fakeRb.AddForce(force, ForceMode.Impulse);
+        enabled = false;
     }
 }

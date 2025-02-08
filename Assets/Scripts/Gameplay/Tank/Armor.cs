@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Armor : MonoBehaviour
 {
-    Tank tank;
+    public Tank tank;
     public float DMGMultiplier = 1;
     public float KineticResistance = 0;
     public float ExplosiveResistance = 0;
@@ -17,7 +17,7 @@ public class Armor : MonoBehaviour
         Transform t = transform;
         while (t.parent != null)
         {
-            if (t.parent.tag == "Tank")
+            if (t.parent.name == "Tank")
             {
                 return t.parent.GetComponent<Tank>();
             }

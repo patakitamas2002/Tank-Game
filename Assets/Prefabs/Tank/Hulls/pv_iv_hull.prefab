@@ -75,8 +75,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 50
   ExplosiveResistance: 0
 --- !u!1 &392714110099430912
 GameObject:
@@ -90,6 +91,7 @@ GameObject:
   - component: {fileID: 4184515029324978659}
   - component: {fileID: 803320482932539839}
   - component: {fileID: 3519522586009854237}
+  - component: {fileID: 2338611112337287824}
   m_Layer: 0
   m_Name: track_l
   m_TagString: Untagged
@@ -183,6 +185,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2338611112337287824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392714110099430912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tank: {fileID: 0}
+  DMGMultiplier: 0.3
+  KineticResistance: 30
+  ExplosiveResistance: 0
 --- !u!1 &1164147127814990431
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,8 +307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 30
   ExplosiveResistance: 0
 --- !u!1 &1777201665185509485
 GameObject:
@@ -400,8 +419,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 15
   ExplosiveResistance: 0
 --- !u!1 &3322790497263892195
 GameObject:
@@ -478,8 +498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 30
   ExplosiveResistance: 0
 --- !u!1 &3568862050872267586
 GameObject:
@@ -530,6 +551,7 @@ GameObject:
   - component: {fileID: 4398971234161683216}
   - component: {fileID: 4976853629269327763}
   - component: {fileID: 48713947201006845}
+  - component: {fileID: 1784630761905226282}
   m_Layer: 0
   m_Name: track_r
   m_TagString: Untagged
@@ -623,6 +645,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1784630761905226282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883798502167781153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tank: {fileID: 0}
+  DMGMultiplier: 0.3
+  KineticResistance: 30
+  ExplosiveResistance: 0
 --- !u!1 &5773741455363601535
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777309448059060631}
   - component: {fileID: 3902987891287159349}
+  - component: {fileID: -2422409876292448660}
   m_Layer: 0
   m_Name: pv_iv_hull
   m_TagString: Untagged
@@ -779,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Model: {fileID: 0}
+    Sound: {fileID: 0}
     Name: TestMid
     Health: 3000
     Weight: 15000
@@ -787,6 +827,102 @@ MonoBehaviour:
     FrontArmor: 0
     SideArmor: 0
     RearArmor: 0
+--- !u!82 &-2422409876292448660
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309078559783982514}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a70d64be5dacb2cccbc778bd558793b6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7093278260827326623
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,8 +998,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 15
   ExplosiveResistance: 0
 --- !u!1 &7980524898970078341
 GameObject:
@@ -940,8 +1077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
-  KineticResistance: 0
+  KineticResistance: 100
   ExplosiveResistance: 0
 --- !u!1 &8036195315395683629
 GameObject:

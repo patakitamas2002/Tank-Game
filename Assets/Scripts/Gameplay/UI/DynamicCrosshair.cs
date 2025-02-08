@@ -6,6 +6,7 @@ public class DynamicCrosshair : MonoBehaviour
 {
     Transform target;
     [SerializeField] RectTransform crosshair;
+    [SerializeField] LayerMask layerMask;
 
     void Start()
     {
@@ -20,8 +21,8 @@ public class DynamicCrosshair : MonoBehaviour
     public void AlignCrosshair()
     {
         if (target == null) return;
-        Ray ray = new Ray(target.position, target.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        // Ray ray = new Ray(target.position, target.forward);
+        if (Physics.Raycast(target.position, target.forward, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
             crosshair.position = Camera.main.WorldToScreenPoint(hit.point);
         }

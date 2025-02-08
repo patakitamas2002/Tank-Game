@@ -7,18 +7,17 @@ public class APHE : AP
     public float ExplosiveMass;
     public float FuseSensitivity;
 
-    protected override float CalculateDMG(Collision collision)
+    protected override float CalculateDMG()
     {
         Debug.Log("APHE DMG");
         float damage = 0;
-        Armor hitArmor = collision.contacts[0].otherCollider.GetComponent<Armor>();
         if (FuseSensitivity < hitArmor.KineticResistance)
         {
-            damage = Caliber * Veloctiy / 100;
+            damage = Caliber * Veloctiy / 20;
         }
         else
         {
-            damage = ExplosiveMass * 10;
+            damage = ExplosiveMass * 50;
         }
 
         return damage;

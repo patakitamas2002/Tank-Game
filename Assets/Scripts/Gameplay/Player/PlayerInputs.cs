@@ -128,6 +128,6 @@ public class PlayerInputs : MonoBehaviour
 
     private void PauseGame(InputAction.CallbackContext context)
     {
-        playerAssets.pauseMenu.GetComponent<PauseMenu>().PauseGame(this);
+        playerAssets.pauseMenu.PauseGame();
     }
 }

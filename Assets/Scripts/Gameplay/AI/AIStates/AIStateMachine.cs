@@ -32,6 +32,6 @@ public class AIStateMachine
         GetState(currentState)?.Exit();
         currentState = id;
         Debug.Log("Changing state to: " + id);
-        GetState(currentState)?.Enter();
+        GetState(currentState)?.Enter(tank);
     }
 }

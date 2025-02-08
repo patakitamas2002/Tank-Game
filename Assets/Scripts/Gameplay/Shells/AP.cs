@@ -19,24 +19,39 @@ public class AP : Bullet
     public float DistanceFalloff = 1f;
 
 
-
     protected override float GetMaxPenetration()
     {
         //Implement DeMarr formula
         // Ref Penetration *(V / rV)^1.4283 x (D / rD)^1.0714 x (W / D^3)^0.7143 / (rW /  rD^3)^0.7143
-        return (float)(refPenentration / Math.Pow(Veloctiy / refVelocity, 1.4283) *
-            Math.Pow(Caliber / refCaliber, 1.0714) * Math.Pow(refWeight / refCaliber, 0.7143) / Math.Pow(refPenentration / refCaliber, 0.7143));
+        return (float)(refPenentration * Math.Pow(Veloctiy / refVelocity, 1.4283) *
+            Math.Pow(Caliber / refCaliber, 1.0714) * Math.Pow(Weight / Math.Pow(refCaliber, 3), 0.7143) / Math.Pow(refWeight / Math.Pow(refCaliber, 3), 0.7143));
     }
 
-    protected override float CalculateDMG(Collision collision)
-    {
-        //Damage based on how much remaining penetration there is, too much %pen is less damage due to less spalling
-        float maxDamage = Caliber * Veloctiy / 100;
-        // float penPercent =
 
-        Debug.Log("AP DMG");
+    protected override float CalculateDMG()
+    {
+
+        //Damage based on how much remaining penetration there is, too much %pen is less damage due to less spalling
+        float maxDamage = Caliber * Veloctiy / 40;
+        float penPercent = remainingPen / GetMaxPenetration();
+        switch (penPercent)
+        {
+            case < 0.2f:
+                return maxDamage *= 0.4f;
+            case < 0.4f:
+                return maxDamage *= 1f;
+            case < 0.6f:
+                return maxDamage *= 0.8f;
+            case < 0.8f:
+                maxDamage *= 0.6f;
+                break;
+            case < 1f:
+                return maxDamage *= 0.3f;
+            default:
+                break;
+        }
+
         return maxDamage;
-        throw new System.NotImplementedException();
     }
 
     protected override float CalculatePenetration(Collision collision, float distanceTravelled)
@@ -44,11 +59,14 @@ public class AP : Bullet
         Armor hitArmor = collision.contacts[0].otherCollider.GetComponent<Armor>();
         double rad = Vector3.Angle(transform.forward, -collision.contacts[0].normal) * Mathf.Deg2Rad;
 
-
         float effectivePen = remainingPen * (float)Math.Pow(DistanceFalloff, distanceTravelled / 1000); //Distance falloff
         effectivePen = effectivePen * (float)Math.Pow(Math.Cos(rad), AnglePerformance); //Angle falloff
 
-        Debug.Log("EffectivePen: " + effectivePen);
+        // Debug.Log("Base pen: " + GetMaxPenetration());
+        // Debug.Log("EffectivePen: " + effectivePen);
+        // Debug.Log("Distance multiplier: " + Math.Pow(DistanceFalloff, distanceTravelled / 1000));
+        // Debug.Log("Angle multiplier: " + Math.Pow(Math.Cos(rad), AnglePerformance));
+
         return effectivePen - hitArmor.KineticResistance;
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.AI;
 public enum AIStateID
 {
     Patrol,
@@ -9,7 +9,7 @@ public enum AIStateID
 public interface AIState
 {
     AIStateID GetID();
-    void Enter();
+    void Enter(AITank tank);
     void Update(AITank tank);
     void Exit();
 }

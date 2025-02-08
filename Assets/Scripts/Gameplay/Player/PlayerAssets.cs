@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 public class PlayerAssets : MonoBehaviour
 {
     public GameObject[] cameras;
-
-    public GameObject pauseMenu;
+    public CameraPlayerFollow[] testCameras;
+    public PauseMenu pauseMenu;
     [SerializeField] private int camIndex = 0;
     public int CamIndex { get { return camIndex; } }
     public GameObject tankObject;
     public Tank tank;
     public CameraPlayerFollow currentCamera { get; private set; }
     Transform aimPoint;
-    [SerializeField] GameObject dynamicCrosshair;
+    [SerializeField] private GameState gameState;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         tankObject = Tank.CreateTank(GameOptions.hull.Model, GameOptions.turret.Model, GameOptions.barrel.Model, transform);
         // tankObject = new GameObject("Tank", );
@@ -28,6 +28,10 @@ public class PlayerAssets : MonoBehaviour
         foreach (Renderer gameObject in tankObject.GetComponentsInChildren<Renderer>())
         {
             gameObject.gameObject.layer = LayerMask.NameToLayer("PlayerTank");
+        }
+        foreach (Armor armor in tankObject.GetComponentsInChildren<Armor>())
+        {
+            armor.gameObject.layer = LayerMask.NameToLayer("PlayerTank");
         }
 
         //aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
@@ -61,6 +65,7 @@ public class PlayerAssets : MonoBehaviour
         SetAimPointPosition();
         tank.turret.RotateTowards(aimPoint);
         tank.barrel.Elevate(aimPoint);
+        if (tank.isDead) gameState.LoseGame();
     }
     void SetAimPointPosition()
     {
