@@ -64,7 +64,11 @@ public class Tank : MonoBehaviour
     void Update()
     {
         if (engineSound != null)
-            engineSound.pitch = 0.8f + rb.velocity.magnitude / hull.stats.MaxSpeed;
+        {
+            float speedpercent = rb.velocity.magnitude / hull.stats.MaxSpeed;
+            engineSound.pitch = 0.8f + speedpercent;
+            engineSound.volume = 0.2f + speedpercent / 0.3f;
+        }
     }
     void FixedUpdate()
     {
@@ -93,7 +97,7 @@ public class Tank : MonoBehaviour
         currentHealth = maxHealth;
 
 
-        accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 20;
+        accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 30;
         rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 2;
 
         healthBar.UpdateHealth(this);

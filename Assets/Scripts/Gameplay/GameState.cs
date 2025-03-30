@@ -27,7 +27,7 @@ public class GameState : MonoBehaviour
     void Update()
     {
         if (endGame)
-            Time.timeScale -= Time.deltaTime / 2f;
+            Time.timeScale -= Time.deltaTime;
     }
 
     public void LoseGame()

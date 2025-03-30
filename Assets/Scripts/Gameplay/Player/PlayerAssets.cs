@@ -58,12 +58,17 @@ public class PlayerAssets : MonoBehaviour
         cameras[previousCam].gameObject.SetActive(false);
         cameras[previousCam].tag = "Untagged";
         camIndex += 1;
-
+        float turnX = currentCamera.turnX;
+        float turnY = currentCamera.turnY;
+        float sensitivity = currentCamera.sensitivity;
         if (camIndex >= cameras.Length)
             camIndex = 0;
+
         cameras[camIndex].transform.forward = cameras[previousCam].transform.forward;
         cameras[camIndex].gameObject.SetActive(true);
         currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
+        currentCamera.turnX = turnX * currentCamera.sensitivity / sensitivity;
+        currentCamera.turnY = turnY * currentCamera.sensitivity / sensitivity;
         currentCamera.transform.tag = "MainCamera";
 
     }

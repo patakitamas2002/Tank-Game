@@ -40,8 +40,8 @@ MonoBehaviour:
     ElevationSpeed: 3
     maxElevation: 20
     maxDepression: -8
-  - Model: {fileID: 6518451163707467323, guid: 3f5c173316a4fe0f4aa9e17ed49001e0, type: 3}
-    Name: 
+  - Model: {fileID: 6518451163707467323, guid: 942b4794591623e9ea01551ba07d6549, type: 3}
+    Name: T-34-85
     Health: 10
     Weight: 300
     Caliber: 75

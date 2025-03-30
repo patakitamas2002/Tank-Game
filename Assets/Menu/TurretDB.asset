@@ -37,3 +37,11 @@ MonoBehaviour:
     FrontArmor: 0
     SideArmor: 0
     RearArmor: 0
+  - Model: {fileID: 6749539740590304182, guid: be50d470dd3d18a77b9f89a0e45e55e1, type: 3}
+    Name: Pz. IV. Square
+    Health: 10
+    Weight: 5000
+    RotationSpeed: 10
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0

@@ -20,6 +20,15 @@ public class CameraPlayerFollow : MonoBehaviour
 
     void Start()
     {
+        switch (cameraType)
+        {
+            case CameraType.FirstPerson:
+                sensitivity = PlayerSettings.FPSensitivity;
+                break;
+            case CameraType.ThirdPerson:
+                sensitivity = PlayerSettings.TPSensitivity;
+                break;
+        }
         sensitivity = PlayerSettings.FPSensitivity;
         Cursor.lockState = CursorLockMode.Locked;
         fov = GetComponent<Camera>().fieldOfView;
