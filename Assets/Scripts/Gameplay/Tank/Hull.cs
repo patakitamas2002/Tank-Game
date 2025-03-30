@@ -6,5 +6,17 @@ public class Hull : MonoBehaviour
 {
     public HullStats stats;
 
+    public Track[] tracks;
 
+    public bool isGrounded
+    {
+        get
+        {
+            foreach (Track track in tracks)
+            {
+                if (track.isGrounded) return true;
+            }
+            return false;
+        }
+    }
 }

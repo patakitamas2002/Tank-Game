@@ -24,7 +24,8 @@ public class AP : Bullet
         //Implement DeMarr formula
         // Ref Penetration *(V / rV)^1.4283 x (D / rD)^1.0714 x (W / D^3)^0.7143 / (rW /  rD^3)^0.7143
         return (float)(refPenentration * Math.Pow(Veloctiy / refVelocity, 1.4283) *
-            Math.Pow(Caliber / refCaliber, 1.0714) * Math.Pow(Weight / Math.Pow(refCaliber, 3), 0.7143) / Math.Pow(refWeight / Math.Pow(refCaliber, 3), 0.7143));
+            Math.Pow(Caliber / refCaliber, 1.0714) * Math.Pow(Weight / Math.Pow(refCaliber, 3), 0.7143)
+            / Math.Pow(refWeight / Math.Pow(refCaliber, 3), 0.7143));
     }
 
 

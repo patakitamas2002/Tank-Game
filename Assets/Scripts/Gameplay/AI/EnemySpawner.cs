@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform checkpointParent;
     [SerializeField] List<Transform> checkpoints;
     [SerializeField] GameState gameState;
+    [SerializeField] GameObject healthBar;
 
     private List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -40,7 +41,8 @@ public class EnemySpawner : MonoBehaviour
         int hullIndex = random.Next(hullDatabase.hulls.Length);
         int turretIndex = random.Next(turretDatabase.turrets.Length);
         int cannonIndex = random.Next(cannonDatabase.cannons.Length);
-        GameObject enemy = Tank.CreateTank(hullDatabase.hulls[hullIndex].Model, turretDatabase.turrets[turretIndex].Model, cannonDatabase.cannons[cannonIndex].Model, position);
+        HealthBar hpBar = Instantiate(healthBar).GetComponent<HealthBar>();
+        GameObject enemy = Tank.CreateTank(hullDatabase.hulls[hullIndex].Model, turretDatabase.turrets[turretIndex].Model, cannonDatabase.cannons[cannonIndex].Model, hpBar, position);
         AITank ai = enemy.AddComponent<AITank>();
         ai.SetCheckPoints(checkpoints.ToArray());
         // ai.tank = enemy.GetComponent<Tank>();
@@ -50,6 +52,10 @@ public class EnemySpawner : MonoBehaviour
         // ai.tank = enemy.GetComponent<Tank>();
 
         enemy.transform.SetParent(position);
+
+        hpBar.transform.SetParent(enemy.transform);
+        hpBar.transform.localPosition = Vector3.up * 5;
+
         enemies.Add(enemy);
     }
 }

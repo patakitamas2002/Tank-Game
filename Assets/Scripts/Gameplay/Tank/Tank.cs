@@ -24,7 +24,7 @@ public class Tank : MonoBehaviour
     public Barrel barrel;
     public Turret turret;
     public Transform aimPoint;
-
+    public HealthBar healthBar;
     private BoxCollider boxCollider;
     private const float ton = 1000;
 
@@ -38,7 +38,7 @@ public class Tank : MonoBehaviour
 
     public bool isDead { get { return currentHealth <= 0; } }
 
-    public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, Transform transform)
+    public static GameObject CreateTank(GameObject hull, GameObject turret, GameObject barrel, HealthBar hpbar, Transform transform)
     {
         Tank newTank = new GameObject("Tank", typeof(Tank), typeof(Rigidbody), typeof(BoxCollider)).GetComponent<Tank>();
         newTank.transform.position = transform.position;
@@ -47,6 +47,7 @@ public class Tank : MonoBehaviour
         newTank.turret = Instantiate(turret.GetComponent<Turret>(), newTank.hull.transform.GetChild(0).transform);
         newTank.barrel = Instantiate(barrel.GetComponent<Barrel>(), newTank.turret.transform.GetChild(0).transform);
 
+        newTank.healthBar = hpbar;
         return newTank.gameObject;
     }
 
@@ -56,6 +57,7 @@ public class Tank : MonoBehaviour
         Debug.Log(hull.GetComponentInChildren<Renderer>().bounds.size);
         GetComponent<BoxCollider>().size = hull.transform.GetChild(3).GetComponent<Renderer>().bounds.size;
         SetStats();
+
         Debug.Log("The tank \"" + gameObject.name + "\" has been created");
     }
 
@@ -66,7 +68,7 @@ public class Tank : MonoBehaviour
     }
     void FixedUpdate()
     {
-        grounded = IsGrounded();
+        grounded = hull.isGrounded;
         if (grounded)
             SidewaysFriction();
     }
@@ -94,6 +96,8 @@ public class Tank : MonoBehaviour
         accelSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 20;
         rotationSpeed = hull.stats.Horsepower / (hull.stats.Weight / ton) * 2;
 
+        healthBar.UpdateHealth(this);
+
         engineSound = hull.GetComponent<AudioSource>();
         if (engineSound != null)
             engineSound.Play();
@@ -114,15 +118,12 @@ public class Tank : MonoBehaviour
         // Update the Rigidbody's velocity
         rb.velocity = newVelocity;
     }
-    bool IsGrounded()
-    {
-        return Physics.CheckSphere(boxCollider.bounds.center, 1.5f, LayerMask.GetMask("Terrain"));
-    }
 
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        healthBar.UpdateHealth(this);
         if (isDead)
         {
             Die();
@@ -176,7 +177,9 @@ public class Tank : MonoBehaviour
         Instantiate(barrel.gameObject, faketurret.transform.GetChild(0).transform);
         // turret.gameObject.SetActive(false);
         Rigidbody fakeRb = faketurret.AddComponent<Rigidbody>();
+        fakeRb.interpolation = RigidbodyInterpolation.Interpolate;
         fakeRb.AddForce(force, ForceMode.Impulse);
         enabled = false;
+        healthBar.gameObject.SetActive(false);
     }
 }

@@ -29,6 +29,7 @@ public abstract class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision");
         if (hasCollided)
         {
             return;
@@ -61,7 +62,7 @@ public abstract class Bullet : MonoBehaviour
             return;
         }
 
-        hitArmor.RegiserDamage(CalculateDMG());
+        hitArmor.RegisterDamage(CalculateDMG());
         Debug.Log("Damage dealt: " + CalculateDMG());
         hasCollided = true;
     }

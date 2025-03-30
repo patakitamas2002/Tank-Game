@@ -9,6 +9,7 @@ TagManager:
   - Barrel
   - Terrain
   - GameState
+  - Turret
   layers:
   - Default
   - TransparentFX

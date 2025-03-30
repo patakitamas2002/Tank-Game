@@ -52,7 +52,7 @@ MonoBehaviour:
   maxTime: 10
   AnglePerformance: 1
   DistanceFalloff: 1
-  ExplosiveMass: 250
+  ExplosiveMass: 50
   FuseSensitivity: 10
 --- !u!54 &-7943877141553209864
 Rigidbody:

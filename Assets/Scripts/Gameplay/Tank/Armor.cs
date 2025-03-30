@@ -27,7 +27,7 @@ public class Armor : MonoBehaviour
         return null; // Could not find a parent with given tag.
     }
 
-    public void RegiserDamage(float damage)
+    public void RegisterDamage(float damage)
     {
         tank.TakeDamage(damage * DMGMultiplier);
     }

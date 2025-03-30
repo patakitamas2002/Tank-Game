@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hulls:
   - Model: {fileID: 6309078559783982514, guid: ae856173fe4b8f2bfac3cee1b846aae7, type: 3}
+    Sound: {fileID: 0}
     Name: 'Rear '
     Health: 100
     Weight: 20000
@@ -23,6 +24,7 @@ MonoBehaviour:
     SideArmor: 0
     RearArmor: 0
   - Model: {fileID: 6309078559783982514, guid: 1477e38ac71b923f1a809e5cb4afc4a3, type: 3}
+    Sound: {fileID: 0}
     Name: Normal
     Health: 10
     Weight: 20000
@@ -32,7 +34,18 @@ MonoBehaviour:
     SideArmor: 0
     RearArmor: 0
   - Model: {fileID: 3186258190974456655, guid: e362ba079b534120d8dd424db03f4c72, type: 3}
+    Sound: {fileID: 0}
     Name: M4
+    Health: 10
+    Weight: 20000
+    Horsepower: 300
+    MaxSpeed: 30
+    FrontArmor: 0
+    SideArmor: 0
+    RearArmor: 0
+  - Model: {fileID: 244806776974475377, guid: 7e6dbfdbcf0b13fa595af8ac58d53af3, type: 3}
+    Sound: {fileID: 0}
+    Name: t-34
     Health: 10
     Weight: 20000
     Horsepower: 300

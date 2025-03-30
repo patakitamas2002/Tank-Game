@@ -11,13 +11,14 @@ public class APHE : AP
     {
         Debug.Log("APHE DMG");
         float damage = 0;
-        if (FuseSensitivity < hitArmor.KineticResistance)
+        if (FuseSensitivity > hitArmor.KineticResistance)
         {
-            damage = Caliber * Veloctiy / 20;
+            damage = Caliber * Veloctiy / 100;
         }
         else
         {
-            damage = ExplosiveMass * 50;
+            damage = ExplosiveMass * 20;
+
         }
 
         return damage;

@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
   KineticResistance: 50
   ExplosiveResistance: 0
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
   KineticResistance: 50
   ExplosiveResistance: 0
@@ -535,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
   KineticResistance: 50
   ExplosiveResistance: 0
@@ -657,6 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
   KineticResistance: 50
   ExplosiveResistance: 0
@@ -672,7 +676,7 @@ GameObject:
   - component: {fileID: 2499297433993518057}
   m_Layer: 0
   m_Name: pz_iv_turret_square
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -867,6 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67fa66ff8e4c0b4aae45ec8bec6be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tank: {fileID: 0}
   DMGMultiplier: 1
   KineticResistance: 50
   ExplosiveResistance: 0

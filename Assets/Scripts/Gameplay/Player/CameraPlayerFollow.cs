@@ -20,6 +20,7 @@ public class CameraPlayerFollow : MonoBehaviour
 
     void Start()
     {
+        sensitivity = PlayerSettings.FPSensitivity;
         Cursor.lockState = CursorLockMode.Locked;
         fov = GetComponent<Camera>().fieldOfView;
         FindTarget();
@@ -36,23 +37,21 @@ public class CameraPlayerFollow : MonoBehaviour
     }
     void Update()
     {
-
-        Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
-        transform.position = target.position + offsetRot;
-
         target.rotation = Quaternion.Euler(-turnY, turnX, 0);
         transform.localRotation = Quaternion.Euler(-turnY, turnX, 0);
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-
-
-
+        Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
+        transform.position = target.position + offsetRot;
     }
     public void Aim(Vector2 value)
     {
         turnX += value.x * sensitivity;
         turnY += value.y * sensitivity;
+        // turnX += value.x;
+        // turnY += value.y;
+        // Debug.Log(turnX + ", " + turnY); 
         turnY = Math.Clamp(turnY, -90, 90);
     }
     public void Zoom(float value)

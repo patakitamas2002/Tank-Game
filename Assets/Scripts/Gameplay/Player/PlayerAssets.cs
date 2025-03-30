@@ -15,16 +15,19 @@ public class PlayerAssets : MonoBehaviour
     public CameraPlayerFollow currentCamera { get; private set; }
     Transform aimPoint;
     [SerializeField] private GameState gameState;
+    public HealthBar healthBar;
 
+    public CrosshairReload ReloadCrosshair;
     // Start is called before the first frame update
     void Awake()
     {
-        tankObject = Tank.CreateTank(GameOptions.hull.Model, GameOptions.turret.Model, GameOptions.barrel.Model, transform);
+        tankObject = Tank.CreateTank(GameOptions.hull.Model, GameOptions.turret.Model, GameOptions.barrel.Model, healthBar, transform);
         // tankObject = new GameObject("Tank", );
         // tankObject.GetComponent<BoxCollider>().size = new Vector3(5, 2, 3);
         // tankObject.transform.position = transform.position;
         tankObject.transform.SetParent(transform);
         tank = tankObject.GetComponent<Tank>();
+        // healthBar.UpdateHealth(tank);
         foreach (Renderer gameObject in tankObject.GetComponentsInChildren<Renderer>())
         {
             gameObject.gameObject.layer = LayerMask.NameToLayer("PlayerTank");
@@ -33,6 +36,7 @@ public class PlayerAssets : MonoBehaviour
         {
             armor.gameObject.layer = LayerMask.NameToLayer("PlayerTank");
         }
+        ReloadCrosshair.barrel = tank.barrel;
 
         //aimPoint = Instantiate(new GameObject("Aimpoint"), transform).transform;
         aimPoint = new GameObject("Aimpoint").transform;
@@ -41,7 +45,9 @@ public class PlayerAssets : MonoBehaviour
         for (int i = 0; i < cameras.Length; i++)
         {
             cameras[i] = Instantiate(cameras[i], transform);
+            // cameras[i].transform.SetParent(tank.turret.transform);
         }
+
         currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
         currentCamera.transform.tag = "MainCamera";
     }
@@ -59,6 +65,7 @@ public class PlayerAssets : MonoBehaviour
         cameras[camIndex].gameObject.SetActive(true);
         currentCamera = cameras[camIndex].GetComponent<CameraPlayerFollow>();
         currentCamera.transform.tag = "MainCamera";
+
     }
     void Update()
     {

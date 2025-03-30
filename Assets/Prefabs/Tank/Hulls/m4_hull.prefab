@@ -167,11 +167,14 @@ MonoBehaviour:
     Name: M4 Hull
     Health: 1500
     Weight: 20000
-    Horsepower: 450
+    Horsepower: 550
     MaxSpeed: 30
     FrontArmor: 0
     SideArmor: 0
     RearArmor: 0
+  tracks:
+  - {fileID: 3424215573209179872}
+  - {fileID: 4790245374963292204}
 --- !u!82 &-6943380353859300005
 AudioSource:
   m_ObjectHideFlags: 0
@@ -388,7 +391,7 @@ Transform:
   m_GameObject: {fileID: 3582221577941124340}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,6 +536,7 @@ GameObject:
   - component: {fileID: 3917498177085011532}
   - component: {fileID: 1700865813286753689}
   - component: {fileID: 2145894656803856346}
+  - component: {fileID: 4790245374963292204}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -642,6 +646,18 @@ MonoBehaviour:
   DMGMultiplier: 0.2
   KineticResistance: 30
   ExplosiveResistance: 0
+--- !u!114 &4790245374963292204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4193213487872002540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2096d9d229c4ddfab5b1113a9be71ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5367813100685247180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1110,7 @@ GameObject:
   - component: {fileID: 2917250364891220947}
   - component: {fileID: 1116033682932349477}
   - component: {fileID: 5742735900402380677}
+  - component: {fileID: 3424215573209179872}
   m_Layer: 6
   m_Name: Plane.001
   m_TagString: Untagged
@@ -1203,6 +1220,18 @@ MonoBehaviour:
   DMGMultiplier: 0.2
   KineticResistance: 30
   ExplosiveResistance: 0
+--- !u!114 &3424215573209179872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148785381451937665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2096d9d229c4ddfab5b1113a9be71ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8121074241834831769
 GameObject:
   m_ObjectHideFlags: 0
