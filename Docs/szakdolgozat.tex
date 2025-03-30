@@ -1,0 +1,229 @@
+%
+% Szakdolgozatminta az Eszterházy Károly Katolikus Egyetem
+% matematika illetve informatika szakos hallgatóinak.
+%
+
+\documentclass[
+% opciók nélkül: egyoldalas nyomtatás, elektronikus verzió
+% twoside,     % kétoldalas nyomtatás
+% tocnopagenum,% oldalszámozás a tartalomjegyzék után kezdődik
+]{thesis-ekf}
+\usepackage[T1]{fontenc}
+\PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
+\usepackage[magyar]{babel}
+\usepackage{mathtools,amssymb,amsthm,pdfpages}
+
+\footnotestyle{rule=fourth}
+
+\newtheorem{tetel}{Tétel}[chapter]
+\theoremstyle{definition}
+\newtheorem{definicio}[tetel]{Definíció}
+\theoremstyle{remark}
+\newtheorem{megjegyzes}[tetel]{Megjegyzés}
+
+\begin{document}
+
+\institute{Matematikai és Informatikai Intézet}
+\title{A szakdolgozat címe}
+\author{Pataki Tamás\\Programtervező Informatikus BSc}
+\supervisor{Tanár neve\\beosztás}
+\city{Eger}
+\date{2024}
+\maketitle
+
+\tableofcontents
+
+\chapter*{Bevezetés}
+\addcontentsline{toc}{chapter}{Bevezetés}
+A szakdolgozati a téma választás idején sok lehetőség közül lehetett választanom.
+Végül amikor választnom kellet olyan témát szerettem volna amely egy sajátos kiívást és egyben az érdekeltségi közömbe is tartozik téma szerint.
+A játékfejlesztés érdekelt korábban is, 
+
+Ezek a faktorok alapján választottam játék fejlesztést Unity\cite{Unity} játékmotorral, melyben a fejlesztész C\# programozási nyelven alapszik. A 3D projekt mellet döntöttem, ez felelt meg az elképzeléseimhez. 
+
+
+
+\chapter{A játék bemutatása}
+
+
+\section{A játékmenet}
+
+A fő eleme a játéknak a Tank részeinek kiválasztásának a lehetősége, melyet a főmenüben lehetséges.
+\subsection{Tank kiválasztása}
+
+Egy tank 3db részre van osztva.
+\begin{itemize}
+    \item Test
+    \item Torony
+    \item Ágyú
+\end{itemize}
+Mindhárom résznek van súlya, páncélzata.
+
+\subsection{Csata}
+
+
+
+\section{A megvalósítás}
+
+\subsection{A tank felépítése}
+
+\subsubsection{Páncélzati rendszer}
+Minden tank modellje fel van osztva több kis darabra, melynek van a beépített ütközés komponense és a saját páncél komponense. Ezzel a módszerrel pontosan meg lehet adni hogy mely részen mekkora védelme van.
+
+\subsubsection{Irányítás}
+
+\subsubsection{Célzás}
+
+\subsubsection{Torony és annak forgatása}
+
+A torony forgatását egy üres játék objektum segítségével megy.
+
+\subsubsection{Cső és annak emelése}
+
+A torony forgatásához hasonlóan a cső is egy üres játék objektum használ, mely felé
+
+\subsubsection{Játékos nézőpontja}
+
+A játékos nézőpontja 2 darab kamerával van megoldva, külső és belső nézetes, melyeknek az érzékenységét külön lehet beállítani.
+
+\subsection{Menü}
+
+
+\subsubsection{Tank kiválasztása}
+
+A kiválasztási menüben a felső részen cserélhető és látható a neve a tank részeinek.
+
+\subsubsection{Beállítások}
+
+A beállításokban az érzékenységet és a hangerőt lehet állítani, melyeknek
+
+\subsubsection{Szünet menü}
+
+Egy egyszerűbb szünet menü van a játékban, mellyel újralehet indítani a játékmenetet vagy visszamenni a fő menübe. Ilyenkor a játékmenet teljesen megáll illetve a kurzor újra látható és mozgathatóvá válik.
+
+\subsection{Irányítás bevitele}
+
+A bevitelhez a Unity új beviteli rendszerét használtam segítségül.
+
+
+\subsection{Lövedékek}
+
+A lövedékek fizikai objektumként működnek,
+
+Három féle lövedék van beimplementálva jelenleg a játékba:
+\begin{itemize}
+    \item páncéltörő
+    \item robbanótöltetes pácéltörő
+    \item robbanótöltet
+\end{itemize}
+
+Ezekből a változók beállításával lehet további típusokat beállítani.
+
+\subsubsection{Páncéltörő lövedék}
+
+A töltet nélküli páncél törő lövedék a DeMarr formula alapján lett modellezve. Ide rakd a formulát.
+
+\subsubsection{Robbanó töltetes lövedék}
+
+Az alábbi lövedék egy felülethez érvén egy robbanást olyan módon utánoz hogy a megadott átmérőjű gömbön belül először megnézni az összes objektum között hogy bármyelik páncélnak számít-e, majd a robbanás középpontjától számítva mely páncéllemeznek a legkevesebb a vastagsága és a távolságának a keveréke.
+
+\subsubsection{Robbabótöltetes páncéltörő lövedék}
+
+Ez a lövedék hasonlóan működik a
+
+\subsection{Kezelő felület}
+
+\subsubsection{Életerő csík}
+
+Két féle életerő csík létezik a projektben. Az egyik a kezelő felületen fixen található a bal alsó sarokba, ez kijelzi a teljes és a jelenlegi életerőt számmal, illetve hiányzó életerő szerint kevesebb része lesz kitöltve. A másik az ellenfelek felett megtalálható, és a 3D térben helyezkednek ell
+
+\subsubsection{Célkereszt}
+
+A cél kereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelzi, emellett lövés után pirossá változik, jelezve az újratöltés menetét. A második, kereszt alakú, pedig azt jelzi, hogy a cső jelenleg milyen irányba néz.
+
+\subsection{Ellenfelek}
+
+\subsubsection{Navmesh}
+
+Az ellenfelek útkeresését a Unity-nak a beépített Navmesh rendszere segítségével oldottam meg.
+
+\subsubsection{Állapotgép}
+
+Állaptgép használatával van megoldva az ellenfelek viselkedésének szétválasztása. Azért választottam állapotgépet ehhez, mert egy tiszta és egyszerűen bővíthető módszert ad különböző viselkedések és állapotok megadására.
+
+Kétféle állapot van:
+\begin{itemize}
+ \item Járőrözés
+ \item Támadás
+\end{itemize}
+
+A járőrözés
+
+\chapter{Felhasznált technológiák}
+
+\section{Unity}
+
+A fejlesztésem alapjának a Unity-t választottam népszerűsége és sokoldalúsága miatt. Rengeteg eszközt ad a fejlesztő kezébe, így szinte bármilyen típusú projektet lehet vele készíteni, akár a játékfejlesztésen túl is.
+
+\subsection{A Unity-ről általánosan}
+
+A projektek Unity-ben több jelenetből (scene-ből) épülnek fel, melyek tartalmaznak Gameobjecteket. 
+
+\subsection{Gameobject-ek}
+
+Egyik alapeleme a Unity-nek a GameObjectek, melyeknek rengeteg féle felhasználási módjuk van. Bármilyen karakter, pálya vagy tárgy egy Gameobject egy jeleneten belül. 
+Alapból nincsen konkrét funkciójúk, de komponenseket lehet hozzájuk csatolni, melyek meghatározzás a működésüket. Az egyik alap komponen a Transform, mely minden gameobject-nek van, és a pozíciót, forgatást és méretet kezeli. 
+
+
+
+\subsection{Scene-k}
+
+
+\subsection{Szkriptelés}
+
+A szkriptek egyféle komponens a Gameobjectnek. A játék logikájának és interakcióinak megírására szolgálnak. A szkriptek főként C\# nyelven készülnek, és az egyes játékobjektumok viselkedését, mozgását, valamint a játékbeli eseményeket szabályozzák.
+
+
+A Monobehavior-ből nevű osztályból öröklődik a legtöbb szkript, mely többféle életciklus metódust:
+
+\begin{itemize}
+    \item Start
+    \item Update
+    \item FixedUpdate
+    \item OnCollisionEnter / OnTriggerEnter
+\end{itemize}
+
+A Start metódus egyszer fut le a szkript indításakor, amikor a jelenet betöltődik, és az objektum engedélyezve van. Általában inicializálási feladatokat, például változók értékeinek beállítását hajtja végre.
+\\ 
+Az Update metódus minden képkockánál lefut, így ide kerülnek azok a kódok, amelyeknek folyamatosan, valós időben kell futniuk, például kamerakövetés.
+
+A FixedUpdate, az Update-hez hasonlóan, folyamatosan fut, viszont minden fizikai képkockán fut le, a megjelenített képkockáktől függetlenul. Ide a fizikai számítások kerülnek.
+
+Az OnCollisionEnter akkor fut le amikor két tárgy amelyek van Collider-e összeütközik. Ezt 
+
+\subsection{Prefab-ek}
+
+
+
+\section{Blender}
+
+A modellezéshez Blendert választottam a tág eszközkészlete és sok tanulási anyaga miatt.
+
+
+\chapter{További tervek}
+
+\chapter*{Összegzés}
+
+\addcontentsline{toc}{chapter}{\bibname}
+
+\begin{thebibliography}{55}
+    \bibitem{Unity}
+    \textsc{Unity} \emph{Unity Documentation}
+    \\
+    \url{https://docs.unity.com/}
+
+
+
+\end{thebibliography}
+
+\end{document}
