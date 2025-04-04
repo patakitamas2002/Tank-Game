@@ -74,7 +74,8 @@ public class AITank : MonoBehaviour
         if (other.transform.position == checkpoints[checkpointNumber].position)
         {
             checkpointNumber++;
-            agent.SetDestination(checkpoints[checkpointNumber].position);
+            if (stateMachine.currentState == AIStateID.Patrol)
+                agent.SetDestination(checkpoints[checkpointNumber].position);
             if (isFinished) gameState.LoseGame();
         }
     }

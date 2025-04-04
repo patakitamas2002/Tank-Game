@@ -117,9 +117,9 @@ MonoBehaviour:
     m_Flags: 0
   target: {fileID: 0}
   sensitivity: 0.5
-  offset: {x: 2, y: 5, z: -8}
+  offset: {x: 0, y: 2, z: -6}
   minFov: 20
   maxFov: 90
-  lerpSpeed: 0
   crosshair: {fileID: 0}
-  turn: {x: 0, y: 0}
+  turnX: 0
+  turnY: 0

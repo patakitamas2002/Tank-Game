@@ -31,7 +31,7 @@ public class Tank : MonoBehaviour
     public float accelSpeed { get; private set; }
     public float rotationSpeed { get; private set; }
 
-    private float sidewaysFrictionFactor = 0.04f;
+    private const float sidewaysFrictionFactor = 0.04f;
     private bool grounded = false;
     private AudioSource engineSound;
     public Rigidbody rb { get; private set; }
