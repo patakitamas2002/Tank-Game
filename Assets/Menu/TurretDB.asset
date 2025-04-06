@@ -22,7 +22,7 @@ MonoBehaviour:
     SideArmor: 0
     RearArmor: 0
   - Model: {fileID: 7773613420589190543, guid: 1e6dcdb9bb6e97d858905a4daeab0e2b, type: 3}
-    Name: Pz. IV. Square
+    Name: Sherman turret
     Health: 10
     Weight: 5000
     RotationSpeed: 10
@@ -38,7 +38,7 @@ MonoBehaviour:
     SideArmor: 0
     RearArmor: 0
   - Model: {fileID: 6749539740590304182, guid: be50d470dd3d18a77b9f89a0e45e55e1, type: 3}
-    Name: Pz. IV. Square
+    Name: T-34 turret
     Health: 10
     Weight: 5000
     RotationSpeed: 10

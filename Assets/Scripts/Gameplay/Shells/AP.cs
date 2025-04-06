@@ -37,6 +37,8 @@ public class AP : Bullet
         float penPercent = remainingPen / GetMaxPenetration();
         switch (penPercent)
         {
+            case <= 0f:
+                return 0;
             case < 0.2f:
                 return maxDamage *= 0.4f;
             case < 0.4f:
@@ -48,8 +50,6 @@ public class AP : Bullet
                 break;
             case < 1f:
                 return maxDamage *= 0.3f;
-            default:
-                break;
         }
 
         return maxDamage;

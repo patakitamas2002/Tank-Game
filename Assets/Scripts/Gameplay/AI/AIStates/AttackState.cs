@@ -51,7 +51,7 @@ public class AttackState : AIState
     {
         timer += Time.deltaTime;
         frameTimer++;
-        if (tank.CheckPlayerVisible())
+        if (frameTimer > 5 && tank.CheckPlayerVisible())
         {
             timer = 0;
             LookAtPlayer(tank);

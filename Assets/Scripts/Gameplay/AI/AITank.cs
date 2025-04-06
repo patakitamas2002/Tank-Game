@@ -113,12 +113,10 @@ public class AITank : MonoBehaviour
     {
         Vector3 direction = transform.InverseTransformPoint(target);
         float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
         if (Mathf.Abs(angle) > 1)
         {
             tank.Rotate(angle / Mathf.Abs(angle) * Time.deltaTime);
         }
-        // Debug.Log(angle);
     }
 
     public void Move(float strength = 1)

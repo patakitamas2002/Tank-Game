@@ -11,10 +11,7 @@
 \usepackage[T1]{fontenc}
 \PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
 \usepackage[magyar]{babel}
-
-
-%\usepackage{listingsutf8,mathtools,amssymb,amsthm,pdfpages,xurl}
-\usepackage{listingsutf8,lmodern,caption,mathtools,amssymb,amsthm,pdfpages,xurl,float}
+\usepackage{mathtools,amssymb,amsthm,pdfpages,listingsutf8,xurl}
 
 \footnotestyle{rule=fourth}
 
@@ -23,17 +20,6 @@
 \newtheorem{definicio}[tetel]{Definíció}
 \theoremstyle{remark}
 \newtheorem{megjegyzes}[tetel]{Megjegyzés}
-
-\makeatletter
-\expandafter\let\csname active@char\string?\endcsname\relax
-\expandafter\let\csname active@char\string!\endcsname\relax
-\expandafter\let\csname active@char\string:\endcsname\relax
-
-
-\initiate@active@char{?}
-\initiate@active@char{!}
-\initiate@active@char{:}
-\makeatother
 
 \lstset{
     language=[Sharp]C,
@@ -53,16 +39,14 @@
 }
 \renewcommand{\lstlistingname}{kód}
 
-
-
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
 \title{A szakdolgozat címe}
 \author{Pataki Tamás\\Programtervező Informatikus BSc}
-\supervisor{Dr. Kovásznai Gergely\\Egyetemi docens}
+\supervisor{Tanár neve\\beosztás}
 \city{Eger}
-\date{2025}
+\date{2024}
 \maketitle
 
 \tableofcontents
@@ -103,7 +87,7 @@ A szkriptek egyféle komponens a Gameobjectnek. A játék logikájának és inte
 A Monobehavior-ből nevű osztályból öröklődik a legtöbb szkript, mely többféle életciklus metódust:
 
 \begin{itemize}
-    \item \emph{Start}
+    \item Start
     \item Update
     \item FixedUpdate
     \item OnCollisionEnter / OnTriggerEnter
@@ -115,7 +99,7 @@ Az Update metódus minden képkockánál lefut, így ide kerülnek azok a kódok
 
 A FixedUpdate, az Update-hez hasonlóan, folyamatosan fut, viszont minden fizikai képkockán fut le, a megjelenített képkockáktől függetlenul. Ide a fizikai számítások kerülnek.
 
-Az \emph{OnCollisionEnter} akkor fut le amikor két tárgy amelyek van \emph{Collider}-e összeütközik. Ezt
+Az OnCollisionEnter akkor fut le amikor két tárgy amelyek van Collider-e összeütközik. Ezt
 
 \subsection{Prefab-ek}
 
@@ -123,24 +107,16 @@ Az \emph{OnCollisionEnter} akkor fut le amikor két tárgy amelyek van \emph{Col
 
 \section{Blender}
 
-A modellezéshez Blender-t választottam, mely egy ingyenes és nyílt forráskódú 3D modellező és animációs program. A Blender egy nagyon széles körben használt és alkalmazott program a 3D grafika világában, és ingyenessége miatt könnyen kipróbálható és használható.
+A modellezéshez Blendert választottam a tág eszközkészlete és sok tanulási anyaga miatt.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{screenshots/blender.png}
-    \caption{Tank modell Blender-ben}
-    \label{fig:blender}
-\end{figure}
 
 \chapter{A játék bemutatása}
-
-\subsection{Tank kiválasztása}
-
 
 
 \section{A játékmenet}
 
-
+A fő eleme a játéknak a Tank részeinek kiválasztásának a lehetősége, melyet a főmenüben lehetséges.
+\subsection{Tank kiválasztása}
 
 \subsection{Csata}
 
@@ -155,7 +131,7 @@ A tank komponens sok dologért felel. Legfőként a különböző részek létre
 
 Ez a komponens egyéni tapadási fizikáért is felel, mely gyorsabb sebességnél történő fordulásnál nagy mértékben csökkenti a tank sebességét és a fordulás irányába viszi a tankot. Ennek hiányában forduláskor nem lenne tapadás és oldalirányban tudna csúszni.
 
-\lstinputlisting[caption=Tapadási kód,label=tracion]{./codesnippets/traction.cs}
+\lstinputlisting[caption=Torony irányítása,label=tracion]{./codesnippets/traction.cs}
 
 
 A tank 3 részre van felosztva:
@@ -173,20 +149,26 @@ Minden tank modellje fel van osztva több kis darabra, melynek van a beépített
 
 \subsubsection{Tanktest}
 
-Ez a rész adja meg az egész tank teljes sebességét, gyorsulását, a motor hangját és az életerejének a nagy részét. Valamint hozzá tartoznak a lánctalpak is, melyek ellenőrzik, hogy a tank a földön van-e egy adott pillanatban egy rövid sugár segítségével, mely megnézi hogy a terep-be ütközött-e be.  Általánosan ez rendelkezik a legtöbb páncél elemmel is. Valamint a test adja meg a torony elhelyezkedését.
+Ez a rész adja meg az egész tank teljes sebességét, gyorsulását, a motor hangját és az életerejének a nagy részét. Valamint hozzá tartoznak a lánctalpak is, melyek ellenőrzik, hogy a tank a földön van-e egy adott pillanatban egy rövid sugár segítségével, mely megnézi hogy a terep-be ütközött-e be.  Általánosan ez rendelkezik a legtöbb páncél elemmel is.
 
 \subsubsection{Torony}
 
-A torony forgatását a játékos nézőpontjából kilőtt sugár segítségével implementáltam, mely visszaad egy koordinátát, és miután a torony ezt megkapja, elkezd fordulni megadott sebességel annak irányába. Emellett a torony adja meg a belső kamera pozícióját, az ágyú elhelyezkedését is.
+A torony forgatását egy
 
-\lstinputlisting[caption=Torony forgatása,label=turretrotation]{./codesnippets/turretrotation.cs}
+\lstinputlisting[caption=Torony irányítása,label=turretrotation]{./codesnippets/turretrotation.cs}
 
 \subsubsection{Ágyú}
 
-Az ágyú emelése hasonlóan működik a toronyhoz forgatásához képest. Viszont megadott a maximum magassági és depressziószögük, melyeken nem mehet túl a függőleges fordulása.
+A torony forgatásához hasonlóan a cső is egy üres játék objektum használ, mely felé
 
 \lstinputlisting[caption=Torony irányítása,label=barrelelevation]{./codesnippets/barrelelevation.cs}
 
+
+\subsubsection{Irányítás}
+
+
+
+\subsubsection{Célzás}
 
 \subsubsection{Játékos nézőpontja}
 
@@ -194,44 +176,27 @@ A játékos nézőpontja 2 darab kamerával van megoldva, külső és belső né
 
 \subsection{Menü}
 
+
 \subsubsection{Tank kiválasztása}
 
 A kiválasztási menüben a felső részen a gombok segítségével választhatóak a tank részei, és a gombok között található azoknak a megnevezése. A jobb alsó sarokban található a játék indító gomb, mely indítja a játékmenetet.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{screenshots/selectionmenu.png}
-    \caption{Tank választási menü}
-    \label{fig:selectionmenu}
-\end{figure}
-
 \subsubsection{Beállítások}
 
-A beállításokban az érzékenységet és a hangerőt lehet állítani, melyekre csúszkák szolgálnak.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{screenshots/settings.png}
-    \caption{Beállítási menü}
-    \label{fig:settings}
-\end{figure}
-
+A beállításokban az érzékenységet és a hangerőt lehet állítani, melyeknek
 
 \subsubsection{Szünet menü}
 
 Egy egyszerűbb szünet menü van a játékban, mellyel újralehet indítani a játékmenetet vagy visszamenni a fő menübe. Ilyenkor a játékmenet teljesen megáll illetve a kurzor újra látható és mozgathatóvá válik.
 
-\subsection{Irányítási rendszer}
+\subsection{Irányítás bevitele}
 
-A bevitelhez a Unity új beviteli rendszerét használtam segítségül, melynek használatával egyszerűen lehetett újabb beviteli billentyűket hozzáadni, valamint azokat csoportosítani és együttesen ki vagy bekapcsolni.
+A bevitelhez a Unity új beviteli rendszerét használtam segítségül.
 
-\subsubsection{Célzás}
-
-A célzást az egér mozgásának olvasása teszi lehetővé. A játékmenet közben a kurzor viszont nem látható és a játékablak közepére van lezárva, amíg a játékos fel nem hozza a szünet menüt vagy a játékmenetnek vége nem lesz.
 
 \subsection{Lövedékek}
 
-A lövedékek fizikai objektumként működnek, megadott sebességük és súlyuk van, viszont gravitáció nincs rájuk hatással.
+A lövedékek fizikai objektumként működnek,
 
 Három féle lövedék van beimplementálva jelenleg a játékba:
 \begin{itemize}
@@ -246,7 +211,7 @@ Ezekből a változók beállításával lehet további típusokat beállítani.
 
 \subsubsection{Páncéltörő lövedék}
 
-A páncél törő lövedék a DeMarr formula alapján lett modellezve. Ez adja meg a súly, átmérő és sebesség alapján a maximális átütési erejét egy adott lövedéknek.
+A páncél törő lövedék a DeMarr formula alapján lett modellezve. Ez adja meg a súly, átmérő és sebesség alapján az alap átütési erejét egy adott lövedéknek.
 
 %DeMarr Formula
 \begin{equation}
@@ -257,8 +222,6 @@ Ezentúl a lövdéknek a megtett távolsága és a találat szöge is figyelmbe 
 
 \lstinputlisting[caption=Átütés kiszámítása,label=APcalculation]{./codesnippets/APcalculation.cs}
 
-A lövedék sebzését mely max értéke kaliberétől és a sebességétől függ, és utána az átütött páncél értékéhez és a lövedék átütő erejétől függően csökkentjük.
-
 \subsubsection{Robbanótöltetes lövedék}
 
 Az alábbi lövedék egy felülethez érvén egy robbanást olyan módon utánoz hogy a megadott átmérőjű gömbön belül először megnézni az összes objektum között hogy bármyelik páncélnak számít-e, majd a robbanás középpontjától számítva mely páncéllemeznek a legkevesebb a vastagsága és a távolságának a keveréke.
@@ -267,47 +230,36 @@ Az alábbi lövedék egy felülethez érvén egy robbanást olyan módon utánoz
 
 \subsubsection{Robbabótöltetes páncéltörő lövedék}
 
-Ez a lövedék hasonlóan működik a sima páncéltörő lövedékhez képest, az átütő ereje ugyanazon a módon van kiszámítva. A különbség a sebzés kiszámításában van, de csak akkor lép életbe, ha a lövedék egy adott vastagsága páncélt átütött, miután a robbanótöltet mértékétől függően sebez.
+Ez a lövedék hasonlóan működik a
 
 \subsection{Kezelő felület}
 
 \subsubsection{Életerő csík}
 
-Két féle életerő csík létezik a projektben. Az egyik a kezelő felületen fixen található a bal alsó sarokban, ez kijelzi a teljes és a jelenlegi életerőt számmal, illetve hiányzó életerő szerint kevesebb része lesz kitöltve. A másik az ellenfelek felett megtalálható, és a 3D térben helyezkednek el.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{screenshots/hpbar.png}
-    \caption{Életerő csíkok}
-    \label{fig:healthbar}
-\end{figure}
-
+Két féle életerő csík létezik a projektben. Az egyik a kezelő felületen fixen található a bal alsó sarokba, ez kijelzi a teljes és a jelenlegi életerőt számmal, illetve hiányzó életerő szerint kevesebb része lesz kitöltve. A másik az ellenfelek felett megtalálható, és a 3D térben helyezkednek ell
 
 \subsubsection{Célkereszt}
 
-A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelzi, emellett lövés után pirossá változik, jelezve az újratöltés menetét. A második, kereszt alakú, pedig azt jelzi, hogy a cső jelenleg milyen irányba néz.
+A cél kereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelzi, emellett lövés után pirossá változik, jelezve az újratöltés menetét. A második, kereszt alakú, pedig azt jelzi, hogy a cső jelenleg milyen irányba néz.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{screenshots/crosshair.png}
     \caption{Célkeresztek}
     \label{fig:crosshair}
 \end{figure}
 
-
-
 \subsection{Ellenfelek}
 
 \subsubsection{Navmesh}
 
-Az ellenfelek útkeresését a Unity-nak a beépített Navmesh rendszere segítségével implementáltam. Bár a Navmesh-be alapból van megadott módszer a mozgásra, de az embszerű karakterekre van tervezve. Emiatt a sajátos mozgási megoldásra kellett hagyatkozzak. Így ugyanazt a mozgási rendszert használják mint a játékosok.
+Az ellenfelek útkeresését a Unity-nak a beépített Navmesh rendszere segítségével oldottam meg.
 
 \subsubsection{Ellenőrző pontok}
 
-Az ellefeleknek van egy megadott útvonaluk amit követnek, melyet ellenőrző pontok segítségével oldottam meg. Amikor
-az adott ellenfél belép egy adott ellenőrző pont érzékelőpont
+Az ellefeleknek van egy megadott útvonaluk amit követnek, melyet ellenőrző pontok segítségével oldottam meg.
 
-\lstinputlisting[caption=Ellenőrző pontok váltása,label=checkpoints]{./codesnippets/checkpointsystem.cs}
-
+%\lstinputlisting[caption=Torony irányítása,label=checkpoints]{./codesnippets/checkpointsystem.cs}
 
 \subsubsection{Állapotgép}
 
@@ -325,11 +277,7 @@ Kétféle állapot van:
 
 \subsubsection{Járőrözés}
 
-A járőrözés az alap állapot, melyben az ellenőrző pontok által megadott útvonalat követi az ellenfél.
-
 \subsubsection{Támadás}
-
-Erre az állapotra akkor vált az az ellenfél, ha az ellenfél előtt elmegyünk és akadály nélkül meglát. Átváltás után amíg nem a játékos megyünk akadály mögé addig az ellenfél a testét és a tornyát forgatja a játékos felé. Miután sikeresen célba vette a játékost az ellenfél lő. Ha a játékos kimegy az ellenfél látószögéből akkor az ellenfél megpróbálja utolnérni a játékost. Ha adott időn belül nem látja meg újra a játékost, akkor az ellenfél visszatér járőrözési állapotba.
 
 \lstinputlisting[caption=Állapotgép,label=checkplayervisible]{./codesnippets/checkplayervisible.cs}
 
@@ -344,6 +292,9 @@ Erre az állapotra akkor vált az az ellenfél, ha az ellenfél előtt elmegyün
     \textsc{Unity} \emph{Unity Documentation}
     \\
     \url{https://docs.unity.com/}
+
+
+
 \end{thebibliography}
 
 \end{document}

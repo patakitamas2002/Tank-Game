@@ -52,7 +52,8 @@ public class CameraPlayerFollow : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 offsetRot = target.up * offset.y + target.forward * offset.z;
-        transform.position = target.position + offsetRot;
+        // transform.position = target.position + offsetRot;
+        transform.position = Vector3.Lerp(transform.position, target.position + offsetRot, 0.1f);
     }
     public void Aim(Vector2 value)
     {
