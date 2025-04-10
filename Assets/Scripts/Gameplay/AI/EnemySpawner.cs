@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameState gameState;
     [SerializeField] GameObject healthBar;
 
+    public LayerMask layerMask;
+
     private List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
 
         hpBar.transform.SetParent(enemy.transform);
         hpBar.transform.localPosition = Vector3.up * 5;
-
+        ai.excludeCollisionBox = layerMask;
         enemies.Add(enemy);
     }
 }

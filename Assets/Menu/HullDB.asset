@@ -45,7 +45,7 @@ MonoBehaviour:
     RearArmor: 0
   - Model: {fileID: 244806776974475377, guid: 7e6dbfdbcf0b13fa595af8ac58d53af3, type: 3}
     Sound: {fileID: 0}
-    Name: t-34
+    Name: T-34
     Health: 10
     Weight: 20000
     Horsepower: 300

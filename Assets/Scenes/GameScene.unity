@@ -1545,6 +1545,9 @@ MonoBehaviour:
   checkpoints: []
   gameState: {fileID: 803798656}
   healthBar: {fileID: 873976320579625839, guid: 21c9471273411a5a49acea5fef929bcd, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 371
 --- !u!195 &1155844690
 NavMeshAgent:
   m_ObjectHideFlags: 0

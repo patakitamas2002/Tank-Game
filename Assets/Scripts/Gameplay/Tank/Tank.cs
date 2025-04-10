@@ -110,16 +110,11 @@ public class Tank : MonoBehaviour
     {
         Vector3 rightDirection = transform.right;
 
-        // Project the Rigidbody velocity onto the right direction
         float sidewaysSpeed = Vector3.Dot(rb.velocity, rightDirection);
 
-        // Create a velocity vector to counteract the sideways motion
         Vector3 sidewaysVelocity = rightDirection * sidewaysSpeed;
 
-        // Apply friction to reduce the sideways velocity
         Vector3 newVelocity = rb.velocity - sidewaysVelocity * sidewaysFrictionFactor;
-
-        // Update the Rigidbody's velocity
         rb.velocity = newVelocity;
     }
 

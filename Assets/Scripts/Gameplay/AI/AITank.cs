@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AITank : MonoBehaviour
 {
 
-    LayerMask excludeCollisionBox;
+    public LayerMask excludeCollisionBox;
     public int checkpointNumber { get; private set; }
     [SerializeField] public Transform[] checkpoints { get; private set; }
     public Tank tank { get; private set; }
@@ -22,7 +22,7 @@ public class AITank : MonoBehaviour
     int frametimer = 0;
     void Start()
     {
-        excludeCollisionBox = ~(1 << LayerMask.NameToLayer("CollisionBox"));
+        // excludeCollisionBox = ~(1 << LayerMask.NameToLayer("CollisionBox"));
         tank = GetComponent<Tank>();
         agent = GetComponent<NavMeshAgent>();
         agent.baseOffset = 3f;
@@ -74,9 +74,12 @@ public class AITank : MonoBehaviour
         if (other.transform.position == checkpoints[checkpointNumber].position)
         {
             checkpointNumber++;
+            if (isFinished)
+            {
+                gameState.LoseGame();
+            }
             if (stateMachine.currentState == AIStateID.Patrol)
                 agent.SetDestination(checkpoints[checkpointNumber].position);
-            if (isFinished) gameState.LoseGame();
         }
     }
     void Die()
@@ -94,15 +97,16 @@ public class AITank : MonoBehaviour
         float angle = Mathf.Atan2(relativeVector.x, relativeVector.z) * Mathf.Rad2Deg;
         if (Mathf.Abs(angle) > 60) return false;
         if (!Physics.Raycast(transform.position + transform.forward * 6, player.position - transform.position, out RaycastHit hit, 100, excludeCollisionBox)) return false;
-        return Vector3.Distance(hit.point, player.transform.position) > 3;
         // Debug.Log(hit.transform.name);
+        return Vector3.Distance(hit.point, player.transform.position) < 3;
         // Debug.Log("Player visible");
         // return true;
     }
     public bool IsLookingAtPlayer()
     {
         Physics.Raycast(tank.barrel.transform.position, tank.barrel.transform.forward, out RaycastHit hit, 100, excludeCollisionBox);
-        // Debug.Log(hit.transform.name);
+        // Debug.Log((Vector3.Distance(hit.point, player.transform.position) < 5) + " " + hit.transform.name);
+
         return Vector3.Distance(hit.point, player.transform.position) < 5;
     }
     public void SetCheckPoints(Transform[] points)

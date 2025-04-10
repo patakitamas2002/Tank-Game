@@ -47,11 +47,12 @@ public class AttackState : AIState
     //         tank.stateMachine.ChangeState(AIStateID.Patrol);
     //     }
     // }
+
     public void Update(AITank tank)
     {
         timer += Time.deltaTime;
-        frameTimer++;
-        if (frameTimer > 5 && tank.CheckPlayerVisible())
+
+        if (tank.CheckPlayerVisible())
         {
             timer = 0;
             LookAtPlayer(tank);
@@ -66,9 +67,19 @@ public class AttackState : AIState
         {
             FollowPlayer(tank);
         }
-        if (frameTimer >= 5) frameTimer = 0;
+        frameTimer++;
+        if (frameTimer > 5) frameTimer = 0;
         if (timer > maxTimer) tank.stateMachine.ChangeState(AIStateID.Patrol);
     }
+    // public void Update(AITank tank)
+    // {
+    //     FollowPlayer(tank);
+    //     frameTimer++;
+    //     if (frameTimer > 5)
+    //     {
+    //         frameTimer = 0;
+    //     }
+    // }
     void FollowPlayer(AITank tank)
     {
         tank.Move(0.5f);
