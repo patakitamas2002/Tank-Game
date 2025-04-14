@@ -9,7 +9,7 @@ public class Armor : MonoBehaviour
     // Start is called before the first frame updatep
     void Start()
     {
-        tank = GetParentTank();
+        tank = GetComponentInParent<Tank>();
     }
 
     Tank GetParentTank()

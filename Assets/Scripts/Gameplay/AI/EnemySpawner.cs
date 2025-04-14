@@ -21,14 +21,18 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Enemy spawner start");
         foreach (Transform child in checkpointParent)
         {
             checkpoints.Add(child);
         }
+        Debug.Log("CheckPoints set");
         foreach (Transform child in transform)
         {
+            Debug.Log("Spawning enemy");
             gameState.AddEnemy();
             SpawnEnemy(child);
+            Debug.Log("Spawned enemy: " + child.name);
         }
     }
 

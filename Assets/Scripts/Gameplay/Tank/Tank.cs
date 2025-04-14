@@ -42,12 +42,13 @@ public class Tank : MonoBehaviour
     {
         Tank newTank = new GameObject("Tank", typeof(Tank), typeof(Rigidbody), typeof(BoxCollider)).GetComponent<Tank>();
         newTank.transform.position = transform.position;
-
+        // transform.tag = "Tank";
         newTank.hull = Instantiate(hull.GetComponent<Hull>(), newTank.transform);
         newTank.turret = Instantiate(turret.GetComponent<Turret>(), newTank.hull.transform.GetChild(0).transform);
         newTank.barrel = Instantiate(barrel.GetComponent<Barrel>(), newTank.turret.transform.GetChild(0).transform);
 
         newTank.healthBar = hpbar;
+        Debug.Log("Created tank with hull: " + newTank.hull.name + ", turret: " + newTank.turret.name + ", barrel: " + newTank.barrel.name);
         return newTank.gameObject;
     }
 
