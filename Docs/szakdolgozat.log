@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.3.28)  8 APR 2025 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.3.28)  14 APR 2025 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -521,9 +521,9 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@floatcapt=\box60
 )
 \c@tetel=\count321
-Package babel Info: Making ? an active character on input line 33.
-Package babel Info: Making ! an active character on input line 34.
-Package babel Info: Making : an active character on input line 35.
+Package babel Info: Making ? an active character on input line 34.
+Package babel Info: Making ! an active character on input line 35.
+Package babel Info: Making : an active character on input line 36.
 
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
@@ -543,25 +543,25 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 (./szakdolgozat.aux)
 \openout1 = `szakdolgozat.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-Package hyperref Info: Link coloring OFF on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+Package hyperref Info: Link coloring OFF on input line 59.
  (./szakdolgozat.out) (./szakdolgozat.out)
 \@outlinefile=\write3
 \openout3 = `szakdolgozat.out'.
@@ -602,50 +602,50 @@ Package hyperref Info: Link coloring OFF on input line 58.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5
-8.
+9.
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5
-8.
+9.
 
 (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-58.
+59.
 
 (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-58.
+59.
 
 (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 58.
+(Font)              <12> on input line 59.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 58.
+(Font)              <8> on input line 59.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 58.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
+(Font)              <6> on input line 59.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 59.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 59.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 58.
+(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 59.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 58.
+(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 59.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -696,10 +696,10 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 LaTeX Info: Redefining \cal on input line 577.
 LaTeX Info: Redefining \mit on input line 578.
 )
-<eszterhazy-logo-hu.pdf, id=108, 256.07971pt x 88.04292pt>
+<eszterhazy-logo-hu.pdf, id=116, 256.07971pt x 88.04292pt>
 File: eszterhazy-logo-hu.pdf Graphic file (type pdf)
 <use eszterhazy-logo-hu.pdf>
-Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 66.
+Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 67.
 (pdftex.def)             Requested size: 256.07907pt x 88.0427pt.
 
 
@@ -717,56 +717,66 @@ Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 66.
 [2
 
 ]
+
+[3]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-1.
+4.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[3
-
-]
-1. fejezet.
-
-
 [4
 
 ]
-2. fejezet.
+1. fejezet.
+<screenshots/warthundergame.png, id=178, 1927.2pt x 1084.05pt>
+File: screenshots/warthundergame.png Graphic file (type png)
+<use screenshots/warthundergame.png>
+Package pdftex.def Info: screenshots/warthundergame.png  used on input line 95.
+
+(pdftex.def)             Requested size: 396.91325pt x 223.25725pt.
 
 
 [5
 
-]
+ <./screenshots/warthundergame.png>]
 
 [6]
-<screenshots/blender.png, id=176, 1567.35562pt x 934.99312pt>
+2. fejezet.
+
+
+[7
+
+]
+
+[8]
+<screenshots/blender.png, id=230, 1567.35562pt x 934.99312pt>
 File: screenshots/blender.png Graphic file (type png)
 <use screenshots/blender.png>
-Package pdftex.def Info: screenshots/blender.png  used on input line 142.
+Package pdftex.def Info: screenshots/blender.png  used on input line 179.
 (pdftex.def)             Requested size: 396.91325pt x 236.77226pt.
 
 
-[7 <./screenshots/blender.png>]
+[9 <./screenshots/blender.png>]
 3. fejezet.
-<screenshots/selectionmenu.png, id=185, 1067.48813pt x 566.115pt>
+<screenshots/selectionmenu.png, id=237, 1067.48813pt x 566.115pt>
 File: screenshots/selectionmenu.png Graphic file (type png)
 <use screenshots/selectionmenu.png>
-Package pdftex.def Info: screenshots/selectionmenu.png  used on input line 162.
+Package pdftex.def Info: screenshots/selectionmenu.png  used on input line 206.
 
 (pdftex.def)             Requested size: 308.71106pt x 163.71132pt.
-<screenshots/settings.png, id=186, 1099.10625pt x 614.295pt>
-File: screenshots/settings.png Graphic file (type png)
-<use screenshots/settings.png>
-Package pdftex.def Info: screenshots/settings.png  used on input line 171.
-(pdftex.def)             Requested size: 308.71106pt x 172.5357pt.
 
 
-[8
+[10
 
  <./screenshots/selectionmenu.png>]
+<screenshots/settings.png, id=244, 1099.10625pt x 614.295pt>
+File: screenshots/settings.png Graphic file (type png)
+<use screenshots/settings.png>
+Package pdftex.def Info: screenshots/settings.png  used on input line 215.
+(pdftex.def)             Requested size: 308.71106pt x 172.5357pt.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 185.
+nput line 230.
 
 (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
@@ -778,66 +788,68 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 File: se-iso-8859-2.def 2019/11/29 v1.12 stringenc: ISO-8859-2
 )
 
-[9 <./screenshots/settings.png>]
+[11 <./screenshots/settings.png>]
 (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[10] (/usr/share/texmf-dist/tex/latex/base/latin2.def
-File: latin2.def 2024/02/08 v1.3d Input encoding file
-)
-(/usr/share/texmf-dist/tex/latex/base/latin2.def
+[12] (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[11]
-<screenshots/mapineditor.png, id=254, 2049.15562pt x 1164.60094pt>
+[13] (/usr/share/texmf-dist/tex/latex/base/latin2.def
+File: latin2.def 2024/02/08 v1.3d Input encoding file
+)
+<screenshots/mapineditor.png, id=300, 2049.15562pt x 1164.60094pt>
 File: screenshots/mapineditor.png Graphic file (type png)
 <use screenshots/mapineditor.png>
-Package pdftex.def Info: screenshots/mapineditor.png  used on input line 237.
+Package pdftex.def Info: screenshots/mapineditor.png  used on input line 290.
 (pdftex.def)             Requested size: 352.81552pt x 200.50293pt.
-<screenshots/scriptableobject.png, id=255, 340.27126pt x 381.67593pt>
+
+
+[14]
+<screenshots/scriptableobject.png, id=323, 340.27126pt x 381.67593pt>
 File: screenshots/scriptableobject.png Graphic file (type png)
 <use screenshots/scriptableobject.png>
-Package pdftex.def Info: screenshots/scriptableobject.png  used on input line 2
-50.
+Package pdftex.def Info: screenshots/scriptableobject.png  used on input line 3
+03.
 (pdftex.def)             Requested size: 220.50887pt x 247.34096pt.
 
 
-[12 <./screenshots/mapineditor.png>]
-
-[13 <./screenshots/scriptableobject.png>]
+[15 <./screenshots/mapineditor.png> <./screenshots/scriptableobject.png>]
 (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[14] (/usr/share/texmf-dist/tex/latex/base/latin2.def
+[16]
+
+[17] (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[15{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-di
+[18{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-di
 st/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/l
 m-rm.enc}] (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[16]
-<screenshots/hpbar.png, id=378, 600.74437pt x 559.33969pt>
+[19]
+<screenshots/hpbar.png, id=455, 600.74437pt x 559.33969pt>
 File: screenshots/hpbar.png Graphic file (type png)
 <use screenshots/hpbar.png>
-Package pdftex.def Info: screenshots/hpbar.png  used on input line 323.
+Package pdftex.def Info: screenshots/hpbar.png  used on input line 388.
 (pdftex.def)             Requested size: 220.50887pt x 205.31375pt.
 
 
-[17]
-<screenshots/crosshair.png, id=406, 519.44063pt x 386.94562pt>
+[20]
+<screenshots/crosshair.png, id=467, 519.44063pt x 386.94562pt>
 File: screenshots/crosshair.png Graphic file (type png)
 <use screenshots/crosshair.png>
-Package pdftex.def Info: screenshots/crosshair.png  used on input line 335.
+Package pdftex.def Info: screenshots/crosshair.png  used on input line 400.
 (pdftex.def)             Requested size: 220.50887pt x 164.25781pt.
 
 
-[18 <./screenshots/hpbar.png> <./screenshots/crosshair.png>]
+[21 <./screenshots/hpbar.png> <./screenshots/crosshair.png>]
 (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
@@ -845,56 +857,106 @@ File: latin2.def 2024/02/08 v1.3d Input encoding file
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[19] (/usr/share/texmf-dist/tex/latex/base/latin2.def
+[22]
+
+[23] (/usr/share/texmf-dist/tex/latex/base/latin2.def
 File: latin2.def 2024/02/08 v1.3d Input encoding file
 )
 
-[20]
-
-[21]
+[24]
 4. fejezet.
+<screenshots/losegame.png, id=553, 1111.15125pt x 623.32875pt>
+File: screenshots/losegame.png Graphic file (type png)
+<use screenshots/losegame.png>
+Package pdftex.def Info: screenshots/losegame.png  used on input line 456.
+(pdftex.def)             Requested size: 396.91325pt x 222.65762pt.
 
 
-[22
+[25
+
+ <./screenshots/losegame.png>]
+<screenshots/logging.png, id=562, 315.42844pt x 210.03468pt>
+File: screenshots/logging.png Graphic file (type png)
+<use screenshots/logging.png>
+Package pdftex.def Info: screenshots/logging.png  used on input line 465.
+(pdftex.def)             Requested size: 308.71106pt x 205.57298pt.
+
+
+[26 <./screenshots/logging.png>]
+
+[27
 
 ]
 
-[23
+[28
 
 ]
 
-[24
+[29]
+<nyilatkozat.pdf, id=617, 591.6504pt x 836.16388pt>
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf>
+Package pdftex.def Info: nyilatkozat.pdf  used on input line 603.
+(pdftex.def)             Requested size: 591.64896pt x 836.16183pt.
+<nyilatkozat.pdf, id=619, page=1, 591.6504pt x 836.16388pt>
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf, page 1>
+Package pdftex.def Info: nyilatkozat.pdf , page1 used on input line 603.
+(pdftex.def)             Requested size: 591.64896pt x 836.16183pt.
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf, page 1>
+Package pdftex.def Info: nyilatkozat.pdf , page1 used on input line 603.
+(pdftex.def)             Requested size: 598.0497pt x 845.20782pt.
 
-] (./szakdolgozat.aux)
+
+[30]
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf, page 1>
+Package pdftex.def Info: nyilatkozat.pdf , page1 used on input line 603.
+(pdftex.def)             Requested size: 598.0497pt x 845.20782pt.
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf, page 1>
+Package pdftex.def Info: nyilatkozat.pdf , page1 used on input line 603.
+(pdftex.def)             Requested size: 598.0497pt x 845.20782pt.
+
+
+File: nyilatkozat.pdf Graphic file (type pdf)
+<use nyilatkozat.pdf, page 1>
+Package pdftex.def Info: nyilatkozat.pdf , page1 used on input line 603.
+(pdftex.def)             Requested size: 598.0497pt x 845.20782pt.
+[31
+
+ <./nyilatkozat.pdf>] (./szakdolgozat.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `szakdolgozat.out' has not changed.
-(rerunfilecheck)             Checksum: 33ABC0E97C5A636581E46F2C5DE492D2;3844.
+(rerunfilecheck)             Checksum: A673F05C9493281ABE4EA3B71DBCB8BA;4068.
  ) 
 Here is how much of TeX's memory you used:
- 18937 strings out of 474560
- 303787 string characters out of 5750494
- 1105528 words of memory out of 5000000
- 41393 multiletter control sequences out of 15000+600000
- 622068 words of font info for 87 fonts, out of 8000000 for 9000
+ 19044 strings out of 474560
+ 305689 string characters out of 5750494
+ 1087528 words of memory out of 5000000
+ 41462 multiletter control sequences out of 15000+600000
+ 636541 words of font info for 96 fonts, out of 8000000 for 9000
  350 hyphenation exceptions out of 8191
- 84i,7n,93p,931b,2454s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,93p,998b,2539s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
 texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/
 public/lm/lmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><
 /usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fo
 nts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr1
-2.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-d
-ist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/
-lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/amsfonts/symbols/msbm10.pfb>
-Output written on szakdolgozat.pdf (24 pages, 3920718 bytes).
+2.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf-d
+ist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm
+/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share
+/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1
+/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on szakdolgozat.pdf (31 pages, 13772377 bytes).
 PDF statistics:
- 632 PDF objects out of 1000 (max. 8388607)
- 557 compressed objects within 6 object streams
- 280 named destinations out of 1000 (max. 500000)
- 249 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 773 PDF objects out of 1000 (max. 8388607)
+ 675 compressed objects within 7 object streams
+ 310 named destinations out of 1000 (max. 500000)
+ 295 words of extra memory for PDF output out of 10000 (max. 10000000)
 

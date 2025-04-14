@@ -17,6 +17,6 @@ public class SaveSettings : MonoBehaviour
     {
         PlayerSettings.TPSensitivity = float.Parse(lookSens.text);
         PlayerSettings.FPSensitivity = float.Parse(aimSens.text);
-        volume.SetFloat("MasterVol", float.Parse(volumeSlider.text));
+        volume.SetFloat("MasterVol", float.Parse(volumeSlider.text) * 40 - 40);
     }
 }

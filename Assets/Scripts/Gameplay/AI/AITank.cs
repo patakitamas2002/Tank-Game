@@ -77,6 +77,7 @@ public class AITank : MonoBehaviour
             if (isFinished)
             {
                 gameState.LoseGame();
+                return;
             }
             if (stateMachine.currentState == AIStateID.Patrol)
                 agent.SetDestination(checkpoints[checkpointNumber].position);

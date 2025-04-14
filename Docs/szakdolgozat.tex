@@ -16,6 +16,7 @@
 %\usepackage{listingsutf8,mathtools,amssymb,amsthm,pdfpages,xurl}
 \usepackage{listingsutf8,lmodern,caption,mathtools,amssymb,amsthm,pdfpages,xurl,float}
 
+
 \footnotestyle{rule=fourth}
 
 \newtheorem{tetel}{Tétel}[chapter]
@@ -58,7 +59,7 @@
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
-\title{Mesterséges intelligencia a számítógépes játékokban}
+\title{Mesterséges intelligencia elleni harci járműves játék készítése a NavMesh használatával}
 \author{Pataki Tamás\\Programtervező Informatikus BSc}
 \supervisor{Dr. Kovásznai Gergely\\Egyetemi docens}
 \city{Eger}
@@ -70,15 +71,15 @@
 \chapter*{Bevezetés}
 \addcontentsline{toc}{chapter}{Bevezetés}
 
-A szakdolgozati téma választás idején sok lehetőség volt elérhető számomra. Végül amikor választanom kellet olyan témát szerettem volna amely egy sajátos kihívást ad és egyben az érdekeltségi közömbe is tartozik. A számítógépes játékok és azoknak a fejlesztése már korábban is érdekelt, és ez adta meg a löketet a téma választásához.
+A szakdolgozati témaválasztásom idején számtalan lehetőség közül válogathattam, de én olyan témát szerettem volna, ami egy sajátos kihívást ad és egyben az érdeklődési körömbe is tartozik. A számítógépes játékok és azoknak a fejlesztése már korábban is érdekelt, és ez adta meg az inspirációt egy új játék létrehozásához.
 
-A témám egy olyan játék készítése, mely
+A témám egy olyan játék elkészítése, melyhez hasonlóval évekkel ezelőtt már játszottam, ebből hiányoltam néhány lehetőséget, és úgy gondoltam, hogy egy új tankos játék létrehozásában kifejezhetem saját kreativitásomat.
 
-Emellett a harckocsik között történő csaták is érdekelnek, főleg a II. világháborúban használatos fegyverekkel. Emiatt egy olyan játékot szerettem volna fejleszteni melyben meglehetett tapasztalni az akkori időben kifejlesztetett harckocsiknak az erejét. Csavarként gondoltam ki azt a funkciót, hogy a különböző harckocsik elemeit meglehessen cserélni egymás közt, ezzel új lehetőségeket nyitva a taktikákra és egy fantázia elemet belerakva a játékba.
+Emellett a harckocsik közötti csaták is érdekelnek, főleg a II. világháborúban használatos fegyverekkel. Emiatt egy olyan játékot szerettem volna fejleszteni, melyben megtapasztalhatjuk az akkori időben kifejlesztetett harckocsiknak az erejét. Csavarként gondoltam ki azt a funkciót, hogy a különböző harckocsik elemei megcserélhetőek legyenek egymás között, ezzel új lehetőségek nyílnak a taktikákra és ezzel további fantáziaelemeket próbálhatunk ki a játékban.
 
 Emiatt választottam a projektem megvalósítására Unity\cite{unity} játékmotort, mely lehetőséget adott ennek kifejlesztésére 3D térben.
 
-
+A szakdolgozatom az alábbi módon épül fel: az 1. fejezetben a tématerületet írom körbe és térek ki pár általánosabb fogalomra, amit használtam. A 2. fejezetben a konkrétabb felhasznált technológiákat és pár fontosabb funkciót mutatok be. Ezt követően a 3. fejezetben projek és annak működéséről lesz szó. Végül a 4. fejezetben a tesztelés menetét mutatom be.
 
 A szakdolgozatom az alábbi linken érhető el: \url{https://github.com/patakitamas2002/Tank-Game}
 
@@ -86,7 +87,7 @@ A szakdolgozatom az alábbi linken érhető el: \url{https://github.com/patakita
 
 \section{Inspiráció}
 
-Inspirációmat főként a War Thunder\cite{warthunder} című játékból merítettem, mely egy több mint 10 éve kiadott, de folyamatosan tovább fejlesztett, online többszereplős játék. Többféle járművet lehet benne irányítani, például repülők, hajók, helikopterek, de főleg a harckocsis részéből merítettem az ötleteimet. Több ezer jármú elérhető benne és mélyen kidolgozott rendszereik vannak, melyek a realizmusra törekednek. Ennek egy töredékét szerettem volna elérni egy félig realisztikus megoldással.
+Inspirációmat főként a War Thunder\cite{warthunder} című játékból merítettem, mely egy több mint 10 éve kiadott, de folyamatosan továbbfejlesztett, online többszereplős játék, melyben többféle járművet lehet benne irányítani - például repülőt, hajót, helikoptert, harckocsit. Az ötleteimet a harckocsis részéből merítettem. Több ezer jármú elérhető benne és mélyen kidolgozott rendszereik vannak, melyek a realizmusra törekednek. Ennek egy töredékét szerettem volna elérni egy félig realisztikus megoldással.
 
 
 \begin{figure}[H]
@@ -97,63 +98,61 @@ Inspirációmat főként a War Thunder\cite{warthunder} című játékból merí
 \end{figure}
 
 
-\section{Navmesh}
+\section{NavMesh}
 
-A Navmesh\cite{navmesh} a mesterséges intelligenciáknál alkalmazott absztrakt adat struktúra, mely segít a komplex környezetekben történő útvonal keresésben. Ez a fogalom már több évtizede ismert a robotika területén, de a 2000-es évek elején népszerűsítették a számítógépes játékok.
+A NavMesh\cite{navmesh} a mesterséges intelligenciáknál alkalmazott absztrakt adatstruktúra, mely segít a komplex környezetekben történő útvonal keresésben. Ez a fogalom már több évtizede ismert a robotika területén, de a 2000-es évek elején népszerűsítették a számítógépes játékok.
 
 Egy két-dimenziós konvex poligonokból\footnote{sokszögekből} álló háló adja meg az ügynök\footnote{Eredeti nevén \emph{agent}} által bejárható területet, melyen belül szabadon mozoghat. Egy poligonon belül egy egyenes vonallal lehet áthaladni, míg két poligon között gráfkereső algoritmusok használatával, mint például az A\* algoritmus, lehet útvonalat találni.
 
-Egy Navmesh-t, bár lehet kézzel készíteni, nagyon hosszadalmas folyamat lenne, ezért általában egy pályán levő statikus geometriában található magasság különbségek alapján van legenerálva.
+Egy NavMesh-t, bár lehet kézzel készíteni, nagyon hosszadalmas folyamat lenne, ezért általában egy pályán lévő statikus geometriában található magasság különbségek alapján van legenerálva.
 
-A szakdolgozatom során tervezem ennek használatát a gépi ellenségek irányításához.
+A szakdolgozatom során tervezem ennek használatát a gépi ellenséges tankok irányításához.
 
 \section{Ray cast}
 
-A ray cast\cite{raycast}\footnote{Sugár követés} egy több évtizede kifejlesztett módszer a 3 dimenziós számítógépes grafikák megjelenítésére 2 dimenziós képernyőkön. Ray cast segítségével el lehet dönteni, hogy adott nézőpontból melyik tárgy van előrébb.
+A ray cast\cite{raycast}\footnote{Sugár követés} egy több évtizede kifejlesztett módszer a 3 dimenziós számítógépes grafikák megjelenítésére kétdimenziós képernyőkön. Ray cast segítségével el lehet dönteni, hogy adott nézőpontból melyik tárgy van előrébb.
 
 Működése egy pontból kilőtt adott irányba haladó sugárral történik, mely visszaadja az első eltalált pontot, ezzel megállapítva, hogy az adott ponthoz képest mi található a legközelebb egy adott irányban.
 
-Unity-ban ez egy beépített funkció és megadható a sugarak maximális távolsága, valamint a rétegeket.
+Unity-ban ez egy beépített funkció és megadható a sugarak maximális távolsága, valamint az, hogy mely rétegeket vegye - vagy ne vegye - figyelembe.
 
-\section{Quaternion}
 
 \chapter{Felhasznált technológiák}
 
 \section{Unity}
 
-A fejlesztésem alapjának a Unity-t választottam népszerűsége és sokoldalúsága miatt. Rengeteg eszközt ad a fejlesztő kezébe, így szinte bármilyen típusú projektet lehet vele készíteni, akár a játékfejlesztésen túl is.
+Fejlesztésem alapjául a Unity\cite{unity} játékmotort választottam népszerűsége és sokoldalúsága miatt. Rengeteg eszközt ad a fejlesztő kezébe, így szinte bármilyen típusú projekt elkészíthető vele, akár a játékfejlesztésen túl is.
 
 \subsection{A Unity-ről általánosan}
 
-A Unity játékmotor először 2005-ben jelent meg, amióta folyamatos továbbfejlesztés átváltoztatta teljesen. 2D és 3D játékok feljlesztésére szolgál több platformon is, emellett interaktív szimulációkra használható és virtuális valóságra való fejlesztésre is van támogatása.
+A Unity először 2005-ben jelent meg, azóta a folyamatos továbbfejlesztés teljesen átváltoztatta. Jelenleg 2 és 3 dimenziós játékok fejlesztésére szolgál több platformon is, emellett interaktív szimulációkra használható és virtuális valóságra való fejlesztésre is van támogatása.
 
-Adott bevételig ingyenes lincesszel rendelkezik emiatt az indie és újonc játékfejlesztők körében nagyon elterjedt és tág közösségre tett szert. Emiatt sokféle oktatóvideó található, és rengeteg közösség által készített játék tartozékot (pl. hangok, modellek) lehet letölteni vagy megvásárolni.
+A fejlesztők részére bizonyos bevételig ingyenes lincensszel rendelkezik, emiatt az indie és újonc játékfejlesztők körében nagyon népszerűvé vált, tág közösségre tett szert, ezért többféle oktatóvideó található, és számtalan, a közösség által készített játékhoz tartozó elemet - pl. hangokat, modelleket - lehet letölteni vagy megvásárolni.
 
 \subsection{Gameobject-ek}
 
-Egyik alapeleme a Unity-nek a GameObjectek, melyeknek rengeteg féle felhasználási módjuk van. Bármilyen karakter, pálya vagy tárgy egy GameObject egy jeleneten belül. Alapból nincsen konkrét funkciójuk, de komponenseket lehet hozzájuk csatolni, melyek meghatározás a működésüket. Ezért a GameObjecteket tekinthetjük úgy, mint egy tárolóegység.
+Egyik alapeleme a Unity-nek a GameObject-ek\cite{GameObject}, melyeknek sokféle felhasználási módjuk van. A játékban bármelyik karakter, pálya vagy tárgy GameObject-nek számít egy jeleneten belül. Alapból nincsen konkrét funkciójuk, de komponenseket lehet hozzájuk csatolni, melyek meghatározzák a működésüket. Ezért a GameObjectet tekinthetjük úgy, mint egy tárolóegységet.
 
 \subsection{Komponensek}
 
-\label{sec:components}
-
-A komponensek felelnek a GameObject-ek viselkedéséért, rengeteg különféle funkcionalitást nyújtanak. Alapból rengetek komponens van beépítve a Unity-be, de a szkriptelési funkcionalitással saját komponensekkel lehet ezt a tárat tovább bővíteni. A leggyakrabban használt beépített komponensek:
+A komponensek\cite{components} felelnek a GameObject-ek viselkedéséért, rengeteg különféle funkcionalitást nyújtanak. Alapból több komponens van beépítve a Unity-be, de a szkriptelés kihasználásával saját komponenseket is lehet készíteni és ezzel a tár tovább bővíthető. A leggyakrabban használt beépített komponensek:
 \begin{itemize}
- \item Transform (Ezt minden GameObject tartalmazza)
- \item Mesh renderer
- \item Collider
- \item Rigidbody
- \item Szkriptek
+ \item Transform\cite{transform} (Ezt minden GameObject tartalmazza)
+ \item Mesh renderer\cite{meshrenderer}
+ \item Collider\cite{collider}
+ \item Rigidbody\cite{rigidbody}
+ \item Szkriptek\cite{scripting}
 \end{itemize}
 
-A \emph{Transform} adja meg a pozícióját, méretezését és forgatását az adott objektumnak. A \emph{Mesh renderer} felel a modellek megjelenítésért. A \emph{Collider} az ütközések kezelését szolgálja, több formában is létezik, mint például doboz és kapszula alakú. A \emph{RigidBody} felel a fizikáért. Ezeken kívül még rengeteg beépített komponens létezik.
+A számtalan beépített komponens közül pedig az alábbiakban emelném ki a legalapvetőbbeket:
+A \emph{Transform} adja meg a pozícióját, méretezését és forgatását az adott objektumnak, a modellek megjelenítésért a \emph{Mesh renderer} felel. A \emph{Collider} az ütközések kezelését szolgálja, több formában is létezik, mint például doboz és kapszula alakú. A \emph{RigidBody} felel a fizikáért.
 
 \subsection{Szkriptelés}
 
-A szkriptek egyféle komponens a GameObjectnek. A játék logikájának és interakcióinak megírására szolgálnak. A szkriptek főként C\# nyelven készülnek, és az egyes játékobjektumok viselkedését, mozgását, valamint a játékbeli eseményeket szabályozzák.
+A szkriptek egyféle komponensei a GameObjectnek. A játék logikájának és interakcióinak megírására szolgálnak. A szkriptek főként C\# nyelven készülnek, és az egyes játékobjektumok viselkedését, mozgását valamint a játékbeli eseményeket szabályozzák.
 
 
-A Monobehavior-ből nevű osztályból öröklődik a legtöbb szkript, mely többféle beépíttet életciklus tesz elérhetővé:
+A \emph{MonoBehaviour} nevű osztályból öröklődik a legtöbb szkript, mely többféle beépített életciklust tesz elérhetővé:
 
 \begin{itemize}
     \item \emph{Start}
@@ -162,18 +161,18 @@ A Monobehavior-ből nevű osztályból öröklődik a legtöbb szkript, mely tö
     \item \emph{OnCollisionEnter} / \emph{OnTriggerEnter}
 \end{itemize}
 
-A \emph{Start} metódus egyszer fut le a szkript indításakor, amikor az adott objektum betöltődik, és az objektum engedélyezve van. Általában inicializálási feladatokhoz van alkalmazva, például változók értékeinek beállítását hajtja végre.
+Az adott objektum betöltődésénél a \emph{Start} metódus a szkript indításakor egyszer fut le, amennyiben a szkript engedélyezve van. A \emph{Start} metódust általában inicializálási feladatokhoz alkalmazzák, például változók értékeinek beállítását hajtja végre.
 
-Az \emph{Update} metódus minden képkockánál lefut, így ide kerülnek azok a kódok, amelyeknek folyamatosan, valós időben kell futniuk, például a mesterség intelligenciák irányítása vagy a kezelőfelületen levő folyamatosan frissülő részek.
+Az \emph{Update} metódus minden képkockánál lefut, így ide kerülnek azok a kódok, amelyeknek folyamatosan, valós időben kell futniuk, például a mesterséges intelligenciák irányítása vagy a kezelőfelületen lévő folyamatosan frissülő részek.
 
-A \emph{FixedUpdate}, az \emph{Update}-hez hasonlóan, folyamatosan fut, viszont minden fizikai képkockán fut le, a megjelenített képkockáktől függetlenül. Ide a fizikai számítások kerülnek, mivel megadott időközönként fut újra.
+A \emph{FixedUpdate}, az \emph{Update}-hez hasonlóan, folyamatosan fut, viszont minden fizikai képkockán fut le, a megjelenített képkockáktól függetlenül. Ide a fizikai számítások kerülnek, mivel megadott időközönként fut újra.
 
-Az \emph{OnCollisionEnter} akkor fut le amikor két tárgy amelyek van \emph{Collider} komponense összeütközik. Ütközések vagy fizika lövedékek kezelésére alkalmas.
+Az \emph{OnCollisionEnter} akkor fut le, amikor két \emph{Collider} komponenssel rendelkező tárgy összeütközik. A \emph{OnCollisionEnter} az ütközések vagy fizikai lövedékek kezelésére alkalmas.
 
 
 \section{Blender}
 
-A modellezéshez Blender-t választottam, mely egy ingyenes és nyílt forráskódú 3D modellező és animációs program. A Blender egy nagyon széles körben használt és alkalmazott program a 3D grafika világában, és ingyenessége miatt könnyen kipróbálható és használható.
+A modellezéshez Blender-t választottam, mely egy ingyenes és nyílt forráskódú 3D modellező és animációs program. A Blender egy nagyon széles körben használt és alkalmazott program a 3D grafika világában, és ingyenessége miatt bárki számára   hozzáférhető és kipróbálható.
 
 \begin{figure}[H]
     \centering
@@ -182,7 +181,7 @@ A modellezéshez Blender-t választottam, mely egy ingyenes és nyílt forrásk�
     \label{fig:blender}
 \end{figure}
 
-A Blender újabb verzióiban rengeteg eszközzel rendelkezik, mely egyszerűsíti a modellezést és annak tanulását. Emellett tág felhasználói közössége miatt rengeteg segítség található internetes fórumokon, illetve rengeteg tanító videó is áll rendelkezésre, melyek nagyrészben segítettek e programnak a használatában.
+A Blender újabb verzióiban számtalan eszköz elérhető, ami egyszerűbbé teszi a modellezést és annak tanulását, mindemellett a felhasználói közössége miatt több segítség is található internetes fórumokon, valamint sok tanító videó is rendelkezésre áll. Mindez nagy segítséget nyújtott számomra a program használatában.
 
 \chapter{A játék bemutatása}
 
@@ -190,9 +189,16 @@ A Blender újabb verzióiban rengeteg eszközzel rendelkezik, mely egyszerűsít
 
 \subsection{Menü}
 
-A játékot elindításakor a főmenübe kerülünk, ahol 3 gomb fogad, a játékmenet elindítása, beállítások és a kilépés.
+A játék betöltődését követően a főmenübe kerülünk, ahol 3 gomb található:
+\begin{itemize}
+ \item Play (tank kiválasztása)
+ \item Settings (beállítások)
+ \item Exit (kilépés)
+\end{itemize}
 
-A játékmenet elindítására kattintva megjelenik a harckocsi kiválasztására szolgáló menü. Ebben menüben a felső részen a gombok segítségével választhatóak a harckocsi részei, és a gombok között található azoknak a megnevezése. A képernyő közepén látható a jelenleg kiválasztott harckocsi előnézete, mely minden alkatrész váltás során változik. A jobb alsó sarokban található a játék indító gomb, mely indítja a játékmenetet és a bal alsó sarokban a főmenübe visszalépő gomb.
+A Play gombra kattintva megjelenik a harckocsi kiválasztására szolgáló menü, és itt a felső részen a gombok segítségével kiválaszthatjuk a harckocsi részeit, melyek megnevezése a gombok között található. A képernyő közepén láthatjuk a jelenleg kiválasztott harckocsi előnézetét, amely az alkatrészek cseréje során frissül, így a létrehozott tankot azonnal láthatjuk.
+
+A játék indító gombja (\emph{Start mission}) a képernyő jobb alsó sarkában található, míg a bal alsó sarokban a főmenübe visszalépő gomb (\emph{Back}) van.
 
 
 \begin{figure}[H]
@@ -202,7 +208,7 @@ A játékmenet elindítására kattintva megjelenik a harckocsi kiválasztásár
     \label{fig:selectionmenu}
 \end{figure}
 
-A beállításoknál 3 csúszka található, melyek mellett a jelenlegi értékük található. Ezek szolgálnak a játékbeli érzékenység és a hangerő beállítására.
+A beállításoknál 3 csúszka található, melyek mellett a jelenlegi értékük jelenik meg. Ezek a csúszkák szolgálnak a játékbeli érzékenység és a hangerő beállítására.
 
 \begin{figure}[H]
     \centering
@@ -213,23 +219,23 @@ A beállításoknál 3 csúszka található, melyek mellett a jelenlegi érték�
 
 \subsection{Csata}
 
-A harckocsi kiválasztása után elindul a csata, ahol egy sziklás pályán jelenik meg a játékos kiválasztott harckocsi, és egy csoport ellenséges harckocsit, melyek egy útvonalat követnek célpontjukig. A játékos célja, hogy az ellenfeleket megsemmisítse mielőtt az ellefnelek a célpontjukhoz érnek. Ha bármelyik ellenfél eléri a célpontot vagy a játékos harckocsija megsemmisül akkor a játékos veszít.
+A harckocsi kiválasztását követően elindul a csata, ahol egy sziklás pályán jelenik meg a játékos tankja, és az ellenséges harckocsik egy útvonalat követve indulnak meg a  célpontjukig. A játékos célja, hogy az ellenfeleket megsemmisítse, mielőtt a célpontjukhoz érnének. Ha bármelyik ellenfél eléri a célpontot vagy a játékos harckocsija megsemmisül, akkor a játékos veszít.
 
 \section{A megvalósítás}
 
 \subsection{A harckocsi}
 
-A \emph{Tank} komponens sok dologért felel. Legfőként a különböző részek létrehozásáért, statisztikáiknak az összekombinálásáért és az életerő-t is kezeli.
+A \emph{Tank} komponens sok dologért felel, leginkább a különböző részek létrehozásáért, statisztikáiknak az összekombinálásáért és az életerő-t is kezeli.
 
 \lstinputlisting[caption=A harckocsi létrehozása,label=tankspawn]{./codesnippets/tankspawn.cs}
 
 A \emph{CreateTank} metódus először a gyökér objektumot hozza létre, melyhez hozzáadja a \emph{Tank, Rigidbody} és \emph{BoxCollider} komponenseket. Ezt követően a harckocsi alkatrészeit létrehozza gyerek objektumokként, melyek a többi alkatrész által megadott pozíciókba kerülnek.
 
-Ez a komponens egyéni tapadási fizikáért is felel, mely gyorsabb sebességnél történő fordulásnál nagy mértékben csökkenti a harckocsi sebességét és a fordulás irányába viszi a tankot. Ennek hiányában forduláskor nem lenne tapadás és oldalirányban tudna csúszni. A \emph{SidewaysFriction} a \emph{FixedUpdate}-ben fut le akkor, amikor a harckocsi legalább egyik lánctalpa a földön van.
+Ez a komponens egyéni tapadási fizikáért is felel, mely nagyobb sebességgel történő fordulásnál jelentősen lecsökkenti a harckocsi sebességét, így az kívánt irányba halad tovább. Ennek hiányában forduláskor nem lenne tapadás és a tank oldalirányban csúszna. A \emph{SidewaysFriction} a \emph{FixedUpdate}-ben csak akkor fut le, ha a harckocsinak legalább az egyik lánctalpa a földön van.
 
 \lstinputlisting[caption=Tapadási kód,label=tracion]{./codesnippets/traction.cs}
 
-A kód az oldalirányú mozgási sebesség alapján, mely a mozgási irány vektor és az oldal irányi vektor szorzatából kap meg, csökkenti a sebességet a \emph{sidewaysFrictionFactor} alapján. Az értéket tesztelés és érzés alapján állítottam be.
+A kód az oldalirányú mozgási sebességtől függően - melyet a mozgási irány vektor és az oldal irányú vektor szorzatából kap meg - csökkenti a sebességet a \emph{sidewaysFrictionFactor} alapján. Az értéket tesztelés és érzés alapján állítottam be.
 
 A harckocsi 3 részre van felosztva:
 \begin{itemize}
@@ -238,45 +244,46 @@ A harckocsi 3 részre van felosztva:
     \item Ágyú
 \end{itemize}
 
-Ezentúl, ha a harckocsi élete 0 vagy annál kisebb értékre csökken le, akkor megsemmisültnek számít, mely könnyen észrevehető abból, hogy a lövegtorony lerepül ennek esetén.
+Ezen túlmenően ha a harckocsi élete 0 vagy annál kisebb értékre csökken le, akkor megsemmisültnek számít, melyet abból vehetünk könnyen észre, hogy ebben az esetben a lövegtorony lerepül a páncéltestről.
 
 
 \subsubsection{Páncélzati rendszer}
-Minden harckocsi modellje fel van osztva több kis darabra, melynek van a beépített \emph{Collider} komponense és a saját páncél komponense. Ezzel a módszerrel pontosan meg lehet adni hogy mely részen mekkora védelme van és mekkora sebzési szorzót kap. Például az ágyúnak és a lánctalpnak kisebb szorzója van, mivel könnyebben átüthető részeknek számítanak, miközben a harckocsi középpontja nem kap sebzést.
+Minden harckocsi modellje fel van osztva több kis darabra, melynek van a beépített \emph{Collider} komponense és a saját páncél komponense. Ezzel a módszerrel pontosan meg lehet adni, hogy melyik részen mekkora védelme legyen és mekkora sebzési szorzót kapjon. Például az ágyúnak és a lánctalpnak kisebb a szorzója, mivel könnyebben átüthető részeknek számítanak, így a harckocsi középpontja ebben az esetben nem sérül. Az ötletet az alábbi projekt\cite{armoridea} alapján kaptam.
 
 \subsubsection{Páncéltest}
 
-Ez a rész adja meg az egész harckocsi teljes sebességét, gyorsulását, a motor hangját és az életerejének a nagy részét. Valamint hozzá tartoznak a lánctalpak is, melyek ellenőrzik, hogy a harckocsi a földön van-e egy adott pillanatban egy rövid sugár segítségével, mely megnézi hogy a terep-be ütközött-e be.  Általánosan ez rendelkezik a legtöbb páncél elemmel is. Valamint a test adja meg a lövegtorony elhelyezkedését. Az ötletet az alábbi projekt alapján kaptam.
+Általánosságban ez rendelkezik a legtöbb páncél elemmel, valamint a páncéltest adja meg a tankon a lövegtorony elhelyezkedését, továbbá ez adja meg az egész harckocsi maximális sebességét, gyorsulását, a motor hangját és az életerejének a nagy részét. Ezen túlmenően ehhez tartoznak a lánctalpak is, melyek ellenőrzik, hogy a harckocsi a földön van-e az adott pillanatban, amit  egy rövid \emph{ray cast} segítségével érzékel.
 
 \subsubsection{Lövegtorony}
 
-A lövegtorony forgatását a játékos nézőpontjából kilőtt sugár segítségével implementáltam, mely visszaad egy koordinátát, és miután a lövegtorony ezt megkapja, elkezd fordulni megadott sebességgel annak irányába. Emellett a lövegtorony adja meg a belső kamera pozícióját, az ágyú elhelyezkedését is.
+A lövegtorony forgatását a játékos nézőpontjából kilőtt sugár segítségével implementáltam, mely visszaad egy koordinátát, és miután a lövegtorony ezt megkapja, elkezd fordulni megadott sebességgel a kívánt irányba. Emellett a lövegtorony adja meg a belső kamera pozícióját és az ágyú elhelyezkedését is.
 
 \lstinputlisting[caption=Lövegtorony forgatása,label=turretrotation]{./codesnippets/turretrotation.cs}
 
-A \emph{RotateTowards} metódus először megkap egy vektort a célpont pozíciója és a torony pozíciójából, amiből kiszámítja a kívánt irányt. Ezután megkapja \emph{Quaternion}-ban a forgási irányt és végül elkezdi forgatni a tornyot másodpercenként \emph{stats.RotationSpeed} fokkal. Alapul az alábbi kódrészletet\cite{rotation} vettem.
+A \emph{RotateTowards} metódus először megkap egy vektort a célpont pozíciója és a torony pozíciójából, amiből kiszámítja a kiválasztott irányt. Ezután megkapja \emph{Quaternion}-ban a forgási irányt és végül elkezdi forgatni a tornyot másodpercenként \break
+\emph{stats.RotationSpeed} által megadott fokkal. Alapul az alábbi kódrészletet\cite{rotation} vettem.
 
 \subsubsection{Ágyú}
 
-Az ágyú emelése hasonlóan működik a toronyhoz forgatásához képest. Viszont megadott a maximum magassági és depressziószögük, melyeken nem mehet túl a függőleges fordulása.
+Az ágyú emelése is hasonlóan működik a torony forgatásához képest, viszont megadott a maximum magassági és depressziószöge, melyeket nem léphet túl a függőleges fordulása. Valamint az ágyú adja megy, hogy a játékos számára milyen lőszerek elérhetőek.
 
 \lstinputlisting[caption=Lövegtorony irányítása,label=barrelelevation]{./codesnippets/barrelelevation.cs}
 
-A kódban sincs túl nagy eltérés a torony forgatásához képest. Viszont itt a 2. sorban a Pitarorasz-tétel\cite{pitagorasz} alkalmazásával a távolgásot megkapom, utána annak segítségével kapom meg a kívánt szöget. Itt figyelembe kellet venni az is, ha a harckocsi emelkedőn van-e. A 7. sorban adom meg a forgási limitet.
+A kódban sincs túl nagy eltérés a torony forgatásához képest. Viszont itt a 2. sorban a Pitagorasz-tétel\cite{pitagorasz} alkalmazásával a távolságot kiszámítja, utána annak segítségével kapja meg a kívánt szöget, és itt figyelembe veszi azt is, ha a harckocsi emelkedőn van-e. A forgatási limit a 7. sorban van megadva.
 
 
 \subsubsection{Játékos nézőpontja}
 
-A játékos nézőpontja 2 darab kamerával van megoldva, külső és belső nézetes, melyeknek az érzékenységét külön-külön lehet beállítani. Az egérgörgővel lehet csökkenteni a  kamera látószögét, segíthet nagyobb távolságon történő célzásban.
+A játékos nézőpontját 2 darab kamerával oldottam meg, külső és belső nézetessel, melyeknek az érzékenységét külön-külön lehet beállítani. Az egérgörgővel lehet csökkenteni a kamera látószögét, mely segíthet a nagyobb távolságra történő célzásban.
 
 \subsection{Pálya}
 
 \subsubsection{Kialakítása}
 
-A pálya kialakításához a Unity terepszerkeszőjét használtam, mely ecsetszerű eszközöket segítségével a terepen magasabb és mélyebb részeket lehetett rajzolni. Így egy hegyes-dombos pályát készítettem egy kivájt útvonallal.
+A pálya kialakításához a Unity terepszerkesztőjét használtam, mely az ecsetszerű eszközök segítségével a terepen magasabb és mélyebb részek rajzolására volt lehetőség, és ennek használatával egy hegyes-dombos pályát készítettem egy kivájt útvonallal.
 \subsubsection{Textúrázás}
 
-A textúrázáshoz szintúgy a terepszerkesztő eszközöket használtam, mellyel az útvonalat egy ecsettel lehetett festeni. A textúrákat a \emph{Poly Haven}\cite{polyhaven} oldalról töltöttem le.
+A textúrázást szintén a terepszerkesztő eszközzel készítettem, mellyel az útvonalat egy ecsettel van lehetőségünk festeni. A textúrákat a \emph{Poly Haven}\cite{polyhaven} oldalról töltöttem le.
 
 \begin{figure}[H]
     \centering
@@ -289,7 +296,7 @@ A textúrázáshoz szintúgy a terepszerkesztő eszközöket használtam, mellye
 
 \subsubsection{Harckocsi kiválasztása}
 
-A harckocsi részeit a Unity-ba beépített \emph{ScriptableObject}-ek segítségével tudtam eltárolni és ezekből újra elérni a harckocsi kiválasztásakor.
+A harckocsi részeit a Unity-ba beépített \emph{ScriptableObject}-ek segítségével tudjuk eltárolni, majd a későbbiekben a játék során elérni. A kiválasztási rendszerhez az ötletet az alábbi videó\cite{selectionmenu} adta.
 
 \begin{figure}[H]
     \centering
@@ -301,44 +308,45 @@ A harckocsi részeit a Unity-ba beépített \emph{ScriptableObject}-ek segítsé
 
 \subsubsection{Beállítások}
 
-A beállításokban az érzékenységet és a hangerőt lehet állítani, melyekre csúszkák szolgálnak. Ezeket az értékeket egy statikus osztályban tárolom el.
+A beállítások menüben az érzékenység és a hangerő beállítására van lehetőségünk a csúszkák mozgatásával, amelyek értékei egy statikus osztályban tárolódnak el.
 
 
 \subsubsection{Szünet menü}
 
-Egy egyszerűbb szünet menü van a játékban, mellyel újralehet indítani a játékmenetet vagy visszamenni a fő menübe. Ilyenkor a játékmenet teljesen megáll illetve a kurzor újra látható és mozgathatóvá válik.
+A játékban létrehoztam egy ún. szünet menüt - ebben az esetben a játékmenet leáll - viszont bármikor folytatni tudjuk, de lehetőségünk van elölről kezdeni a csatát, vagy visszalépni a főmenübe.
 
 \subsection{Irányítási rendszer}
 
-A bevitelhez a Unity új beviteli rendszerét használtam segítségül, melynek használatával egyszerűen lehetett újabb beviteli billentyűket hozzáadni, valamint azokat csoportosítani és együttesen ki vagy bekapcsolni.
+A bevitelhez a Unity új beviteli rendszerét használtam segítségül, melynek használatával egyszerűen lehetett újabb beviteli billentyűket hozzáadni, valamint azokat csoportosítani és együttesen ki- vagy bekapcsolni. Az alábbi videó\cite{inputsystem} alapján készítettem el ezt a rendszert.
 
 \subsubsection{Célzás}
 
-A célzást az egér mozgásának olvasása teszi lehetővé. A játékmenet közben a kurzor viszont nem látható és a játékablak közepére van lezárva, amíg a játékos fel nem hozza a szünet menüt vagy a játékmenetnek vége nem lesz.
+Az egér mozgatásával tudunk célozni, és bár a játékmenet közben a kurzor nem látható, mivel ez a játékablak közepére van lerögzítve, de mindaddig úgy marad, amíg a játékos meg nem nyitja a szünet menüt vagy véget nem ér a játékmenet.
 
 \subsection{Lövedékek}
 
-A lövedékek fizikai objektumként működnek, megadott sebességük és súlyuk van, viszont gravitáció nincs rájuk hatással.
+A lövedékek fizikai objektumként működnek, megadott sebességük és súlyuk van, de a gravitáció nincs hatással rájuk.
 
-Három féle lövedék van beimplementálva jelenleg a játékba:
+A játékban jelenleg háromféle lövedék elérhető:
 \begin{itemize}
     \item páncéltörő
     \item robbanótöltetes pácéltörő
     \item robbanótöltetes lövedék
 \end{itemize}
 
-Mindhárom típus egy absztrakt \emph{Bullet} osztályból öröklődik, így a \emph{Start} és az \emph{OnCollisionEnter} metódusaik közösek, valamint implementálniuk kell a \emph{GetMaxPenetration, CalculateDMG} és\emph{CalculatePenetration}.
+Mindhárom típus egy absztrakt \emph{Bullet} osztályból öröklődik, így a \emph{Start} és az \emph{OnCollisionEnter} metódusaik közösek, valamint implementálniuk kell a \emph{GetMaxPenetration, CalculateDMG} és \emph{CalculatePenetration}-t.
 
 \lstinputlisting[caption=Absztrakt \emph{Bullet} osztály metódusai,label=bullet]{./codesnippets/bullet.cs}
 
-A \emph{Start} metódusban beállítja a kezdeti pozíciót, az átütés értékét, a sebességet és a méretét a lövedéknek. Az alap méret 100mm-es átmérőre van modellezve, ezért az adott lövedék kaliberével beszorozva megkapjuk az új, pontos méretet.
+A \emph{Start} metódusban beállítja a kezdeti pozíciót, az átütési értéket, a sebességet és a méretét a lövedéknek. Az alaplövedék modellje 100mm átmérőjű, és emiatt a lövedék pontos méretét úgy kapja meg, hogy az adott lövedék méretét kaliberével beszorozza, és azt elosztja százzal.
 
-Az \emph{OnCollisionEnter} ütközéskor fut le, először megnézi hogy ütközött-e páncéllal már, ha igen akkor nem fog sebezi többet. Más esetben megnézi hogy páncéllal ütközik-e és kiszámítja a megtett távolságot a kezdeti pozíciótól. Ha páncélnak számít az eltalált objektum, akkor kiszámítja hogy mennyi átütés maradt meg. Ezután ha maradt még átütési erő, azaz a páncél nem állította meg a lövedéket, akkor sebzi az ellenfelet.
+Az \emph{OnCollisionEnter} ütközéskor fut le, ellenőrzi hogy ütközött-e páncéllal. \break
+Amennyiben igen, akkor nem történik további sebzés. Más esetben megvizsgálja, hogy az ütközés páncéllal történt-e, és kiszámítja a kezdeti pozíciótól megtett távolságot. Amennyiben páncélnak minősül az eltalált objektum, kiszámításra kerül a megmaradt átütőerő, és ha még mindig maradt átütési erő - azaz a páncél nem állította meg a lövedéket -, az ellenfél sebzést szenved el.
 
 
 \subsubsection{Páncéltörő lövedék}
 
-A páncél törő lövedék a DeMarre formula alapján lett modellezve. Ez adja meg a súly, átmérő és sebesség alapján a maximális átütési erejét egy adott lövedéknek.
+A páncéltörő lövedéket a DeMarre-formula alapján modelleztem. A képlet a tömeg, az átmérő és a sebesség alapján számítja ki a lövedék maximális átütési erejét.
 
 %DeMarr Formula
 \begin{equation}
@@ -347,46 +355,45 @@ A páncél törő lövedék a DeMarre formula alapján lett modellezve. Ez adja 
 \end{equation}
 
 
-Ezentúl a lövedéknek a megtett távolsága és a találat szöge is figyelembe van véve. Ezek befolyásának a mértékét kettő változóval lehet állítani. A távolságnál az 1-es érték figyelmen kívül hagyja a szorzót, az 1 alatti érték, melyet a legtöbb lövedék használ, nagyobb távolságnál csökkenti az átütés mértékét, míg az 1 feletti érték növeli. A szögteljesítménynél az 0-ás érték nem veszi figyelembe a szög mértékét, az 1-es érték a páncélvastagságnak $\cos$ értékét nézi, mely egyenlő az adott szög alapján figyelembe vett vastagságával és a leggyakrabban használt 1 feletti érték gyengíti nagyobb szög esetén. Ha a távolsági és a szögteljesíményi értékeket 1-re állítjuk akkor egy másfajta lövedék típust lehet elérni. Ezekből a változók beállításával lehet további típusokat beállítani.
+A lövedéknek figyelembe vesszük a megtett távolságát és a találati szögét is. Ezen a tényezők hatását kettő változóval lehet befolyásolni, \emph{DistanceFalloff}-fal és \emph{AnglePerformance}-szel. Amennyiben a \emph{DistanceFalloff} értéke 1 a távolság nem befolyásolja az átütőképességet. 1 alatti értéknél, melyet a legtöbb lövedék használ, a távolság függvényében csökken az átütőerő, míg az 1 feletti értéknél nő. Az \emph{AnglePerformance}-nál a 0-ás érték figyelmen kívül hagyja a találati szöget. Ezzel szemben az 1-es értéknél a páncélvastagság találati szögből adódó növekedését $\cos$ függvény alapján számítja ki. A leggyakrabban használt 1 feletti érték gyengíti az átütőerőt nagyobb szög esetén. Amennyiben a \emph{DistanceFalloff} és \emph{AnglePerformance} értékeket 1-re állítjuk, abban az esetben egy eltérő viselkedésű lövedéktípust kapunk.
 
 
 \lstinputlisting[caption=Átütés kiszámítása,label=APcalculation]{./codesnippets/APcalculation.cs}
 
-A lövedék sebzését, mely maximális értéke kaliberétől és a sebességétől függ, az átütött páncél értékéhez és a lövedék átütő erejétől függően csökkentjük.
+A lövedék sebzését - melynek maximális értéke kaliberétől és a sebességétől függ - az átütött páncél értékéhez és a lövedék átütő erejétől függően csökkentjük.
 
 \subsubsection{Robbanótöltetes lövedék}
 
-Az alábbi lövedék egy felülethez érvén egy robbanást olyan módon utánoz hogy a megadott átmérőjű gömbön belül először megnézni az összes objektum között hogy bármyelik páncélnak számít-e, majd a robbanás középpontjától számítva mely páncéllemeznek a legkevesebb a vastagsága és a távolságának a keveréke.
+Az alábbi lövedék egy felülethez érve egy robbanást szimulál, melynek során megadott távolságon belül először megvizsgálja az összes objektumot, azt, hogy melyik számít páncélnak. Ezt követően kiszámítja,hogy a páncéllemezek közül melyik a leggyengébb, a lemez vastagsága és a a robbanás középpontjából számított távolságának kombinációjából.
 
 \lstinputlisting[caption=Robbanótöltetes lövedék működése,label=hexplosion]{./codesnippets/heexplosion.cs}
 
-A \emph{GetMaxPenetration} egy sajátos függvényt használ az átütés kiszámítására, itt az értékeket a \emph{War Thunder} lövedékéihez képest hasonlóra szerettem volna megoldani, de azzal nem egyezik meg.
+A \emph{GetMaxPenetration} függvény egy egyedi módszert alkalmaz az átütés kiszámítására. Az értékeket a \emph{War Thunder} lövedékéihez hasonlóan szerettem volna megvalósítani, de végeredményben a számításom eltérő értékeket ad.
 
-A \emph{CalculatePenetration} a leggyengébb páncél alapján adja vissza a maradandó átütést. Ezt a \emph{GetWeakestArmor} metódus segítségével kapja meg, mely először megnézi az összes \emph{Collder}-el rendelkező objektumot egy adott távolságon belül. Utána \emph{Ray cast}-ok segítség megnézim hogy a robbanás középpontjából látható-e az adott objektum, melyet a pozícióik összehasonlításával ellenőriz, figyelmen kívül hagyva a \emph{CollisionBox} réteget. Ezután megnézi, hogy az adott objektum páncél-e. Ha ténylegesen páncél, akkor megnézi az ellenállását a \emph{GetResistance} fügvénnyel, mely a távolság szerint növeli a páncél védelmének erejét négyzetesen.
+A \emph{CalculatePenetration} függvény a leggyengébb páncél alapján adja vissza a maradandó átütést. Ehhez a \emph{GetWeakestArmor} metódust alkalmazza, mely először megvizsgálja az összes \emph{Collider}-el rendelkező objektumot egy adott távolságon belül. Ezután \emph{Ray cast}-ok használatával vizsgálja meg. hogy a robbanás középpontjából látható-e az adott objektum, melyet a pozícióik összehasonlításával ellenőriz - figyelmen kívül hagyva a \emph{CollisionBox} réteget. Amennyiben az adott objektum páncél, akkor kiszámítja az ellenállását a \emph{GetResistance} függvénnyel, mely a távolság függvényében növeli a páncél védelmének erejét négyzetesen.
 
 
 \subsubsection{Robbanótöltetes páncéltörő lövedék}
 
-Ez a lövedék hasonlóan működik a sima páncéltörő lövedékhez képest, az átütő ereje ugyanazon a módon van kiszámítva. A különbség a sebzés kiszámításában van, de csak akkor lép életbe, ha a lövedék egy adott vastagsága páncélt átütött, miután a robbanótöltet mértékétől függően sebez.
-
+Ez a lövedék a sima páncéltörő lövedékhez képest hasonlóan működik, mivel az átütő ereje szintén a \emph{DeMarre} formula alapján került kiszámításra. A különbség a sebzés módszerében rejlik, ami csak akkor eltérő, ha a lövedék megadott érzékenységénél vastagabb páncélt ütött át, és ezt követően a robbanótöltet mértékétől függően sebez.
 
 
 \subsection{Kezelőfelület}
 
 \subsubsection{Életerő sáv}
 
-Két féle életerő sáv létezik a projektben. Az első típusú a kezelőfelületen fixen található a bal alsó sarokban, mely számokkal kijelzi a teljes és a jelenlegi életerőt, illetve hiányzó életerő mértéke szerint kevesebb része lesz kitöltve a sávnak. A másik típus az ellenfelek felett megtalálható, és a 3D térben helyezkednek el.
+A projektben kétféle életerő-sávot készítettem: Az első típus a kezelőfelületen található a bal alsó sarokban, ahol számokkal jelzi ki a teljes és a jelenlegi életerőt. A második típus az ellenségek felett található meg, mely 3D térben helyezkedik el, követve az egység pozícióját. Az alsó és felső sáv is a mutatja külön-külön az adott egység megmaradó életerejét.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{screenshots/hpbar.png}
     \caption{Életerő sávok}
-    \label{fig:healthbar}
+    \label{fig:healthbar}not
 \end{figure}
 
 
 \subsubsection{Célkereszt}
 
-A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelzi, emellett lövés után pirossá változik, jelezve az újratöltés menetét. A második, kereszt alakú, pedig azt jelzi, hogy a cső jelenleg milyen irányba néz.
+A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelöli, amely lövés után pirossá változik, utána folyamatosan kezd kitöltődni fehér színnel, jelezve az újratöltés folyamatát. A második ``kereszt'' alakú, pedig azt jelzi, hogy a cső pillanatnyilag melyik irányba néz.
 
 \begin{figure}[H]
     \centering
@@ -397,26 +404,24 @@ A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét 
 
 \subsection{Hangok}
 
-A játékban csak 2 féle hang van jelenleg implementálva: a motor hang és a lövés hang.
-A motor hangja folyamatosan ismétlődve játszódik le, és a hangmagassága a sebesség szerint növekszik vagy csökken. A lövési hang természetesen csak lövés esetén hallható. A hangokat az alábbi oldalról\cite{freesound} töltöttem le.
+A játékban jelenleg kétféle hang hallható: a motor- és a lövéshang. A motorhang folyamatosan ismétlődik, hangmagassága a jármű sebessége alapján növekszik vagy csökken. A lövéshang csak lövés esetén hallható. A hangokat az alábbi oldalról\cite{freesound} töltöttem le.
 
 \subsection{Ellenfelek}
 
-\subsubsection{Navmesh}
+\subsubsection{NavMesh}
 
-Az ellenfelek útkeresését a Unity-nak a beépített Navmesh rendszere segítségével implementáltam. Bár a Navmesh-be alapból van megadott módszer a mozgásra, de az emberszerű karakterekre van tervezve. Emiatt a sajátos mozgási megoldásra kellett hagyatkozzak. Így ugyanazt a mozgási rendszert használják mint a játékosok.
+Az ellenségek útkeresését a Unity beépített NavMesh rendszere segítségével valósítottam meg. A Unity NavMesh lehetőséget biztosít az egység irányítására is, azonban alapvatően emberszerű karakterekre mozgatására lett tervezve. Emiatt a harckocsik mozgatásához egy egyedi megoldást kellett implementálnom, amely eredményeként az ellenfelek ugyanazt a mozgásrendszert használják, mint a játékosok.
 
-\subsubsection{Ellenőrző pontok}
+\subsubsection{Ellenőrzőpontok}
 
-Az ellenfeleknek van egy megadott útvonaluk amit követnek, melyet ellenőrző pontok segítségével oldottam meg. Amikor
-az adott ellenfél belép egy adott ellenőrző pont érzékelőpont
+Az ellenségek egy előre meghatározott útvonalat követnek, amelyet a játékos számára láthatatlan ellenőrzőpontok segítségével valósítottam meg. Amikor az ellenség belép egy ellenőrzőpontba, az alábbi kódrészlet fut le, amely először ellenőrzi, hogy az ellenség az aktuális célpontján haladt-e át. Amennyiben igen, a rendszer beállítja következő célpontot.
 
 \lstinputlisting[caption=Ellenőrző pontok váltása,label=checkpoints]{./codesnippets/checkpointsystem.cs}
 
 
 \subsubsection{Állapotgép}
 
-Állapotgép használatával van megoldva az ellenfelek viselkedésének szétválasztása. Azért választottam állapotgépet ehhez, mert egy tiszta és egyszerűen bővíthető módszert ad különböző viselkedések és állapotok megadására.
+Az ellenfelek viselkedését ún. állapotgép segítségével szabályoztam, amelyet a tiszta felépítése és egyszerű bővíthetősége miatt választottam.
 
 \lstinputlisting[caption=Lövegtorony irányítása,label=statemachine]{./codesnippets/statemachine.cs}
 
@@ -430,79 +435,171 @@ Kétféle állapot van:
 
 \subsubsection{Járőrözés}
 
-A járőrözés az alap állapot, melyben az ellenőrző pontok által megadott útvonalat követi az ellenfél.
+Az alapértelmezett állapot a járőrözés, ebben az esetben az ellenség az ellenőrző pontok által meghatározott útvonalat követi. A két ellenőrző pont közötti útvonalat a NavMesh segítségével kerül meghatározásra.
 
 \subsubsection{Támadás}
 
-Erre az állapotra akkor vált az az ellenfél, ha az ellenfél előtt elmegyünk és akadály nélkül meglát. Átváltás után amíg a játékos nem kerül akadály mögé, addig az ellenfél a testét és a tornyát forgatja a játékos felé. Miután sikeresen célba vette a játékost az ellenfél lő. Ha a játékos kimegy az ellenfél látószögéből akkor az ellenfél megpróbálja utolérni a játékost. Ha adott időn belül nem látja meg újra a játékost, akkor az ellenfél visszatér járőrözési állapotba.
+Az ellenség akkor vált a támadási állapotba, ha a játékos egy adott távolságon belül elhalad előtte. Amíg a játékos nem kerül akadály mögé, az ellenség a páncéltestét és a tornyát a játékos irányába forgatja. Miután a játékost sikeresen célba vette, az ellenség lő. Ha a játékos kimegy az ellenség maximális észlelési távolságából vagy egy akadály mögé bújik, az ellenség megpróbálja utolérni a játékost. Ilyenkor egy időzítő is elindul, és ha egy meghatározott időn belül a játékos nem kerül elő, akkor az ellenség visszatér a járőrözési állapotba.
 
 \lstinputlisting[caption=Állapotgép,label=checkplayervisible]{./codesnippets/checkplayervisible.cs}
 
-\section{További tervek}
-
-A projektnek az alapját és a fő funkcióit sikerült eddigiekben kifejleszenem. Ezentúl szeretném ezt továbbfejleszteni, és kiegészíteni.
-
-\subsubsection{Tartalom}
-
-A projektem alapja miatt jelenleg készen áll több tartalom fogadására, mely alatt főleg nagyobb harckocsi alkatrésztár és újabb pályák értendőek.
-
-\subsubsection{Funkciók}
-
-Funkciók közül több ötletem is támadt a fejlesztés közben amikkel szeretném kiegészíteni a továbbiakban. Amit a legfontosabbnak tartok az a billentyűk megváltoztatásának lehetősége lenne, a testreszabhatóság érdekében, és a kontrolleres bevitel támogatása.
-Emellett további tervekben többféle ellenfél viselkedést és játékmódot implementálni, valamint animációkat és esetleges fizikát a lánctalpakhoz.
-
-
+A játékos láthatóságának vizsgálatát a \emph{CheckPlayerVisible} függvény végzi, amely először a játékostól való távolságot ellenőrzi. Ha ez a távolság a megadott küszöbérték alá esik, akkor egy vektor segítségével kiszámítja a játékos felé mutató irány szögét. Ezt követően megvizsgálja, hogy a játékos az ellenség előtti 60 fokos látószögön belül van-e. Amennyiben ezen határértéken belül van, egy \emph{Ray cast} segítségével ellenőrzi, hogy a játékos és az ellenség között nincs-e akadály, melynek a páncélok elhelyezése miatt van egy biztonsági sugara.
 
 \chapter{Tesztelés}
 
-Teszteléshez manuális tesztelést alkalmaztam.
+A játékfejlesztés során manuális tesztelést\cite{manualtesting} alkalmaztam több felhasználó bevonásával, ami a hibák elkerülésének érdekében elengedhetetlen a fejlesztés során, továbbá segítséget nyújt a játékélmény javításában is.
 
+A Unity-hez letölthető egy hivatalos keretrendszer a teszteléshez, de a használata nagyban eltér a szokványos tesztek írásától, és körülményes is. Ezért is maradtam a manuális tesztelésnél, ami alatt az alapvető játékmenetbeli elemek műkődésére helyeztem a figyelmet. Ilyen elemek például az ellenségek módok közötti váltása, a sérülés során az életerő-sáv frissülése, a lövedékek megfelelő sebzése és a menü megfelelő működése. Ezeket a szituációkat próbálták a tesztelők a játékban előidézni és vizsgálni, hogy azokat az játék kellőképpen kezeli-e.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{screenshots/losegame.png}
+    \caption{Az ellenség elérte az utolsó célpontot}
+    \label{fig:losegame}
+\end{figure}
+
+A fejlesztői oldalon a tesztelés kicsit másképp történt, mivel itt a Unity-ba beépített \emph{Debug} osztály segítségével sokkal több információ volt elérhető. A leggyakrabban az osztály \emph{Log} metódusát használtam, melyet az értékek ellenőrzéséhez és események aktiválódásának jelzéséhez alkamaztam, például ha átment támadási módba az ellenség akkor az a Unity konzolában tisztán láttam. Emellett a \emph{Ray cast}-ek megjelenítésére a \emph{DrawRay} metódus nyújtott segítséget az ágyú jelenlegi irányának jelzésére, valamint ezt alkalmaztam még a játékos és az ellenség közötti irány megjelenítésére is.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{screenshots/logging.png}
+    \caption{Az események kiíratása a konzolba}
+    \label{fig:logging}
+\end{figure}
+
+Több hiba is felbukkant a tesztelés során, mint például az ellenségek szokatlan viselkedése a támadási állapotban. Ebben az esetben a játékos lekövetése helyett inkább csak egy helyben állt és visszaváltott a járőrözési állapotba, később kiderült, hogy a kódban a problémát egy megfordított relációs jel okozta, ezt a hibát miután észleltem, sikeresen kijavítottam.
+
+A tesztelés nagy segítséget nyújtott pár konstans érték finomítására is, mint például a fentebbiekben említett \emph{sidewaysFrictionFactor} beállításában, a lőszerek sebzésére, az ágyúk töltési hangolására, valamint kiegyensúlyozására is lehetőséget biztosított.
+
+A tesztelésnek köszönhetően több hibát sikerült kijavítanom, és a játék megfelelő működését is megoldottam. A tesztelésben részt vevők egy új élményben részesültek, hozzájárultak a fejlesztés előrehaladásához és az élmény javításához is.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
 
+Szakdolgozatom célja egy olyan új harckocsis játék megvalósítása volt, amihez hasonlóval korábban már játszottam, azonban miután néhány dolgot hiányoltam belőle, ezért úgy gondoltam, hogy az általam elképzelt játékot az én elképzeléseimnek megfelelően hozom létre, ezért számomra ennek a játéknak a kifejlesztése rengeteg kihívással járt.
 
+Úgy érzem, hogy a projektnek az alapját és fő funkcióit sikerült az elvárásaimnak megfelelően kifejlesztenem. A lövedékekre és a páncélrendszer kifelszestésére kiemelt figyelmet fordítottam, így azt tartom a játék egyik fénypontjának.
+
+Korábban Unity-vel és 3D modellezéssel még nem foglalkoztam igazán, ezért a játék kifejlesztése és a szakdolgozatom készítése során számtalan új tapasztalatot szereztem, melynek remélhetőleg hasznát tudom venni a jövőben.
+
+A játék fejlesztése során többször elakadtam a tapasztalatom hiánya miatt, ezek áthidalása olykor kihívásnak bizonyult számomra, ami a játék pár részén meg is mutatkozik, ezért a jövőben szeretném ezeket finomítani és javítani. A 3D modelleket is szeretném jobb textúrákkal és több részlettel ellátni, hogy a napjainkban kiadott játékok szintjét elérje mind grafikában, mind élményben.
+
+A projektem jelenlegi állapota készen áll több tartalom fogadására is, mely alatt főleg nagyobb harckocsi alkatrésztár és újabb pályák létrehozásását értem. Ezeket viszonylag egyszerűen lehetne hozzáadni, és újabb taktikákat tenne lehetővé.
+
+A játék fejlesztése közben több ötletem is támadt újabb funkciók létrehozására, amikkel a jövőben szeretném a játékot kiegészíteni. Amit a legfontosabbnak tartok, az a kontrolleres bevitel támogatása és a billentyűk megváltoztatásának lehetősége az egyéni testreszabhatóság érdekében. Ezen kívül terveim között szerepel többféle ellenfél-viselkedést és játékmódot implementálni, valamint animációkat és esetlegesen vizuális fizikát hozzáadni a lánctalpakhoz.
+
+Összességben a szakdolgozatom során sikerült megvalósítanom a tervezett funkciókat és rengeteg tapsztalatot szerezenem, valamint egy bepillantást kaptam a játékfejleszés világba is.
 
 
 \begin{thebibliography}{55}
 
     \bibitem{warthunder}
-    \textsc{Gaijin Entertainment } \emph{War Thunder Wiki} \\
-    \url{https://wiki.warthunder.com/}
+    \textsc{Wikipedia} \emph{War Thunder} \\
+    \url{https://en.wikipedia.org/wiki/War_Thunder} Megtekintés dátuma: 2025.04.14.
 
     \bibitem{navmesh}
     \textsc{Wikipedia} \emph{Navigation mesh} \\
-    \url{https://en.wikipedia.org/wiki/Navigation_mesh}
+    \url{https://en.wikipedia.org/wiki/Navigation_mesh} Megtekintés dátuma: 2025.03.29.
 
     \bibitem{raycast}
     \textsc{Wikipedia} \emph{Ray casting} \\
-    \url{https://en.wikipedia.org/wiki/Ray_casting}
+    \url{https://en.wikipedia.org/wiki/Ray_casting} Megtekintés dátuma: 2025.0.30.
 
     \bibitem{unity}
-    \textsc{Unity} \emph{Unity Documentation} \\
-    \url{https://docs.unity.com/}
+    \textsc{Wikipedia} \emph{Unity (Game Engine)} \\
+    \url{https://en.wikipedia.org/wiki/Unity_(game_engine)} Megtekintés dátuma: 2025.03.31.
+
+    \bibitem{GameObject}
+    \textsc{Unity Documentation} \emph{GameObject} \\
+    \url{https://docs.unity3d.com/Manual/class-GameObject.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{components}
+    \textsc{Unity Documentation} \emph{Components} \\
+    \url{https://docs.unity3d.com/Manual/Components.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{monobehavior}
+    \textsc{Unity Documentation} \emph{MonoBehaviour} \\
+    \url{https://docs.unity3d.com/Manual/class-MonoBehaviour.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{transform}
+    \textsc{Unity Documentation} \emph{Transform} \\
+    \url{https://docs.unity3d.com/Manual/scripting-transform.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{meshrenderer}
+    \textsc{Unity Documentation} \emph{Mesh Renderer component reference} \\
+    \url{https://docs.unity3d.com/Manual/class-MeshRenderer.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{collider}
+    \textsc{Unity Documentation} \emph{Collision} \\
+    \url{https://docs.unity3d.com/Manual/collision-section.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{rigidbody}
+    \textsc{Unity Documentation} \emph{Rigidbody physics} \\
+    \url{https://docs.unity3d.com/Manual/rigidbody-physics-section.html} Megtekintés dátuma: 2025.04.03.
+
+    \bibitem{scripting}
+    \textsc{Unity Documentation} \emph{Scripting} \\
+    \url{https://docs.unity3d.com/Manual/scripting.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{start}
+    \textsc{Unity Documentation} \emph{MonoBehaviour.Start()} \\
+    \url{https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{update}
+    \textsc{Unity Documentation} \emph{MonoBehaviour.Update()} \\
+    \url{https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{fixedupdate}
+    \textsc{Unity Documentation} \emph{MonoBehaviour.FixedUpdate()} \\
+    \url{https://docs.unity3d.com/ScriptReference/MonoBehaviour.FixedUpdate.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{oncollisionenter}
+    \textsc{Unity Documentation} \emph{Collider.OnCollisionEnter(Collision)} \\
+    \url{https://docs.unity3d.com/ScriptReference/Collider.OnCollisionEnter.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{ontriggerenter}
+    \textsc{Unity Documentation} \emph{Collider.OnTriggerEnter(Collider)} \\
+    \url{https://docs.unity3d.com/ScriptReference/Collider.OnTriggerEnter.html} Megtekintés dátuma: 2025.04.04.
+
+    \bibitem{armoridea}
+    \textsc{Github} \emph{ekmekodlamayoutube\_eng} \\
+    \url{https://github.com/ekmekarasikodlama/ekmekodlamayoutube_eng} Megtekintés dátuma: 2025.04.07.
 
     \bibitem{rotation}
     \textsc{Unity Forums} \emph{Rotate towards target position (mouse) at a limited speed} \\
-    \url{https://discussions.unity.com/t/rotating-slowly-toward-a-target-while-also-moving-toward-that-target/886726}
+    \url{https://discussions.unity.com/t/rotating-slowly-toward-a-target-while-also-moving-toward-that-target/886726} Megtekintés dátuma: 2025.04.07.
+
+    \bibitem{selectionmenu}
+    \textsc{Youtube} \emph{Unity Character/Skin Selection Menu} \\
+    \url{https://www.youtube.com/watch?v=2PKBChN10us} Megtekintés dátuma: 2025.04.07.
+
+    \bibitem{inputsystem}
+    \textsc{Youtube} \emph{How to use Unity's New INPUT System EASILY} \\
+    \url{https://www.youtube.com/watch?v=HmXU4dZbaMw} Megtekintés dátuma: 2025.04.07.
 
     \bibitem{pitagorasz}
-    \url{https://hu.wikipedia.org/wiki/Pitagorasz-t\%C3\%A9tel}
+    \textsc{Wikipedia} \emph{Pitagorasz tétel} \\
+    \url{https://hu.wikipedia.org/wiki/Pitagorasz-t\%C3\%A9tel} Megtekintés dátuma: 2025.04.08.
 
     \bibitem{demarre}
     \textsc{The Tank Archives} \emph{Penetration Equations} \\
-    \url{https://www.tankarchives.ca/2014/10/penetration-equations.html}
+    \url{https://www.tankarchives.ca/2014/10/penetration-equations.html} Megtekintés dátuma: 2025.04.08.
 
     \bibitem{freesound}
     \textsc{Freesound} \emph{Freesound} \\
-    \url{https://freesound.org/}
-
+    \url{https://freesound.org/} Megtekintés dátuma: 2025.04.08
 
     \bibitem{polyhaven}
     \textsc{Poly Haven} \emph{The Public 3D Asset Library} \\
-    \url{https://polyhaven.com/}
+    \url{https://polyhaven.com/} Megtekintés dátuma: 2025.04.10
+
+    \bibitem{manualtesting}
+    \textsc{Wikipedia} \emph{Manual testing} \\
+    \url{https://en.wikipedia.org/wiki/Manual_testing} Megtekintés dátuma: 2025.04.12
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{\bibname}
+
+\includepdf{nyilatkozat.pdf}
 
 \end{document}

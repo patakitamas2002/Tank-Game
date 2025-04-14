@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2873872800480751730}
-  - component: {fileID: 1875955286818504725}
   - component: {fileID: 3646602153210678126}
+  - component: {fileID: -7646781326498692987}
   m_Layer: 0
   m_Name: m4_75_aphe
   m_TagString: Untagged
@@ -34,24 +34,6 @@ Transform:
   - {fileID: 4181290034877062581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1875955286818504725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2990589971612980465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dece885f0038cf8b9b9ab001eb422e74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Caliber: 75
-  Weight: 3
-  Veloctiy: 700
-  maxTime: 10
-  AnglePerformance: 1
-  DistanceFalloff: 1
 --- !u!54 &3646602153210678126
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79,6 +61,26 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &-7646781326498692987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990589971612980465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b274fb5ff1e3709a7aa0a04ecc50b92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Caliber: 75
+  Weight: 7
+  Veloctiy: 700
+  maxTime: 20
+  AnglePerformance: 2
+  DistanceFalloff: 0.9
+  ExplosiveMass: 90
+  FuseSensitivity: 15
 --- !u!1 &3500665007500801783
 GameObject:
   m_ObjectHideFlags: 0

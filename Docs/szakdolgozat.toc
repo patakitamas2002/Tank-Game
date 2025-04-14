@@ -1,50 +1,50 @@
-\select@language {magyar} \contentsline {chapter}{Bevezetés}{3}{chapter*.2}%
-\select@language {magyar} \contentsline {chapter}{\numberline {1}Tématerület áttekintése}{4}{chapter.1}%
-\select@language {magyar} \contentsline {chapter}{\numberline {2}Felhasznált technológiák}{5}{chapter.2}%
-\select@language {magyar} \contentsline {section}{\numberline {2.1}Unity}{5}{section.2.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.1.1}A Unity-ről általánosan}{5}{subsection.2.1.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.1.2}Gameobject-ek}{5}{subsection.2.1.2}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.1.3}Komponensek}{5}{subsection.2.1.3}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.1.4}Szkriptelés}{6}{subsection.2.1.4}%
-\select@language {magyar} \contentsline {section}{\numberline {2.2}Blender}{7}{section.2.2}%
-\select@language {magyar} \contentsline {chapter}{\numberline {3}A játék bemutatása}{8}{chapter.3}%
-\select@language {magyar} \contentsline {section}{\numberline {3.1}A játékmenet}{8}{section.3.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Menü}{8}{subsection.3.1.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Csata}{9}{subsection.3.1.2}%
-\select@language {magyar} \contentsline {section}{\numberline {3.2}A megvalósítás}{9}{section.3.2}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}A harckocsi}{9}{subsection.3.2.1}%
-\select@language {magyar} \contentsline {subsubsection}{Páncélzati rendszer}{10}{section*.6}%
-\select@language {magyar} \contentsline {subsubsection}{Páncéltest}{10}{section*.7}%
-\select@language {magyar} \contentsline {subsubsection}{Lövegtorony}{11}{section*.8}%
-\select@language {magyar} \contentsline {subsubsection}{Ágyú}{11}{section*.9}%
-\select@language {magyar} \contentsline {subsubsection}{Játékos nézőpontja}{12}{section*.10}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Pálya}{12}{subsection.3.2.2}%
-\select@language {magyar} \contentsline {subsubsection}{Kialakítása}{12}{section*.11}%
-\select@language {magyar} \contentsline {subsubsection}{Textúrázás}{12}{section*.12}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.3}Menü}{12}{subsection.3.2.3}%
-\select@language {magyar} \contentsline {subsubsection}{Harckocsi kiválasztása}{12}{section*.14}%
-\select@language {magyar} \contentsline {subsubsection}{Beállítások}{13}{section*.16}%
-\select@language {magyar} \contentsline {subsubsection}{Szünet menü}{13}{section*.17}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.4}Irányítási rendszer}{13}{subsection.3.2.4}%
-\select@language {magyar} \contentsline {subsubsection}{Célzás}{13}{section*.18}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.5}Lövedékek}{14}{subsection.3.2.5}%
-\select@language {magyar} \contentsline {subsubsection}{Páncéltörő lövedék}{15}{section*.19}%
-\select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes lövedék}{16}{section*.20}%
-\select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes páncéltörő lövedék}{17}{section*.21}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.6}Kezelőfelület}{17}{subsection.3.2.6}%
-\select@language {magyar} \contentsline {subsubsection}{Életerő sáv}{17}{section*.22}%
-\select@language {magyar} \contentsline {subsubsection}{Célkereszt}{18}{section*.24}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.7}Hangok}{18}{subsection.3.2.7}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.8}Ellenfelek}{19}{subsection.3.2.8}%
-\select@language {magyar} \contentsline {subsubsection}{Navmesh}{19}{section*.26}%
-\select@language {magyar} \contentsline {subsubsection}{Ellenőrző pontok}{19}{section*.27}%
-\select@language {magyar} \contentsline {subsubsection}{Állapotgép}{19}{section*.28}%
-\select@language {magyar} \contentsline {subsubsection}{Állapotok}{20}{section*.29}%
-\select@language {magyar} \contentsline {subsubsection}{Járőrözés}{20}{section*.30}%
-\select@language {magyar} \contentsline {subsubsection}{Támadás}{20}{section*.31}%
-\select@language {magyar} \contentsline {section}{\numberline {3.3}További tervek}{21}{section.3.3}%
-\select@language {magyar} \contentsline {subsubsection}{Tartalom}{21}{section*.32}%
-\select@language {magyar} \contentsline {subsubsection}{Funkciók}{21}{section*.33}%
-\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{22}{chapter.4}%
-\select@language {magyar} \contentsline {chapter}{Összegzés}{23}{chapter*.34}%
-\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{24}{chapter*.35}%
+\select@language {magyar} \contentsline {chapter}{Bevezetés}{4}{chapter*.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Tématerület áttekintése}{5}{chapter.1}%
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Inspiráció}{5}{section.1.1}%
+\select@language {magyar} \contentsline {section}{\numberline {1.2}NavMesh}{5}{section.1.2}%
+\select@language {magyar} \contentsline {section}{\numberline {1.3}Ray cast}{6}{section.1.3}%
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Felhasznált technológiák}{7}{chapter.2}%
+\select@language {magyar} \contentsline {section}{\numberline {2.1}Unity}{7}{section.2.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {2.1.1}A Unity-ről általánosan}{7}{subsection.2.1.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {2.1.2}Gameobject-ek}{7}{subsection.2.1.2}%
+\select@language {magyar} \contentsline {subsection}{\numberline {2.1.3}Komponensek}{7}{subsection.2.1.3}%
+\select@language {magyar} \contentsline {subsection}{\numberline {2.1.4}Szkriptelés}{8}{subsection.2.1.4}%
+\select@language {magyar} \contentsline {section}{\numberline {2.2}Blender}{9}{section.2.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {3}A játék bemutatása}{10}{chapter.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.1}A játékmenet}{10}{section.3.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Menü}{10}{subsection.3.1.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Csata}{11}{subsection.3.1.2}%
+\select@language {magyar} \contentsline {section}{\numberline {3.2}A megvalósítás}{11}{section.3.2}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}A harckocsi}{11}{subsection.3.2.1}%
+\select@language {magyar} \contentsline {subsubsection}{Páncélzati rendszer}{13}{section*.7}%
+\select@language {magyar} \contentsline {subsubsection}{Páncéltest}{13}{section*.8}%
+\select@language {magyar} \contentsline {subsubsection}{Lövegtorony}{13}{section*.9}%
+\select@language {magyar} \contentsline {subsubsection}{Ágyú}{14}{section*.10}%
+\select@language {magyar} \contentsline {subsubsection}{Játékos nézőpontja}{14}{section*.11}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Pálya}{14}{subsection.3.2.2}%
+\select@language {magyar} \contentsline {subsubsection}{Kialakítása}{14}{section*.12}%
+\select@language {magyar} \contentsline {subsubsection}{Textúrázás}{14}{section*.13}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.3}Menü}{15}{subsection.3.2.3}%
+\select@language {magyar} \contentsline {subsubsection}{Harckocsi kiválasztása}{15}{section*.15}%
+\select@language {magyar} \contentsline {subsubsection}{Beállítások}{16}{section*.17}%
+\select@language {magyar} \contentsline {subsubsection}{Szünet menü}{16}{section*.18}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.4}Irányítási rendszer}{16}{subsection.3.2.4}%
+\select@language {magyar} \contentsline {subsubsection}{Célzás}{16}{section*.19}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.5}Lövedékek}{16}{subsection.3.2.5}%
+\select@language {magyar} \contentsline {subsubsection}{Páncéltörő lövedék}{18}{section*.20}%
+\select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes lövedék}{19}{section*.21}%
+\select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes páncéltörő lövedék}{20}{section*.22}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.6}Kezelőfelület}{20}{subsection.3.2.6}%
+\select@language {magyar} \contentsline {subsubsection}{Életerő sáv}{20}{section*.23}%
+\select@language {magyar} \contentsline {subsubsection}{Célkereszt}{21}{section*.25}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.7}Hangok}{21}{subsection.3.2.7}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.8}Ellenfelek}{22}{subsection.3.2.8}%
+\select@language {magyar} \contentsline {subsubsection}{NavMesh}{22}{section*.27}%
+\select@language {magyar} \contentsline {subsubsection}{Ellenőrzőpontok}{22}{section*.28}%
+\select@language {magyar} \contentsline {subsubsection}{Állapotgép}{22}{section*.29}%
+\select@language {magyar} \contentsline {subsubsection}{Állapotok}{23}{section*.30}%
+\select@language {magyar} \contentsline {subsubsection}{Járőrözés}{23}{section*.31}%
+\select@language {magyar} \contentsline {subsubsection}{Támadás}{23}{section*.32}%
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{25}{chapter.4}%
+\select@language {magyar} \contentsline {chapter}{Összegzés}{27}{chapter*.35}%
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{30}{chapter*.36}%

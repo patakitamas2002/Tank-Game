@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Caliber: 75
-  Weight: 3
-  Veloctiy: 5000
+  Weight: 7
+  Veloctiy: 650
   maxTime: 10
   AnglePerformance: 1.5
-  DistanceFalloff: 1
+  DistanceFalloff: 0.8
 --- !u!54 &3646602153210678126
 Rigidbody:
   m_ObjectHideFlags: 0
