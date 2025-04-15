@@ -35,7 +35,7 @@
 \select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes lövedék}{19}{section*.21}%
 \select@language {magyar} \contentsline {subsubsection}{Robbanótöltetes páncéltörő lövedék}{20}{section*.22}%
 \select@language {magyar} \contentsline {subsection}{\numberline {3.2.6}Kezelőfelület}{20}{subsection.3.2.6}%
-\select@language {magyar} \contentsline {subsubsection}{Életerő sáv}{20}{section*.23}%
+\select@language {magyar} \contentsline {subsubsection}{Életerő-sáv}{20}{section*.23}%
 \select@language {magyar} \contentsline {subsubsection}{Célkereszt}{21}{section*.25}%
 \select@language {magyar} \contentsline {subsection}{\numberline {3.2.7}Hangok}{21}{subsection.3.2.7}%
 \select@language {magyar} \contentsline {subsection}{\numberline {3.2.8}Ellenfelek}{22}{subsection.3.2.8}%

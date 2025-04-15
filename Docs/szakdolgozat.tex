@@ -75,7 +75,7 @@ A szakdolgozati témaválasztásom idején számtalan lehetőség közül válog
 
 A témám egy olyan játék elkészítése, melyhez hasonlóval évekkel ezelőtt már játszottam, ebből hiányoltam néhány lehetőséget, és úgy gondoltam, hogy egy új tankos játék létrehozásában kifejezhetem saját kreativitásomat.
 
-Emellett a harckocsik közötti csaták is érdekelnek, főleg a II. világháborúban használatos fegyverekkel. Emiatt egy olyan játékot szerettem volna fejleszteni, melyben megtapasztalhatjuk az akkori időben kifejlesztetett harckocsiknak az erejét. Csavarként gondoltam ki azt a funkciót, hogy a különböző harckocsik elemei megcserélhetőek legyenek egymás között, ezzel új lehetőségek nyílnak a taktikákra és ezzel további fantáziaelemeket próbálhatunk ki a játékban.
+Emellett a harckocsik közötti csaták is érdekelnek, főleg a II. világháborúban használatos fegyverekkel. Emiatt egy olyan játékot szerettem volna fejleszteni, melyben megtapasztalhatjuk az akkori időben kifejlesztetett harckocsiknak az erejét. Csavarként gondoltam ki azt a funkciót, hogy a különböző harckocsik elemei cserélhetőek legyenek, ezzel új lehetőségek nyílnak a taktikákra és ezzel további fantáziaelemeket próbálhatunk ki a játékban.
 
 Emiatt választottam a projektem megvalósítására Unity\cite{unity} játékmotort, mely lehetőséget adott ennek kifejlesztésére 3D térben.
 
@@ -87,7 +87,7 @@ A szakdolgozatom az alábbi linken érhető el: \url{https://github.com/patakita
 
 \section{Inspiráció}
 
-Inspirációmat főként a War Thunder\cite{warthunder} című játékból merítettem, mely egy több mint 10 éve kiadott, de folyamatosan továbbfejlesztett, online többszereplős játék, melyben többféle járművet lehet benne irányítani - például repülőt, hajót, helikoptert, harckocsit. Az ötleteimet a harckocsis részéből merítettem. Több ezer jármú elérhető benne és mélyen kidolgozott rendszereik vannak, melyek a realizmusra törekednek. Ennek egy töredékét szerettem volna elérni egy félig realisztikus megoldással.
+Inspirációmat főként a War Thunder\cite{warthunder} című játékból merítettem, mely egy több mint 10 éve kiadott, de folyamatosan továbbfejlesztett, online többszereplős játék, melyben többféle járművet lehet irányítani - például repülőt, hajót, helikoptert, harckocsit. Az ötleteimet a harckocsis részéből merítettem. Több ezer jármú elérhető benne és mélyen kidolgozott rendszereik vannak, melyek a realizmusra törekednek. Ennek egy töredékét szerettem volna elérni egy félig realisztikus megoldással.
 
 
 \begin{figure}[H]
@@ -248,7 +248,7 @@ Ezen túlmenően ha a harckocsi élete 0 vagy annál kisebb értékre csökken l
 
 
 \subsubsection{Páncélzati rendszer}
-Minden harckocsi modellje fel van osztva több kis darabra, melynek van a beépített \emph{Collider} komponense és a saját páncél komponense. Ezzel a módszerrel pontosan meg lehet adni, hogy melyik részen mekkora védelme legyen és mekkora sebzési szorzót kapjon. Például az ágyúnak és a lánctalpnak kisebb a szorzója, mivel könnyebben átüthető részeknek számítanak, így a harckocsi középpontja ebben az esetben nem sérül. Az ötletet az alábbi projekt\cite{armoridea} alapján kaptam.
+Minden harckocsi modellje fel van osztva több kis darabra, melynek van a beépített \emph{Collider} komponense és a saját páncél komponense. Ezzel a módszerrel pontosan meg lehet adni, hogy melyik részén mekkora védelem legyen és mekkora sebzési szorzót kapjon. Például az ágyúnak és a lánctalpnak kisebb a szorzója, mivel könnyebben átüthető részeknek számítanak, így a harckocsi középpontja ebben az esetben nem sérül. Az ötletet az alábbi projekt\cite{armoridea} alapján kaptam.
 
 \subsubsection{Páncéltest}
 
@@ -265,7 +265,7 @@ A \emph{RotateTowards} metódus először megkap egy vektort a célpont pozíci�
 
 \subsubsection{Ágyú}
 
-Az ágyú emelése is hasonlóan működik a torony forgatásához képest, viszont megadott a maximum magassági és depressziószöge, melyeket nem léphet túl a függőleges fordulása. Valamint az ágyú adja megy, hogy a játékos számára milyen lőszerek elérhetőek.
+Az ágyú emelése is hasonlóan működik a torony forgatásához képest, viszont adott a maximum magassági és depressziószöge, melyeket nem léphet túl a függőleges fordulásának mértéke. Továbbá az ágyú adja megy, hogy a játékos számára milyen lőszerek elérhetőek.
 
 \lstinputlisting[caption=Lövegtorony irányítása,label=barrelelevation]{./codesnippets/barrelelevation.cs}
 
@@ -274,13 +274,13 @@ A kódban sincs túl nagy eltérés a torony forgatásához képest. Viszont itt
 
 \subsubsection{Játékos nézőpontja}
 
-A játékos nézőpontját 2 darab kamerával oldottam meg, külső és belső nézetessel, melyeknek az érzékenységét külön-külön lehet beállítani. Az egérgörgővel lehet csökkenteni a kamera látószögét, mely segíthet a nagyobb távolságra történő célzásban.
+A játékos nézőpontját 2 darab kamerával oldottam meg, külső és belső nézetessel, melyeknek az érzékenységét külön-külön lehet beállítani. A kamera látószögét az egérgörgővel lehet csökkenteni, mely segíthet a nagyobb távolságra történő célzásban.
 
 \subsection{Pálya}
 
 \subsubsection{Kialakítása}
 
-A pálya kialakításához a Unity terepszerkesztőjét használtam, mely az ecsetszerű eszközök segítségével a terepen magasabb és mélyebb részek rajzolására volt lehetőség, és ennek használatával egy hegyes-dombos pályát készítettem egy kivájt útvonallal.
+A pálya kialakításához a Unity terepszerkesztőjét használtam, mely az ecsetszerű eszközök segítségével a terepen magasabb és mélyebb részek rajzolására van lehetőség, ennek használatával készítettem a hegyes-dombos pályát egy kivájt útvonallal.
 \subsubsection{Textúrázás}
 
 A textúrázást szintén a terepszerkesztő eszközzel készítettem, mellyel az útvonalat egy ecsettel van lehetőségünk festeni. A textúrákat a \emph{Poly Haven}\cite{polyhaven} oldalról töltöttem le.
@@ -338,7 +338,7 @@ Mindhárom típus egy absztrakt \emph{Bullet} osztályból öröklődik, így a 
 
 \lstinputlisting[caption=Absztrakt \emph{Bullet} osztály metódusai,label=bullet]{./codesnippets/bullet.cs}
 
-A \emph{Start} metódusban beállítja a kezdeti pozíciót, az átütési értéket, a sebességet és a méretét a lövedéknek. Az alaplövedék modellje 100mm átmérőjű, és emiatt a lövedék pontos méretét úgy kapja meg, hogy az adott lövedék méretét kaliberével beszorozza, és azt elosztja százzal.
+A \emph{Start} metódusban beállítja a kezdeti pozíciót, az átütési értéket, a sebességet és a méretét a lövedéknek. Az alaplövedék modellje 100 mm átmérőjű, ezért a lövedék pontos méretét úgy kapja meg, hogy az adott lövedék méretét kaliberével beszorozza, és azt elosztja százzal.
 
 Az \emph{OnCollisionEnter} ütközéskor fut le, ellenőrzi hogy ütközött-e páncéllal. \break
 Amennyiben igen, akkor nem történik további sebzés. Más esetben megvizsgálja, hogy az ütközés páncéllal történt-e, és kiszámítja a kezdeti pozíciótól megtett távolságot. Amennyiben páncélnak minősül az eltalált objektum, kiszámításra kerül a megmaradt átütőerő, és ha még mindig maradt átütési erő - azaz a páncél nem állította meg a lövedéket -, az ellenfél sebzést szenved el.
@@ -355,7 +355,7 @@ A páncéltörő lövedéket a DeMarre-formula alapján modelleztem. A képlet a
 \end{equation}
 
 
-A lövedéknek figyelembe vesszük a megtett távolságát és a találati szögét is. Ezen a tényezők hatását kettő változóval lehet befolyásolni, \emph{DistanceFalloff}-fal és \emph{AnglePerformance}-szel. Amennyiben a \emph{DistanceFalloff} értéke 1 a távolság nem befolyásolja az átütőképességet. 1 alatti értéknél, melyet a legtöbb lövedék használ, a távolság függvényében csökken az átütőerő, míg az 1 feletti értéknél nő. Az \emph{AnglePerformance}-nál a 0-ás érték figyelmen kívül hagyja a találati szöget. Ezzel szemben az 1-es értéknél a páncélvastagság találati szögből adódó növekedését $\cos$ függvény alapján számítja ki. A leggyakrabban használt 1 feletti érték gyengíti az átütőerőt nagyobb szög esetén. Amennyiben a \emph{DistanceFalloff} és \emph{AnglePerformance} értékeket 1-re állítjuk, abban az esetben egy eltérő viselkedésű lövedéktípust kapunk.
+A lövedéknek figyelembe vesszük a megtett távolságát és a találati szögét is. Ezen tényezők hatását kettő változóval lehet befolyásolni, \emph{DistanceFalloff}-fal és \emph{AnglePerformance}-szel. Amennyiben a \emph{DistanceFalloff} értéke 1 a távolság nem befolyásolja az átütőképességet. 1 alatti értéknél, melyet a legtöbb lövedék használ, a távolság függvényében csökken az átütőerő, míg az 1 feletti értéknél nő. Az \emph{AnglePerformance}-nál a 0-ás érték figyelmen kívül hagyja a találati szöget. Ezzel szemben az 1-es értéknél a páncélvastagság találati szögből adódó növekedését $\cos$ függvény alapján számítja ki. A leggyakrabban használt 1 feletti érték gyengíti az átütőerőt nagyobb szög esetén. Amennyiben a \emph{DistanceFalloff} és \emph{AnglePerformance} értékeket 1-re állítjuk, abban az esetben egy eltérő viselkedésű lövedéktípust kapunk.
 
 
 \lstinputlisting[caption=Átütés kiszámítása,label=APcalculation]{./codesnippets/APcalculation.cs}
@@ -364,23 +364,23 @@ A lövedék sebzését - melynek maximális értéke kaliberétől és a sebess�
 
 \subsubsection{Robbanótöltetes lövedék}
 
-Az alábbi lövedék egy felülethez érve egy robbanást szimulál, melynek során megadott távolságon belül először megvizsgálja az összes objektumot, azt, hogy melyik számít páncélnak. Ezt követően kiszámítja,hogy a páncéllemezek közül melyik a leggyengébb, a lemez vastagsága és a a robbanás középpontjából számított távolságának kombinációjából.
+Az alábbi lövedék egy felülethez érve egy robbanást szimulál, melynek során megadott távolságon belül először megvizsgálja az összes objektumot, azt, hogy melyik számít páncélnak. Ezt követően kiszámítja,hogy a páncéllemezek közül melyik a leggyengébb, a lemez vastagsága és a robbanás középpontjából számított távolságának kombinációjából.
 
 \lstinputlisting[caption=Robbanótöltetes lövedék működése,label=hexplosion]{./codesnippets/heexplosion.cs}
 
 A \emph{GetMaxPenetration} függvény egy egyedi módszert alkalmaz az átütés kiszámítására. Az értékeket a \emph{War Thunder} lövedékéihez hasonlóan szerettem volna megvalósítani, de végeredményben a számításom eltérő értékeket ad.
 
-A \emph{CalculatePenetration} függvény a leggyengébb páncél alapján adja vissza a maradandó átütést. Ehhez a \emph{GetWeakestArmor} metódust alkalmazza, mely először megvizsgálja az összes \emph{Collider}-el rendelkező objektumot egy adott távolságon belül. Ezután \emph{Ray cast}-ok használatával vizsgálja meg. hogy a robbanás középpontjából látható-e az adott objektum, melyet a pozícióik összehasonlításával ellenőriz - figyelmen kívül hagyva a \emph{CollisionBox} réteget. Amennyiben az adott objektum páncél, akkor kiszámítja az ellenállását a \emph{GetResistance} függvénnyel, mely a távolság függvényében növeli a páncél védelmének erejét négyzetesen.
+A \emph{CalculatePenetration} függvény a leggyengébb páncél alapján adja vissza a maradandó átütést. Ehhez a \emph{GetWeakestArmor} metódust alkalmazza, mely először megvizsgálja az összes \emph{Collider}-el rendelkező objektumot egy adott távolságon belül. Ezután \emph{Ray cast}-ok használatával vizsgálja meg. hogy a robbanás középpontjából látható-e az adott objektum, melyet a pozícióik összehasonlításával ellenőriz - figyelmen kívül hagyva a \emph{CollisionBox} réteget. Amennyiben az adott objektum páncél, akkor kiszámítja az ellenállását a \emph{GetResistance} függvénnyel, mely a távolságtól függően növeli a páncél védelmének erejét négyzetesen.
 
 
 \subsubsection{Robbanótöltetes páncéltörő lövedék}
 
-Ez a lövedék a sima páncéltörő lövedékhez képest hasonlóan működik, mivel az átütő ereje szintén a \emph{DeMarre} formula alapján került kiszámításra. A különbség a sebzés módszerében rejlik, ami csak akkor eltérő, ha a lövedék megadott érzékenységénél vastagabb páncélt ütött át, és ezt követően a robbanótöltet mértékétől függően sebez.
+Ez a lövedék a sima páncéltörő lövedékhez képest hasonlóan működik, mivel az átütő ereje szintén a \emph{DeMarre} formula alapján került kiszámításra. A különbség a sebzés módszerében rejlik, ami csak akkor eltérő, ha a lövedék a megadott érzékenységénél vastagabb páncélt ütött át, és ezt követően a robbanótöltet mértékétől függően sebez.
 
 
 \subsection{Kezelőfelület}
 
-\subsubsection{Életerő sáv}
+\subsubsection{Életerő-sáv}
 
 A projektben kétféle életerő-sávot készítettem: Az első típus a kezelőfelületen található a bal alsó sarokban, ahol számokkal jelzi ki a teljes és a jelenlegi életerőt. A második típus az ellenségek felett található meg, mely 3D térben helyezkedik el, követve az egység pozícióját. Az alsó és felső sáv is a mutatja külön-külön az adott egység megmaradó életerejét.
 \begin{figure}[H]
@@ -393,7 +393,7 @@ A projektben kétféle életerő-sávot készítettem: Az első típus a kezelő
 
 \subsubsection{Célkereszt}
 
-A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelöli, amely lövés után pirossá változik, utána folyamatosan kezd kitöltődni fehér színnel, jelezve az újratöltés folyamatát. A második ``kereszt'' alakú, pedig azt jelzi, hogy a cső pillanatnyilag melyik irányba néz.
+A célkereszt 2 részből áll. A kör alakú irányzék a képernyő közepét és a kívánt célpontot jelöli, amely lövés után pirossá változik, utána folyamatosan kezd kitöltődni fehér színnel, jelezve az újratöltés folyamatát. A második ``kereszt'' alakú pedig azt jelzi, hogy a cső pillanatnyilag melyik irányba néz.
 
 \begin{figure}[H]
     \centering
@@ -410,7 +410,7 @@ A játékban jelenleg kétféle hang hallható: a motor- és a lövéshang. A mo
 
 \subsubsection{NavMesh}
 
-Az ellenségek útkeresését a Unity beépített NavMesh rendszere segítségével valósítottam meg. A Unity NavMesh lehetőséget biztosít az egység irányítására is, azonban alapvatően emberszerű karakterekre mozgatására lett tervezve. Emiatt a harckocsik mozgatásához egy egyedi megoldást kellett implementálnom, amely eredményeként az ellenfelek ugyanazt a mozgásrendszert használják, mint a játékosok.
+Az ellenségek útkeresését a Unity beépített NavMesh rendszere segítségével valósítottam meg. A Unity NavMesh lehetőséget biztosít az egység irányítására is, azonban alapvatően emberszerű karakterek mozgatására lett tervezve. Emiatt a harckocsik mozgatásához egy egyedi megoldást kellett implementálnom, ennek eredményeként az ellenfelek ugyanazt a mozgásrendszert használják, mint a játékosok.
 
 \subsubsection{Ellenőrzőpontok}
 
@@ -435,7 +435,7 @@ Kétféle állapot van:
 
 \subsubsection{Járőrözés}
 
-Az alapértelmezett állapot a járőrözés, ebben az esetben az ellenség az ellenőrző pontok által meghatározott útvonalat követi. A két ellenőrző pont közötti útvonalat a NavMesh segítségével kerül meghatározásra.
+Az alapértelmezett állapot a járőrözés, ebben az esetben az ellenség az ellenőrző pontok által meghatározott útvonalat követi. A két ellenőrző pont közötti útvonal a NavMesh segítségével kerül meghatározásra.
 
 \subsubsection{Támadás}
 
@@ -458,7 +458,7 @@ A Unity-hez letölthető egy hivatalos keretrendszer a teszteléshez, de a haszn
     \label{fig:losegame}
 \end{figure}
 
-A fejlesztői oldalon a tesztelés kicsit másképp történt, mivel itt a Unity-ba beépített \emph{Debug} osztály segítségével sokkal több információ volt elérhető. A leggyakrabban az osztály \emph{Log} metódusát használtam, melyet az értékek ellenőrzéséhez és események aktiválódásának jelzéséhez alkamaztam, például ha átment támadási módba az ellenség akkor az a Unity konzolában tisztán láttam. Emellett a \emph{Ray cast}-ek megjelenítésére a \emph{DrawRay} metódus nyújtott segítséget az ágyú jelenlegi irányának jelzésére, valamint ezt alkalmaztam még a játékos és az ellenség közötti irány megjelenítésére is.
+A fejlesztői oldalon a tesztelés kicsit másképp történt, mivel itt a Unity-ba beépített \emph{Debug} osztály segítségével sokkal több információ volt elérhető. A leggyakrabban az osztály \emph{Log} metódusát használtam, melyet az értékek ellenőrzéséhez és események aktiválódásának jelzéséhez alkamaztam, például ha átment támadási módba az ellenség, akkor azt a Unity konzolában tisztán láttam. Emellett a \emph{Ray cast}-ek megjelenítésére a \emph{DrawRay} metódus nyújtott segítséget az ágyú jelenlegi irányának jelzésére, valamint ezt alkalmaztam még a játékos és az ellenség közötti irány megjelenítésére is.
 
 \begin{figure}[H]
     \centering
@@ -471,24 +471,24 @@ Több hiba is felbukkant a tesztelés során, mint például az ellenségek szok
 
 A tesztelés nagy segítséget nyújtott pár konstans érték finomítására is, mint például a fentebbiekben említett \emph{sidewaysFrictionFactor} beállításában, a lőszerek sebzésére, az ágyúk töltési hangolására, valamint kiegyensúlyozására is lehetőséget biztosított.
 
-A tesztelésnek köszönhetően több hibát sikerült kijavítanom, és a játék megfelelő működését is megoldottam. A tesztelésben részt vevők egy új élményben részesültek, hozzájárultak a fejlesztés előrehaladásához és az élmény javításához is.
+A tesztelésnek köszönhetően több hibát sikerült kijavítanom, és a játék megfelelő működését is megoldottam. A tesztelésben részt vevők egy új élményben részesültek, hozzájárultak a fejlesztés előrehaladásához és a játékélmény javításához is.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
 
-Szakdolgozatom célja egy olyan új harckocsis játék megvalósítása volt, amihez hasonlóval korábban már játszottam, azonban miután néhány dolgot hiányoltam belőle, ezért úgy gondoltam, hogy az általam elképzelt játékot az én elképzeléseimnek megfelelően hozom létre, ezért számomra ennek a játéknak a kifejlesztése rengeteg kihívással járt.
+Szakdolgozatom célja egy olyan új harckocsis játék megvalósítása volt, amihez hasonlóval korábban már játszottam, azonban miután néhány dolgot hiányoltam belőle, úgy gondoltam, hogy az általam tervezett játékot a saját elképzeléseimnek megfelelően hozom létre, ezért számomra ennek a játéknak a kifejlesztése rengeteg kihívással járt.
 
-Úgy érzem, hogy a projektnek az alapját és fő funkcióit sikerült az elvárásaimnak megfelelően kifejlesztenem. A lövedékekre és a páncélrendszer kifelszestésére kiemelt figyelmet fordítottam, így azt tartom a játék egyik fénypontjának.
+Úgy érzem, hogy a projektnek az alapját és fő funkcióit sikerült az elvárásaimnak megfelelően kifejlesztenem. A lövedékekre és a páncélrendszer kifelszestésére kiemelt figyelmet fordítottam, így ezt tartom a játék egyik fénypontjának.
 
 Korábban Unity-vel és 3D modellezéssel még nem foglalkoztam igazán, ezért a játék kifejlesztése és a szakdolgozatom készítése során számtalan új tapasztalatot szereztem, melynek remélhetőleg hasznát tudom venni a jövőben.
 
 A játék fejlesztése során többször elakadtam a tapasztalatom hiánya miatt, ezek áthidalása olykor kihívásnak bizonyult számomra, ami a játék pár részén meg is mutatkozik, ezért a jövőben szeretném ezeket finomítani és javítani. A 3D modelleket is szeretném jobb textúrákkal és több részlettel ellátni, hogy a napjainkban kiadott játékok szintjét elérje mind grafikában, mind élményben.
 
-A projektem jelenlegi állapota készen áll több tartalom fogadására is, mely alatt főleg nagyobb harckocsi alkatrésztár és újabb pályák létrehozásását értem. Ezeket viszonylag egyszerűen lehetne hozzáadni, és újabb taktikákat tenne lehetővé.
+A projektem jelenlegi állapota készen áll több tartalom fogadására is, mely alatt főleg nagyobb harckocsi alkatrésztár és újabb pályák létrehozásását értem. Ezeket viszonylag egyszerűen hozzá lehetne adni, ami újabb taktikákat tenne lehetővé.
 
 A játék fejlesztése közben több ötletem is támadt újabb funkciók létrehozására, amikkel a jövőben szeretném a játékot kiegészíteni. Amit a legfontosabbnak tartok, az a kontrolleres bevitel támogatása és a billentyűk megváltoztatásának lehetősége az egyéni testreszabhatóság érdekében. Ezen kívül terveim között szerepel többféle ellenfél-viselkedést és játékmódot implementálni, valamint animációkat és esetlegesen vizuális fizikát hozzáadni a lánctalpakhoz.
 
-Összességben a szakdolgozatom során sikerült megvalósítanom a tervezett funkciókat és rengeteg tapsztalatot szerezenem, valamint egy bepillantást kaptam a játékfejleszés világba is.
+Összességben a szakdolgozatom készítése során sikerült megvalósítanom a tervezett funkciókat és mindemellett rengeteg tapsztalatot szerezenem, valamint lehetőségem volt bepillantani a játékfejleszés világba is.
 
 
 \begin{thebibliography}{55}
